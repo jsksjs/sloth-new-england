@@ -6,7 +6,7 @@
 body{
     height: 100%;
     background: #ebebeb;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 header h1{
