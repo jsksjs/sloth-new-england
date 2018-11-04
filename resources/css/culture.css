@@ -4,22 +4,15 @@
 }
 
 body{
-    min-width: 100%;
-    min-height: 100%;
+    height: 100%;
     background: #ebebeb;
     overflow-x: hidden;
 }
-header{
-    min-width: 100%;
-    min-height: 100%;
-}
 
-header>h1{
-    min-width: 100%;
-    min-height: 100%;
+header h1{
     padding: 10px;
     font-size: 22pt;
-    background: rgba(255,255,255,0.3);
+    background: #949494;
 }
 
 .nav {
@@ -35,17 +28,12 @@ header>h1{
     display:inline-block;
 }
 
-.dgroup{
-    margin-left: 64px;
-}
-
 .navItem a, .dropbtn {
     display: inline-block;
     color: #fefefe;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-
 }
 
 .navItem a:hover, .drop:hover .dropbtn {
@@ -55,9 +43,7 @@ header>h1{
 li.drop {
     display: inline-block;
 }
-.active{
 
-}
 .dropcontent {
     display: none;
     position: absolute;
