@@ -7,6 +7,10 @@ body{
     background: #ebebeb;
 }
 
+header{
+    min-height: 54px;
+}
+
 header>h1{
     padding: 10px;
     font-size: 22pt;
@@ -27,17 +31,12 @@ header>h1{
     display:inline-block;
 }
 
-.dgroup{
-    margin-left: 64px;
-}
-
 .navItem a, .dropbtn {
     display: inline-block;
     color: #fefefe;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-
 }
 
 .navItem a:hover, .drop:hover .dropbtn {
@@ -77,6 +76,7 @@ li.drop {
 
 .logo{
     float:left;
+    margin-right: 96px;
 }
 
 .options, .login{
