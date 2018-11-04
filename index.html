@@ -12,8 +12,10 @@
         </h1>
     </header>
     <ul class="nav">
-        <li class="logo"><a href="#logo">LOGO</a></li>
-        <li class="drop">
+        <li class="logo navItem">
+            <a href="#logo">LOGO</a>
+        </li>
+        <li class="drop navItem">
             <a href="#" class="dropbtn">History</a>
             <div class="dropcontent">
                 <a href="#">Link 1</a>
@@ -21,7 +23,7 @@
                 <a href="#">Link 3</a>
             </div>
         </li>
-        <li class="drop">
+        <li class="drop navItem">
             <a href="#" class="dropbtn">Culture</a>
             <div class="dropcontent">
                 <a href="#">Link 1</a>
@@ -29,12 +31,85 @@
                 <a href="#">Link 3</a>
             </div>
         </li>
+        <li class="drop navItem">
+            <a href="#" class="dropbtn">Sports</a>
+            <div class="dropcontent">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </li>
+        <li class="drop navItem">
+            <a href="#" class="dropbtn">Education</a>
+            <div class="dropcontent">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </li>
+        <li class="drop navItem">
+            <a href="#" class="dropbtn">Urban Exploration</a>
+            <div class="dropcontent">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </li>
+        <li class="options navItem">
+            <a href="#">About</a>
+        </li>
+        <li class="options drop navItem">
+            <a href="#" class="dropbtn">Login</a>
+            <div class="dropcontent logindrop">
+                <label for="user">Username: </label>
+                <input class="loginInput" maxlength="18" type="text" id="user" name="user">
+                <label for="pswd">Password: </label>
+                <input class="loginInput" maxlength="24" type="password" id="pswd" name="pswd">
+                <button type="submit" class="login">Login</button>
+            </div>
+        </li>
     </ul>
     <div class="imgContainer">
         <ul class="imgList">
-            <li class="imgListItem"><a class="imgListLink" href="#"><img src="resources/images/Carl'sWatching.jpg"/></a></li>
-            <li class="imgListItem"><a class="imgListLink" href="#"><img src="resources/images/Carl2x4.png"/></a></li>
+            <!-- active image is always first -->
+            <li class="imgListItem left">
+                <a class="imgListLink" href="#">
+                    <img src="resources/images/Carl'sWatching.jpg"/>
+                </a>
+            </li>
+            <li class="imgListItem">
+                <a class="imgListLink" href="#">
+                    <img src="resources/images/Carl'sWatching.jpg"/>
+                </a>
+            </li>
+            <li class="imgListItem active">
+                <a class="imgListLink" href="#">
+                    <img src="resources/images/Carl2x4.png"/>
+                </a>
+            </li>
+            <li class="imgListItem">
+                <a class="imgListLink" href="#">
+                    <img src="resources/images/Carl'sWatching.jpg"/>
+                </a>
+            </li>
+            <li class="imgListItem right">
+                <a class="imgListLink" href="#">
+                    <img src="resources/images/Carl'sWatching.jpg"/>
+                </a>
+            </li>
         </ul>
+    </div>
+    <p class="imgDescription"><i><b>This is ART image that absorbs the CASH of its viewers.<br/>
+    Its sharp stare pierces WALLETS.<br/>
+        Some other info on what makes this particular image cool.</b></i></p>
+    <footer>We are but wee potato farmers harvesting our crops; A+ pls</footer>
+    <div id="NEDContainer">
+        <p class="NEDescription">Some general information about the NEW ENGLAND goes here.
+            <br/>No idea what to actually write. Something something taxes something something
+            failing economies something something everyone is leaving.
+            <br/><br/>I've been meaning to do this a while now:
+            <br/>☹🔞😢🎥💀👌👌👌👌💀👌
+            <br/>Thanks for listening. Don't ya just love NEW 🅱ENGOLAND?!</p>
     </div>
 </body>
 </html>
