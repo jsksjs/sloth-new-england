@@ -122,17 +122,22 @@ li.drop {
     font-size: 14pt;
     text-align: center;
     background: orange;
+    padding: 10px 0 150px 0;
 }
 
 #NEDContainer{
+    border-top: 1px solid rgba(0,0,0,0.3);
 }
 
 footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 22px;
-    background: #333333;
+    margin-top: -22px;
+    clear: both;
+    border-top: 1px solid rgba(0,0,0,0.3);
+    background: #ebebeb;
     padding: 5px;
     text-align: center;
 }
