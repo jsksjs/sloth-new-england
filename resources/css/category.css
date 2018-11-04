@@ -1,0 +1,32 @@
+.categoryDescription {
+	
+}
+
+.contentTable {
+	table-layout: fixed;
+}
+.categoryHeader {
+	text-align: center;
+}
+
+.contentTable {
+	width: 100%;
+}
+
+.contentTile {
+	text-align:center; 
+	overflow: hidden;
+	max-width: 34%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+}
+
+.contentDescription {
+	text-decoration: none;
+	color: #000;
+}
+
+.contentThumbnail {
+	display: block;
+	margin:auto;
+	height:256px
+}
