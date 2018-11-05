@@ -3,24 +3,27 @@ h1 {
 }
 
 .categoryDescription {
-	
+	padding: 10px;
 }
 
 .contentTable {
 	table-layout: fixed;
 }
+
 .categoryHeader {
 	text-align: center;
+	padding: 10px;
+	padding-bottom: 0px;
 }
 
 .contentTable {
+	max-width: 100%;
 	width: 100%;
 }
 
 .contentTile {
-	text-align:center; 
+	text-align: center; 
 	overflow: hidden;
-	max-width: 34%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
 }
 
@@ -31,7 +34,7 @@ h1 {
 
 .contentThumbnail {
 	display: block;
-	height:256px;
+	max-height: 256px;
 	width: 100%;
 	margin: 5px;
 }
