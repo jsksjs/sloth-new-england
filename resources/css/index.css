@@ -9,6 +9,11 @@ body{
 
 header{
     min-height: 54px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
 }
 
 header>h1{
@@ -25,6 +30,11 @@ header>h1{
     background-color: #333;
     text-align: center;
     max-height: 46px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
 }
 
 .navItem {
@@ -115,6 +125,11 @@ li.drop {
 .imgListItem .imgListLink img{
     height: 445px;
     width: 445px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
 }
 
 .imgDescription{
@@ -145,4 +160,9 @@ footer{
     background: #ebebeb;
     padding: 5px;
     text-align: center;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select:none;
+	user-select:none;
+	-o-user-select:none;
 }
