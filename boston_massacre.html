@@ -22,12 +22,13 @@ For instructions on how to modify this file so that it contains actual content, 
             Sloth From <i>THE GOONIES'</i> Guide to New England
         </h1>
     </header>
-    <ul class="nav">
+    <!-- find corresponding category and do style = "background-color: #838383;"-->
+	<ul class="nav">
         <li class="logo navItem">
             <a href="index.html" style="background: url(resources/images/index/templogo.png) no-repeat; background-size: cover; height:8px;"></a>
         </li>
 		<li class="drop navItem">
-			<a href="history.html" style = "background-color: #838383;" class="dropbtn">History</a>
+			<a href="history.html" class="dropbtn">History</a>
 			<div class="dropcontent">
 				<a href="saugus_iron_works.html">Saugus Iron Works</a>
 				<a href="salem_witch_trials.html">Salem Witch Trials</a>
@@ -101,6 +102,9 @@ For instructions on how to modify this file so that it contains actual content, 
         </li>
     </ul>
 	<h2 style = "margin:auto" class = "contentHeader">#Name of attraction#</h2>
-	<img src = "resources/images/history/saugus_iron_mill.jpg">
+	<div class = "imageWrapper">
+		<img class = "contentImage" alt = "#web url of image#" src = "resources/images/history/path.ext#">
+	</div>
+	<p class = "contentDescription">#a few sentences about the given attraction.#</p>
 </body>
 </html>

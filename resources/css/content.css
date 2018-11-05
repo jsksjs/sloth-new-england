@@ -3,5 +3,23 @@
 }
 
 .imageWrapper {
-	max-width: 100%;
+    text-align: center;
+    overflow: hidden;
+	margin-left:20%;
+	margin-right:20%;
+}
+
+.contentImage {
+	margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #dadada;
+    list-style: none;
+    position: relative;
+}
+
+.contentDescription {
+	
 }

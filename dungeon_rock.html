@@ -6,12 +6,14 @@ For instructions on how to modify this file so that it contains actual content, 
 
 
 -->
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sloth Love #Category#!</title>
+    <title>Sloth Love History!</title>
     <link rel="stylesheet" type="text/css" href="resources/css/index.css"/>
 	<link rel="stylesheet" type="text/css" href="resources/css/category.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/content.css"/>
 	<script src = "main.js"></script>
 </head>
 <body>
@@ -20,11 +22,11 @@ For instructions on how to modify this file so that it contains actual content, 
             Sloth From <i>THE GOONIES'</i> Guide to New England
         </h1>
     </header>
-    <ul class="nav">
+    <!-- find corresponding category and do style = "background-color: #838383;"-->
+	<ul class="nav">
         <li class="logo navItem">
             <a href="index.html" style="background: url(resources/images/index/templogo.png) no-repeat; background-size: cover; height:8px;"></a>
         </li>
-		<!-- #from the following li elements, find the one corresponding to the current page and set style = "background-color: #838383;"-->
 		<li class="drop navItem">
 			<a href="history.html" class="dropbtn">History</a>
 			<div class="dropcontent">
@@ -99,58 +101,10 @@ For instructions on how to modify this file so that it contains actual content, 
             </div>
         </li>
     </ul>
-	<h2 class = "categoryHeader">#Category#</h2>
-	<p class = "categoryDescription">#3-5 sentence description of category#</p>
-	<table class = "contentTable">
-		<tr>
-			<td class = "contentTile">
-				<a class = "contentDescription" href="#content#.html">
-					<img class = "contentThumbnail" alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-		</tr>
-		<tr>
-			<td class = "contentTile">
-				<a href="#content#.html">
-					<img alt = "#web url of image#" src = "resources/images/#category/path.ext#">
-					<p>#page name#</p>
-				</a>
-			</td>
-		</tr>
-	</table>
-    
+	<h2 style = "margin:auto" class = "contentHeader">#Name of attraction#</h2>
+	<div class = "imageWrapper">
+		<img class = "contentImage" alt = "#web url of image#" src = "resources/images/history/path.ext#">
+	</div>
+	<p class = "contentDescription">#a few sentences about the given attraction.#</p>
 </body>
 </html>
