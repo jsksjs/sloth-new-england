@@ -14,7 +14,6 @@ header{
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
-	-o-user-select:none;
 }
 
 header>h1{
@@ -34,8 +33,7 @@ header>h1{
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select:none;
-	user-select:none;
-	-o-user-select:none;
+	user-select:none;;
 }
 
 .navItem {
@@ -130,7 +128,6 @@ li.drop {
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
-	-o-user-select:none;
 }
 
 .imgDescription{
@@ -165,5 +162,4 @@ footer{
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
-	-o-user-select:none;
 }
