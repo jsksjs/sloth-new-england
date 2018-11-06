@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sloth Love New England!</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/contact.css"/>
     <script src = "main.js"></script>
 </head>
 <body>
@@ -18,20 +18,21 @@
     </header>
     <div class="top">
         <form class="entry">
-            <img id="profileImage" src="resources/images/index/templogo.png"/>
+            <p>This message [will/will not] be sent to the admins.</p>
             <div class="inputs">
-                <label for="user">Username:</label>
-                <input type="text" id="user" maxlength="16" name="user">
+                <label for="email">Email:</label>
+                <input type="text" id="email" maxlength="45" name="email">
             </div>
             <div class="inputs">
-                <label for="pswd">Password:</label>
-                <input type="password" id="pswd" maxlength="32" name="pswd">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" maxlength="60" name="pswd">
+            </div>
+            <div class="inputs">
+                <label id="msglabel" for="message">Message:</label>
+                <textarea id="message" name="message" maxlength="255"></textarea>
             </div>
             <div class="inputs actions">
-                <a href="register.html">
-                    <button id="register" value="Register">
-                </a>
-                <input id="login" type="submit" value="Log in">
+                <input id="submit" type="submit" value="Submit">
             </div>
         </form>
     </div>

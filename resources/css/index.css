@@ -91,19 +91,8 @@ li.drop {
     margin-right: 96px;
 }
 
-.options, .login{
+.options{
     float:right;
-}
-.logindrop{
-    text-align: left;
-    transform: translateX(-70px);
-    padding: 20px;
-}
-
-.login{
-    padding: 1px;
-    margin-top: 5px;
-    margin-right: 15px;
 }
 
 .imgContainer{
