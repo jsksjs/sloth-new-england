@@ -1,5 +1,6 @@
 .contentHeader {
 	text-align: center;
+	padding: 10px;
 }
 
 .imageWrapper {
@@ -21,5 +22,5 @@
 }
 
 .contentDescription {
-	
+	padding: 10px;
 }
