@@ -9,6 +9,7 @@ body{
 }
 
 header{
+    text-align: center;
     min-height: 54px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -55,9 +56,11 @@ header>h1{
 li.drop {
     display: inline-block;
 }
-.active{
 
+.active{
+    background-color: #838383;
 }
+
 .dropcontent {
     display: none;
     position: absolute;
