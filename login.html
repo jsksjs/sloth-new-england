@@ -3,117 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Sloth Love New England!</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/index.css"/>
-	<script src = "main.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/css/login.css"/>
+    <script src = "main.js"></script>
 </head>
 <body>
+<div class="container">
     <header style="background: url(resources/images/index/sloth-boy.png) no-repeat; background-size: cover;">
-        <h1 align="center">
-            Sloth From <i>THE GOONIES'</i> Guide to New England
+        <h1>
+            Welcome to:
         </h1>
+        <h2>
+            Sloth From <i>THE GOONIES'</i> Guide to New England
+        </h2>
     </header>
-    <ul class="nav">
-        <li class="logo navItem">
-            <a href="index.html" style="background: url(resources/images/index/templogo.png) no-repeat; background-size: cover; height:8px;"></a>
-        </li>
-        <li class="drop navItemd dgroup">
-            <a href="history.html" class="dropbtn">History</a>
-            <div class="dropcontent">
-                <a href="saugus_iron_works.html">Saugus Iron Works</a>
-                <a href="salem_witch_trials.html">Salem Witch Trials</a>
-                <a href="boston_harbor.html">Boston Harbor</a>
-                <a href="boston_massacre.html">Boston Massacre</a>
-                <a href="dungeon_rock.html">Dungeon Rock</a>
-                <a href="mark_twain.html">Mark Twain</a>
-                <a href="old_sturbridge_village.html">Old Sturbridge Village</a>
+    <div class="top">
+        <form class="entry">
+            <img id="profileImage" src="resources/images/index/templogo.png"/>
+            <div class="inputs">
+                <label for="user">Username:</label>
+                <input type="text" id="user" maxlength="16" name="user">
             </div>
-        </li>
-        <li class="drop navItem">
-            <a href="culture.html" class="dropbtn">Culture</a>
-            <div class="dropcontent">
-                <a href="salem_halloween_events.html">Salem</a>
-                <a href="house_of_blues.html">House of Blues</a>
-                <a href="revere_beach.html">Revere Beach</a>
-                <a href="the_beach_plum.html">The Beach Plum</a>
-                <a href="six_flags.html">Six Flags</a>
-                <a href="quassy.html">Quassy</a>
-                <a href="misquamicut.html">Misquamicut</a>
+            <div class="inputs">
+                <label for="pswd">Password:</label>
+                <input type="password" id="pswd" maxlength="32" name="pswd">
             </div>
-        </li>
-        <li class="drop navItem">
-            <a href="sports.html" class="dropbtn">Sports</a>
-            <div class="dropcontent">
-                <a href="uconn_basketball.html">UConn Basketball</a>
-                <a href="hockey.html">Hockey</a>
-                <a href="hartford_hawks.html">Hartford Hawks</a>
-                <a href="gillette_stadium.html">Gillette Stadium</a>
-                <a href="alumni_stadium.html">Alumni Stadium</a>
-                <a href="dunkin_donuts_park.html">Dunkin' Donuts Park</a>
-                <a href="fenway_park.html">Fenway Park</a>
+            <div class="inputs actions">
+                <input id="register" type="button" value="Register">
+                <input id="login" type="submit" value="Log in">
             </div>
-        </li>
-        <li class="drop navItem">
-            <a href="education.html" class="dropbtn">Education</a>
-            <div class="dropcontent">
-                <a href="uhart.html">UHart</a>
-                <a href="uconn.html">UConn</a>
-                <a href="umass.html">UMass</a>
-                <a href="mit.html">MIT</a>
-                <a href="harvard.html">Harvard</a>
-                <a href="yale.html">Yale</a>
-                <a href="brown.html">Brown</a>
-            </div>
-        </li>
-        <li class="drop navItem">
-            <a href="abandoned_buildings.html" class="dropbtn">Abandoned Buildings</a>
-            <div class="dropcontent">
-                <a href="colt_armory.html">Colt Armory</a>
-                <a href="lynn_shoe_factories.html">Lynn</a>
-                <a href="dudleytown.html">Dudleytown</a>
-                <a href="somerset_power_station.html">Somerset Power Station</a>
-                <a href="english_station.html">English Station</a>
-                <a href="majestic_palace_theaters.html">Majestic/Palace Theaters</a>
-                <a href="wishlist.html1">Wishlist</a>
-            </div>
-        </li>
-        <li class="options navItem">
-            <a href="about.html">About</a>
-        </li>
-        <li class="options navItem">
-            <a href="profile.html">Profile</a>
-        </li>
-    </ul>
-    <div class="imgContainer">
-        <ul class="imgList">
-            <!-- active image is always first -->
-            <li class="imgListItem active">
-                <a class="imgListLink" href="#">
-                    <img src="resources/images/index/Carl'sWatching.jpg"/>
-                </a>
-            </li>
-            <li class="imgListItem" right>
-                <a class="imgListLink">
-                    <img src="resources/images/index/Carl2x4.png"/>
-                </a>/index
-            </li>
-            <li class="imgListItem right">
-                <a class="imgListLink">
-                    <img src="resources/images/index/Carl'sWatching.jpg"/>
-                </a>
-            </li>
-        </ul>
+        </form>
     </div>
-    <p class="imgDescription"><i><b>This is ART image that absorbs the CASH of its viewers.<br/>
-    Its sharp stare pierces WALLETS.<br/>
-        Some other info on what makes this particular image cool.</b></i></p>
-    <div id="NEDContainer">
-        <p class="NEDescription">Some general information about the NEW ENGLAND goes here.
-            <br/>No idea what to actually write. Something something taxes something something
-            failing economies something something everyone is leaving.
-            <br/><br/>I've been meaning to do this a while now:
-            <br/>☹🔞😢🎥💀👌👌👌👌💀👌
-            <br/>Thanks for listening. Don't ya just love NEW 🅱ENGOLAND?!</p>
-    <footer>We are but wee potato farmers harvesting our crops; A+ pls</footer>
-    </div>
+    <footer class="end">
+        <a href="guest_contact.html">Contact us</a>
+    </footer>
+</div>
 </body>
 </html>
