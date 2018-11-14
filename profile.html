@@ -21,11 +21,11 @@
             </a>
             <div class="inputs">
                 <label for="email">Email:</label>
-                <input type="text" id="email" maxlength="45" name="email">
+                <input type="text" id="email" maxlength="45" name="email" required>
             </div>
             <div class="inputs">
                 <label for="user">Username:</label>
-                <input type="text" id="user" maxlength="16" name="user">
+                <input type="text" id="user" maxlength="16" name="user" required>
             </div>
             <div class="inputs">
                 <label for="fname">First Name:</label>
@@ -41,7 +41,7 @@
             </div>
             <div class="inputs">
                 <label for="age">Age:</label>
-                <input type="number" id="age" max="122" name="age">
+                <input type="number" id="age" max="122" min="3" name="age" pattern="\d*" value="3">
             </div>
             <div class="inputs">
                 <label for="age">Gender:</label>
