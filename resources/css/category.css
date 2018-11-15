@@ -1,13 +1,14 @@
-h1 {
+h2 {
 	text-align: center;
+	font-size: 2.4vmax;
 }
 
 .categoryDescription {
 	padding: 10px;
     text-align: center;
-
-    margin-left: 10vw;
-    margin-right: 10vw;
+	font-size: 1.6vmax;
+    margin-left: 10vmax;
+    margin-right: 10vmax;
 }
 
 .categoryHeader {
@@ -22,10 +23,8 @@ h1 {
  }
 
 .contentTile {
-    width: 25vh;
-    height: 25vh;
-    min-height: 150px;
-    min-width: 150px;
+    width: 20vmax;
+    height: 20vmax;
     padding-bottom: 15px;
     margin: 5px;
 	text-align: center;
@@ -47,7 +46,7 @@ h1 {
     height: 100%;
     padding-top: 5px;
     vertical-align: middle;
-	font-size: 1.5vh;
+	font-size: 1.2vmax;
 }
 
 
