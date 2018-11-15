@@ -10,39 +10,52 @@ body{
 
 header{
     text-align: center;
-    min-height: 54px;
+    min-height: 5vh;
+	max-height: 5vh;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
+    background: url(../images/index/sloth-boy.png) no-repeat;
+    background-size: cover;
 }
 
 header>h1{
-    padding: 10px;
-    font-size: 22pt;
-    background: rgba(255,255,255,0.3);
+	margin: auto;
+	min-height: 5vh;
+	max-height: 5vh;
+	font-size: 3vh;
+    background: rgba(255,255,255,0.5);
+	padding-top: 0.5vh;
 }
 
 .nav {
+	display: flex;
+    justify-content: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
     text-align: center;
-    max-height: 46px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select:none;
-	user-select:none;;
+	user-select:none;
+	width: 100vw;
+	font-size: 2vh;
+    white-space: nowrap;
 }
 
 .navItem {
-    display:inline-block;
+    display: flex;
+    flex: 1 1 0;
 }
 
 .navItem a, .dropbtn {
-    display: inline-block;
+    display: flex;
+    flex: 1;
+	flex-direction: column;
     color: #fefefe;
     text-align: center;
     padding: 14px 16px;
@@ -65,7 +78,8 @@ li.drop {
     display: none;
     position: absolute;
     background-color: #8e8e8e;
-    min-width: 160px;
+    width: 21vw;
+	font-size: 1.65vmin;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     z-index: 1;
 }
@@ -83,16 +97,22 @@ li.drop {
 }
 
 .drop:hover .dropcontent {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .logo{
-    float:left;
-    margin-right: 96px;
+    flex: 0;
+}
+
+.logo>a{
+    background: url(../images/index/templogo.png) no-repeat;
+    background-size: contain;
+    width: 1vw;
 }
 
 .options{
-    float:right;
+    flex: 1;
 }
 
 .imgContainer{

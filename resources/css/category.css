@@ -1,12 +1,12 @@
 h2 {
 	text-align: center;
-	font-size: 2.4vmax;
+	font-size: 2.6vmin;
 }
 
 .categoryDescription {
 	padding: 10px;
     text-align: center;
-	font-size: 1.6vmax;
+	font-size: 1.8vmin;
     margin-left: 10vmax;
     margin-right: 10vmax;
 }
@@ -23,13 +23,17 @@ h2 {
  }
 
 .contentTile {
-    width: 20vmax;
-    height: 20vmax;
-    padding-bottom: 15px;
-    margin: 5px;
+    width: 21vmax;
+    height: 21vmax;
+    padding-bottom: 1vh;
+    margin: 1vmax;
 	text-align: center;
 	overflow: hidden;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+	box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
+}
+
+.contentTile:hover {
+    box-shadow: 0 0 0.5vmin 0.4vmin rgba(0,0,0,0.5);
 }
 
 .contentDescription {
@@ -44,7 +48,7 @@ h2 {
 
 .contentP{
     height: 100%;
-    padding-top: 5px;
+    padding-top: 1vh;
     vertical-align: middle;
 	font-size: 1.2vmax;
 }

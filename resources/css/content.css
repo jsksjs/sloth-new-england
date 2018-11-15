@@ -1,3 +1,10 @@
+*{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
 .contentHeader {
 	text-align: center;
 	padding: 10px;
