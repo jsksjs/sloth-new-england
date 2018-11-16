@@ -16,6 +16,7 @@ html,body { height:100%; }
     text-align: center;
     overflow: hidden;
     max-height: 75vh;
+	max-width: 95vw;
 	margin-left: 10vw;
 	margin-right: 10vw;
 }
