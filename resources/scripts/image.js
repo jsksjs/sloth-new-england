@@ -19,7 +19,7 @@ innerContainer.style.cssText =
     "position: absolute;" +
     "top: 11vh;" +
     "transform: translate(0%, -150%);" +
-    "transition: transform 0.75s, visibility 2s ease-in;";
+    "transition: transform 0.75s, visibility 1.5s linear;";
 
 // background = the container for the page content (to be blurred)
 // image = the src image of the page image
@@ -37,7 +37,7 @@ function inject(){
     
     backgrnd = document.getElementById("contentContainer");
     backgrnd.addEventListener("click", imgRetract, true);
-    image.addEventListener("transitionend", transEnd, false);
+    backgrnd.addEventListener("transitionend", transEnd, false);
 
     let imgSrc = image.getAttribute("src");
     container.appendChild(innerContainer);
@@ -50,7 +50,7 @@ function inject(){
 function imgExpand(){
     innerContainer.style.visibility = "visible";
     innerContainer.style.transform = "translate(0%, 0)";
-    backgrnd.style.filter = "blur(5px) opacity(1%)";
+    backgrnd.style.filter = "blur(5px) opacity(0.1%)";
 }
 
 // "retract" image (move it up)
@@ -64,11 +64,14 @@ function imgRetract(){
 function transEnd(){
     shown = !shown;
     if(shown){
+		console.log(shown);
         backgrnd.addEventListener("click", imgRetract, false);
         image.removeEventListener("click", imgExpand, false);
+		image.addEventListener("click", imgRetract, false);
     }
     else{
-        image.removeEventListener("click", imgExpand, false);
-        backgrnd.addEventListener("click", imgRetract, false);
+        image.addEventListener("click", imgExpand, false);
+		image.removeEventListener("click", imgRetract, false);
+        backgrnd.removeEventListener("click", imgRetract, false);
     }
 }
