@@ -1,7 +1,7 @@
 .categoryDescription {
 	padding: 10px;
     text-align: center;
-	font-size: 2vmin;
+	font-size: 12pt;
     margin-left: 10vw;
     margin-right: 10vw;
 }
@@ -10,7 +10,7 @@
 	text-align: center;
 	padding: 10px 10px 0;
 	text-align: center;
-	font-size: 2.6vmin;
+	font-size: 18pt;
 }
 
 .contentDiv {

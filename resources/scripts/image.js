@@ -19,7 +19,7 @@ innerContainer.style.cssText =
     "height: 80vh;" +
     "position: absolute;" +
     "top: 15vh;" +
-    "transform: translate(0%, -150%);" +
+    "transform: translate(0%, -125%);" +
     "transition: transform 0.75s, visibility 1.5s linear;";
 
 // background = the container for the page content (to be blurred)
@@ -57,7 +57,7 @@ function imgExpand(){
 // "retract" image (move it up)
 function imgRetract(){
     innerContainer.style.visibility = "hidden";
-    innerContainer.style.transform = "translate(0%, -150%)";
+    innerContainer.style.transform = "translate(0%, -125%)";
     backgrnd.style.filter = "blur(0px) opacity(100%)";	
 	container.style.pointerEvents = "none";
 	image.style.cursor = "zoom-in";
