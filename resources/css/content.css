@@ -28,7 +28,7 @@ html,body { min-height:100%; }
 
 .contentDescription {
 	padding: 10px;
-	font-size: 2.0vmin;
+	font-size: 2.0vmax;
 	text-align: center;
 	max-width: 65vw;
 }
@@ -41,7 +41,7 @@ html,body { min-height:100%; }
 
 .imageWrapper>p{
 	padding-top: 1vmin;
-	font-size: 2.2vmin;
+	font-size: 2.2vmax;
 }
 
 #contentContainer{

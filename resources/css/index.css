@@ -43,7 +43,7 @@ header>h1{
 	-ms-user-select:none;
 	user-select:none;
 	max-width: 100vw;
-	font-size: 2vmin;
+	font-size: 2vmax;
     white-space: nowrap;
 }
 
@@ -79,7 +79,7 @@ li.drop {
     position: absolute;
     background-color: #8e8e8e;
     width: 21vw;
-	font-size: 1.65vmin;
+	font-size: 1.65vmax;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     z-index: 1;
 }

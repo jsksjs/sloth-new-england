@@ -1,12 +1,7 @@
-h2 {
-	text-align: center;
-	font-size: 2.6vmin;
-}
-
 .categoryDescription {
 	padding: 10px;
     text-align: center;
-	font-size: 1.8vmin;
+	font-size: 1.8vmax;
     margin-left: 10vmax;
     margin-right: 10vmax;
 }
@@ -14,6 +9,8 @@ h2 {
 .categoryHeader {
 	text-align: center;
 	padding: 10px 10px 0;
+	text-align: center;
+	font-size: 2.6vmax;
 }
 
 .contentDiv {
