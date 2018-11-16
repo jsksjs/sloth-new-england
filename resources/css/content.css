@@ -8,8 +8,9 @@ html,body { min-height:100%; }
 }
 
 .contentHeader {
+	font-size: 2.75vmin;
 	text-align: center;
-	padding: 2vmin;	
+	padding: 1vmin;	
 }
 
 .imageWrapper {
@@ -24,11 +25,12 @@ html,body { min-height:100%; }
 .contentImage {
     background: #dadada;
     max-height: 60vh;
+	cursor: zoom-in;
 }
 
 .contentDescription {
 	padding: 10px;
-	font-size: 2.0vmax;
+	font-size: 2vmin;
 	text-align: center;
 	max-width: 65vw;
 }
@@ -36,12 +38,12 @@ html,body { min-height:100%; }
 #contentContainer>p:not(.contentDescription){
 	padding: 2vh 0 2vh 0;
 	max-width: 90vw;
-	min-height: 100vh;
+	min-height: 100%;
 }
 
 .imageWrapper>p{
-	padding-top: 1vmin;
-	font-size: 2.2vmax;
+	padding: 0.5vmin 0 1vmin 0;
+	font-size: 2vmin;
 }
 
 #contentContainer{
@@ -50,5 +52,4 @@ html,body { min-height:100%; }
     flex-direction: column;
     height: 100%;
     align-items: center;
-	justify-items: center;
 }

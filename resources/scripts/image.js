@@ -7,6 +7,7 @@ container.style.cssText =
     "justify-content: center;" +
     "top: 0;" +
     "left: 0;" +
+	"z-index: 2;" +
     "pointer-events: none;" +
     "position: fixed;";
 
@@ -15,18 +16,16 @@ let innerContainer = document.createElement("div");
 innerContainer.style.cssText =
     "visibility: hidden;" +
     "width: 95vw;" +
-    "height: 85vh;" +
+    "height: 80vh;" +
     "position: absolute;" +
-    "top: 11vh;" +
+    "top: 15vh;" +
     "transform: translate(0%, -150%);" +
     "transition: transform 0.75s, visibility 1.5s linear;";
 
 // background = the container for the page content (to be blurred)
 // image = the src image of the page image
-// shown tracks what state the pop-down is in
 let backgrnd;
 let image;
-let shown = false;
 
 // inject all dynamic elements on load
 window.onload = inject;
@@ -36,8 +35,7 @@ function inject(){
     image.addEventListener("click", imgExpand, true);
     
     backgrnd = document.getElementById("contentContainer");
-    backgrnd.addEventListener("click", imgRetract, true);
-    backgrnd.addEventListener("transitionend", transEnd, false);
+    container.addEventListener("click", imgRetract, true);
 
     let imgSrc = image.getAttribute("src");
     container.appendChild(innerContainer);
@@ -51,27 +49,17 @@ function imgExpand(){
     innerContainer.style.visibility = "visible";
     innerContainer.style.transform = "translate(0%, 0)";
     backgrnd.style.filter = "blur(5px) opacity(0.1%)";
+	container.style.pointerEvents = "auto";
+	image.style.cursor = "auto";
+	container.style.cursor = "zoom-out";
 }
 
 // "retract" image (move it up)
 function imgRetract(){
     innerContainer.style.visibility = "hidden";
     innerContainer.style.transform = "translate(0%, -150%)";
-    backgrnd.style.filter = "blur(0px) opacity(100%)";
-}
-
-// disables/adds events relative to the current state
-function transEnd(){
-    shown = !shown;
-    if(shown){
-		console.log(shown);
-        backgrnd.addEventListener("click", imgRetract, false);
-        image.removeEventListener("click", imgExpand, false);
-		image.addEventListener("click", imgRetract, false);
-    }
-    else{
-        image.addEventListener("click", imgExpand, false);
-		image.removeEventListener("click", imgRetract, false);
-        backgrnd.removeEventListener("click", imgRetract, false);
-    }
+    backgrnd.style.filter = "blur(0px) opacity(100%)";	
+	container.style.pointerEvents = "none";
+	image.style.cursor = "zoom-in";
+	container.style.cursor = "auto";
 }

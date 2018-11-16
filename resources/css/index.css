@@ -10,8 +10,8 @@ body{
 
 header{
     text-align: center;
-    min-height: 5vh;
-	max-height: 5vh;
+    min-height: 5vmin;
+	max-height: 5vmin;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select:none;
@@ -22,11 +22,11 @@ header{
 
 header>h1{
 	margin: auto;
-	min-height: 5vh;
-	max-height: 5vh;
-	font-size: 3vmin;
+    min-height: 5vmin;
+	max-height: 5vmin;
+	font-size: 2.5vmin;
     background: rgba(255,255,255,0.5);
-	padding-top: 0.5vh;
+	padding-top: 1vh;
 }
 
 .nav {
@@ -43,7 +43,7 @@ header>h1{
 	-ms-user-select:none;
 	user-select:none;
 	max-width: 100vw;
-	font-size: 2vmax;
+	font-size: 1vmax;
     white-space: nowrap;
 }
 
@@ -78,8 +78,8 @@ li.drop {
     display: none;
     position: absolute;
     background-color: #8e8e8e;
-    width: 21vw;
-	font-size: 1.65vmax;
+    width: 21vmax;
+	font-size: 1vmax;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     z-index: 1;
 }

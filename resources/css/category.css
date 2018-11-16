@@ -1,16 +1,16 @@
 .categoryDescription {
 	padding: 10px;
     text-align: center;
-	font-size: 1.8vmax;
-    margin-left: 10vmax;
-    margin-right: 10vmax;
+	font-size: 2vmin;
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
 
 .categoryHeader {
 	text-align: center;
 	padding: 10px 10px 0;
 	text-align: center;
-	font-size: 2.6vmax;
+	font-size: 2.6vmin;
 }
 
 .contentDiv {
@@ -20,8 +20,8 @@
  }
 
 .contentTile {
-    width: 21vmax;
-    height: 21vmax;
+    width: 20vmax;
+    height: 20vmax;
     padding-bottom: 1vh;
     margin: 1vmax;
 	text-align: center;
