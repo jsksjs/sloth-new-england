@@ -1,3 +1,5 @@
+html,body { height:100%; }
+
 *{
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -25,4 +27,13 @@
 
 .contentDescription {
 	padding: 10px;
+    flex: 1;
+}
+
+#contentContainer{
+    transition: filter, 0.75s ease-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
 }
