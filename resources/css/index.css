@@ -24,7 +24,7 @@ header>h1{
 	margin: auto;
 	min-height: 5vh;
 	max-height: 5vh;
-	font-size: 3vh;
+	font-size: 3vmin;
     background: rgba(255,255,255,0.5);
 	padding-top: 0.5vh;
 }
@@ -42,8 +42,8 @@ header>h1{
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
-	width: 100vw;
-	font-size: 2vh;
+	max-width: 100vw;
+	font-size: 2vmin;
     white-space: nowrap;
 }
 
@@ -106,13 +106,15 @@ li.drop {
 }
 
 .logo>a{
-    background: url(../images/index/templogo.png) no-repeat;
-    background-size: contain;
+    background: url(../images/index/templogo.png) no-repeat center;
+    background-size: cover;
     width: 1vw;
 }
 
 .options{
-    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 0;
 }
 
 .imgContainer{
