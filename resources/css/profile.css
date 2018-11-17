@@ -31,13 +31,11 @@ header>*{
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-
 }
 
 .top{
     display:flex;
     flex-direction: row;
-
     font-size: 14pt;
     text-align: center;
     justify-content: center;
@@ -51,7 +49,9 @@ header>*{
     flex-direction: column;
     text-align: right;
     background: #3c3f41;
-    padding: 20px 20px 30px 20px;
+    padding: 20px;
+    color: #c2c2c2;
+    overflow: hidden;
 }
 
 #profileImage{
@@ -74,6 +74,10 @@ header>*{
     justify-content: right;
 }
 
+input{
+    color: #000000;
+}
+
 .end{
     justify-content: flex-end;
     height: 22px;
@@ -90,4 +94,16 @@ header>*{
     vertical-align: top;
     min-height: 150px;
     min-width: 330px;
+}
+
+#log{
+    border-top: 1px #c2c2c2 solid;
+    visibility: hidden;
+    max-height: 0;
+    font-size: 12pt;
+    background: white;
+    transition: background 0.75s, visiblity 1s, max-height 1s linear;
+    text-align: left;
+    padding: 5px;
+    color: #bf143d;
 }
