@@ -10,13 +10,12 @@ html,body { min-height:100%; }
 .contentHeader {
 	font-size: 16pt;
 	text-align: center;
-	padding: 1vmin;	
+	padding: 10px;	
 }
 
 .imageWrapper {
     text-align: center;
     overflow: hidden;
-    max-height: 75vh;
 	max-width: 95vw;
 	margin-left: 10vw;
 	margin-right: 10vw;
@@ -31,7 +30,7 @@ html,body { min-height:100%; }
 .contentDescription {
 	padding: 10px;
 	font-size: 12pt;
-	max-width: 65vw;
+	max-width: 75vw;
 }
 
 #contentContainer>p:not(.contentDescription){
@@ -51,4 +50,10 @@ html,body { min-height:100%; }
     flex-direction: column;
     height: 100%;
     align-items: center;
+}
+
+#contentHeaderCont{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
