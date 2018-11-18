@@ -9,7 +9,7 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select:none;
-    user-select:none;;
+    user-select:none;
 }
 
 
@@ -32,4 +32,8 @@
 .logo{
     float:left;
     margin-right: 96px;
+}
+
+.entry{
+	color: #c2c2c2;
 }
