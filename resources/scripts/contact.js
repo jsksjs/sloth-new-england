@@ -12,7 +12,7 @@
 			height += 18;
 			valid = false;
 		}
-		if(this["message"].value.toLowerCase() === ""){
+		if(this["message"].value.trim().toLowerCase() === ""){
             if(html !== "")
                 html += "<br/>";
             html += "Invalid Message";
