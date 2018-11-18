@@ -105,7 +105,7 @@ input{
     max-height: 0;
     font-size: 12pt;
     background: white;
-    transition: background 0.75s, visiblity 1s, max-height 1s linear;
+    transition: background 1s, visiblity 1s, max-height 0.1s linear;
     text-align: left;
     padding: 5px;
     color: #bf143d;

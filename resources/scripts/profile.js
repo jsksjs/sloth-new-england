@@ -1,45 +1,51 @@
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs
-	function validate(e){
+	this.validate = function(){
 		let regEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-])+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 		let regUser = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;
 		let regNames = /(^[a-z]{0,20}$)/;
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;
-		if(!regEmail.test(e["email"].value.toLowerCase())) {
+        let height = 0;
+		if(!regEmail.test(this["email"].value.toLowerCase())) {
 			html += "Invalid Email";
+            height += 18;
 			valid = false;
 		}
-		if(!regUser.test(e["user"].value.toLowerCase())){
+		if(!regUser.test(this["user"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Username";
+            height += 18;
 			valid = false;
 		}
-		if(!regNames.test(e["fname"].value.toLowerCase())){
+		if(!regNames.test(this["fname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid First Name";
+            height += 18;
 			valid = false;
 		}
-		if(!regNames.test(e["mname"].value.toLowerCase())){
+		if(!regNames.test(this["mname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Middle Name";
+            height += 18;
 			valid = false;
 		}
-		if(!regNames.test(e["lname"].value.toLowerCase())){
+		if(!regNames.test(this["lname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Last Name";
+            height += 18;
 			valid = false;
 		}
 
 		log.innerHTML = "<p>" + html + "</p>";
 		if(!valid){
-			log.style.maxHeight = "500px";
+			log.style.maxHeight = height+"px";
 			log.style.visibility = "visible";
 			log.style.background = "none";
 		}

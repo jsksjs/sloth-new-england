@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Sloth Love New England!</title>
     <link rel="stylesheet" type="text/css" href="resources/css/contact.css"/>
-    <script src = "resources/scripts/main.js"></script>
+    <script src = "resources/scripts/contact.js"></script>
 </head>
 <body>
 <div class="container">
@@ -17,7 +17,7 @@
         </h2>
     </header>
     <div class="top">
-        <form class="entry">
+        <form id="cForm" class="entry" onsubmit="return validate()">
             <p>This message [will/will not] be sent to the admins.</p>
             <div class="inputs">
                 <label for="email">Email:</label>
@@ -34,6 +34,7 @@
             <div class="inputs actions">
                 <input id="submit" type="submit" value="Submit">
             </div>
+            <div id="log"></div>
         </form>
     </div>
     <footer class="end">
