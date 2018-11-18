@@ -8,6 +8,10 @@ body, html{
 	width: 100%;
 }
 
+body{
+	overflow-y: scroll;
+}
+
 
 header{
     text-align: center;
