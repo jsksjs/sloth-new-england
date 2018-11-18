@@ -2,7 +2,6 @@ html, body{
     height: 100%;
     width: 100%;
     background: #ebebeb;
-	overflow: auto;
 }
 
 *{
@@ -79,15 +78,17 @@ input{
     color: #000000;
 }
 
-.end{
-    justify-content: flex-end;
+.end{    
+	position: fixed;
+	bottom: 0;
+	width: 100%;
     height: 22px;
     background: #ebebeb;
     text-align: center;
     -moz-user-select: none;
     -webkit-user-select: none;
-    -ms-user-select:none;
-    user-select:none;
+    -ms-user-select: none;
+    user-select: none;
     border-top: 1px solid rgba(0,0,0,0.3);
 }
 
