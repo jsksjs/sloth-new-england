@@ -15,8 +15,7 @@
 							//hide navbar
 							$('.navbar').addClass('hideme');
 						});
-					});
-                } 
+					} 
 				else if($(this).scrollTop() < 140) {
 					//if towards top of page, move navbar back to original position and show
 					$('.navbar').removeClass('posTop');
