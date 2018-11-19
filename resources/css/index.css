@@ -12,8 +12,7 @@ body{
 	overflow-y: scroll;
 }
 
-
-header{
+.header{
     text-align: center;
     min-height: 50px;
 	max-height: 50px;
@@ -26,7 +25,7 @@ header{
 	overflow: hidden;
 }
 
-header>h1{
+.header>h1{
 	margin: auto;
     min-height: 50px;
 	max-height: 50px;
@@ -49,8 +48,21 @@ header>h1{
     white-space: nowrap;
 }
 
-.navItem {
+.navbar {
+	position: absolute;
+	width: 100%;
+}
 
+.navbar.posTop {
+	position: fixed;
+	top: 0px;
+}
+
+.navbar.hideme {
+    opacity: 0;
+}
+
+.navItem {
     flex: 1 1 auto;
 }
 
@@ -105,6 +117,10 @@ li.drop {
 .drop:hover .dropcontent {
     display: flex;
     flex-direction: column;
+}
+
+#indexBody {
+	padding-top: 70px;
 }
 
 .logo{

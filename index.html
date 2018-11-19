@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Sloth Love New England!</title>
     <link rel="stylesheet" type="text/css" href="resources/css/index.css"/>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src = "resources/scripts/main.js"></script>
 </head>
 <body>
-    <header>
-        <h1>
-            Sloth From <i>THE GOONIES'</i> Guide to New England
-        </h1>
-    </header>
+    <div class="header">
+        <h1>Sloth From <i>THE GOONIES'</i> Guide to New England</h1>
+    </div>
+	<div class="navbar">
     <ul class="nav">
         <li class="logo navItem">
             <a href="index.html"></a>
@@ -83,32 +83,35 @@
             <a href="profile.html">Profile</a>
         </li>
     </ul>
-    <div class="imgContainer">
-        <ul class="imgList">
-            <!-- active image is always first -->
-            <li class="imgListItem active">
-                <a class="imgListLink" href="#">
-                    <img src="resources/images/index/Carl'sWatching.jpg"/>
-                </a>
-            </li>
-            <li class="imgListItem" right>
-                <a class="imgListLink">
-                    <img src="resources/images/index/Carl2x4.png"/>
-                </a>/index
-            </li>
-            <li class="imgListItem right">
-                <a class="imgListLink">
-                    <img src="resources/images/index/Carl'sWatching.jpg"/>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p class="imgDescription">This is a rare image of New England before it was colonized by humans.</p>
-    <div id="NEDContainer">
-        <p class="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.
-            <br/>
-		</p>
-		<footer>Sloth Love New England!</footer>
-    </div>
+	</div>
+	<div id="indexBody">
+		<div class="imgContainer">
+			<ul class="imgList">
+				<!-- active image is always first -->
+				<li class="imgListItem active">
+					<a class="imgListLink" href="#">
+						<img src="resources/images/index/Carl'sWatching.jpg"/>
+					</a>
+				</li>
+				<li class="imgListItem" right>
+					<a class="imgListLink">
+						<img src="resources/images/index/Carl2x4.png"/>
+					</a>/index
+				</li>
+				<li class="imgListItem right">
+					<a class="imgListLink">
+						<img src="resources/images/index/Carl'sWatching.jpg"/>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<p class="imgDescription">This is a rare image of New England before it was colonized by humans.</p>
+		<div id="NEDContainer">
+			<p class="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.
+				<br/>
+			</p>
+			<footer>Sloth Love New England!</footer>
+		</div>
+	</div>
 </body>
 </html>
