@@ -56,8 +56,8 @@ header>*{
 }
 
 #profileImage{
-    width: 50%;
-    height: auto;
+    width: 256px;
+    height: 256px;
     background: #2a2d2f;
     margin: auto;
 }
