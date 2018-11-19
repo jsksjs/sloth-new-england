@@ -1,68 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
-    <meta charset="UTF-8">
-    <title>Sloth Love New England!</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/profile.css"/>
-    <script src = "resources/scripts/profile.js"></script>
+	<meta charset = "UTF-8">
+	<title>Sloth Love New England!</title>
+	<link rel = "stylesheet" type = "text/css" href = "resources/css/profile.css"/>
+	<script src = "resources/scripts/profile.js"></script>
 </head>
 <body>
-<div class="container">
-    <header>
-        <h1>
-            Sloth From <i>THE GOONIES'</i> Guide to New England
-        </h1>
-    </header>
-    <div class="top">
-        <form class="entry" onsubmit="return validate()">
-            <p style="text-align: center;">Your Bio</p>
-            <a style="text-align: center;" href="#">
-                <img id="profileImage" src="resources/images/index/templogo.png"/>
-            </a>
-            <div class="inputs" title="REQUIRED">
-                <label for="email">Email:</label>
-                <input type="text" id="email" maxlength="45" name="email" required>
-            </div>
-            <div class="inputs" title="REQUIRED: 3 to 16 characters long">
-                <label for="user">Username:</label>
-                <input type="text" id="user" maxlength="16" name="user" required>
-            </div>
-            <div class="inputs">
-                <label for="fname">First Name:</label>
-                <input type="text" id="fname" maxlength="20" name="fname">
-            </div>
-            <div class="inputs">
-                <label for="mname">Middle Name:</label>
-                <input type="text" id="mname" maxlength="20" name="mname">
-            </div>
-            <div class="inputs">
-                <label for="lname">Last Name:</label>
-                <input type="text" id="lname" maxlength="20" name="lname">
-            </div>
-            <div class="inputs">
-                <label for="age">Age:</label>
-                <input type="number" id="age" max="122" min="3" name="age" pattern="\d*">
-            </div>
-            <div class="inputs">
-                <label for="age">Gender:</label>
-                <div class="radios">
-                    <label for="m">Male:</label>
-                    <input type="radio" id="m" name="gender">
-                </div>
-                <div class="radios">
-                    <label for="f">Female:</label>
-                    <input type="radio" id="f" name="gender">
-                </div>
-            </div>
-            <div class="inputs actions">
-                <input id="submit" type="submit" value="Submit">
-            </div>
-            <div id="log"></div>
-        </form>
-    </div>
-    <footer class="end">
-        <a href="contact.html">Contact us</a>
-    </footer>
+<div class = "container">
+	<div class = "header">
+		<h1>Sloth From <i>THE GOONIES'</i> Guide to New England</h1>
+	</div>
+	<div class = "top">
+		<form class = "entry" onsubmit = "return validate()">
+			<p style = "text-align: center;">Your Bio</p>
+			<a style = "text-align: center;" href = "#">
+				<img id = "profileImage" src = "resources/images/index/templogo.png"/>
+			</a>
+			<div class = "inputs" title = "REQUIRED">
+				<label for = "email">Email:</label>
+				<input type = "text" id = "email" maxlength = "45" name = "email" required>
+			</div>
+			<div class = "inputs" title = "REQUIRED: 3 to 16 characters long">
+				<label for = "user">Username:</label>
+				<input type = "text" id = "user" maxlength = "16" name = "user" required>
+			</div>
+			<div class = "inputs">
+				<label for = "fname">First Name:</label>
+				<input type = "text" id = "fname" maxlength = "20" name = "fname">
+			</div>
+			<div class = "inputs">
+				<label for = "mname">Middle Name:</label>
+				<input type = "text" id = "mname" maxlength = "20" name = "mname">
+			</div>
+			<div class = "inputs">
+				<label for = "lname">Last Name:</label>
+				<input type = "text" id = "lname" maxlength = "20" name = "lname">
+			</div>
+			<div class = "inputs">
+				<label for = "age">Age:</label>
+				<input type = "number" id = "age" max = "122" min = "3" name = "age" pattern = "\d*">
+			</div>
+			<div class = "inputs">
+				<label for = "age">Gender:</label>
+				<div class = "radios">
+					<label for = "m">Male:</label>
+					<input type = "radio" id = "m" name = "gender">
+				</div>
+				<div class = "radios">
+					<label for = "f">Female:</label>
+					<input type = "radio" id = "f" name = "gender">
+				</div>
+			</div>
+			<div class = "inputs actions">
+				<input id = "submit" type = "submit" value = "Submit">
+			</div>
+			<div id = "log"></div>
+		</form>
+	</div>
+	<footer class = "end">
+		<a href = "contact.html">Contact us</a>
+	</footer>
 </div>
 </body>
 </html>

@@ -4,10 +4,10 @@
 
 .categoryDescription {
 	padding: 10px;
-    text-align: center;
+	text-align: center;
 	font-size: 12pt;
-    margin-left: 10vw;
-    margin-right: 10vw;
+	margin-left: 10vw;
+	margin-right: 10vw;
 }
 
 .categoryHeader {
@@ -18,18 +18,18 @@
 }
 
 .contentDiv {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
  }
 
 .contentTile {
 	min-width: 200px;
 	min-height: 200px;
-    width: 20vmax;
-    height: 20vmax;
-    padding-bottom: 1vh;
-    margin: 1vmax;
+	width: 20vmax;
+	height: 20vmax;
+	padding-bottom: 1vh;
+	margin: 1vmax;
 	text-align: center;
 	overflow: hidden;
 	box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
@@ -41,7 +41,7 @@
 }
 
 .contentTile:hover {
-    box-shadow: 0 0 0.5vmin 0.4vmin rgba(0,0,0,0.5);
+	box-shadow: 0 0 0.5vmin 0.4vmin rgba(0,0,0,0.5);
 }
 
 .contentDescription {
@@ -52,8 +52,8 @@
 
 .contentThumbnail {
 	flex: 1;
-    min-height: 80%;
-    width: 100%;
+	min-height: 80%;
+	width: 100%;
 }
 
 .contentP{
