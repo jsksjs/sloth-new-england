@@ -15,19 +15,19 @@
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;
-        let height = 0;
+		let height = 0;
 		if(!regEmail.test(this["email"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Email";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		if(!regPass.test(this["pswd"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Password";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		log.innerHTML = "<p>" + html + "</p>";

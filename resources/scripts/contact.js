@@ -21,12 +21,12 @@
 			valid = false;
 		}
 		if(this["message"].value.trim().toLowerCase() === ""){
-            if(html !== "")
-                html += "<br/>";
-            html += "Invalid Message";
-            height += 18;
-            valid = false;
-        }
+			if(html !== "")
+				html += "<br/>";
+			html += "Invalid Message";
+			height += 18;
+			valid = false;
+		}
 		log.innerHTML = "<p>" + html + "</p>";
 		if(!valid){
 			log.style.maxHeight = height+"px";
@@ -42,8 +42,8 @@
 		return valid;
 	};
 
-    window.addEventListener("load", inject);
+	window.addEventListener("load", inject);
 	function inject(){
-        document.getElementById("cForm").addEventListener("submit", validate);
-    }
+		document.getElementById("cForm").addEventListener("submit", validate);
+	}
 })();

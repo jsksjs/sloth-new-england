@@ -16,38 +16,38 @@
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;
-        let height = 0;
+		let height = 0;
 		if(!regEmail.test(this["email"].value.toLowerCase())) {
 			html += "Invalid Email";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		if(!regUser.test(this["user"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Username";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		if(!regNames.test(this["fname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid First Name";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		if(!regNames.test(this["mname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Middle Name";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 		if(!regNames.test(this["lname"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
 			html += "Invalid Last Name";
-            height += 18;
+			height += 18;
 			valid = false;
 		}
 

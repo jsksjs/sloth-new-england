@@ -1,32 +1,23 @@
 <!DOCTYPE html>
-<!--
-This file is intended to act as a template for the History, Culture, Sports, Education, and Abandonded Buildings pages, and should not be shown to the user at any point.
-For instructions on how to modify this file so that it contains actual content, simply search this file for # and either modify the #enclosed value# or follow the <!--#instructions->
-
-
-
--->
-
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Sloth Love History!</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/index.css"/>
-	<link rel="stylesheet" type="text/css" href="resources/css/category.css"/>
-	<link rel="stylesheet" type="text/css" href="resources/css/content.css"/>
-	<script src = "main.js"></script>
+	<meta charset="UTF-8">
+	<title>Sloth Love [Category]!</title>
+	<link rel="stylesheet" type="text/css" href="../css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/category.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/content.css"/>
+	<script src="../scripts/image.js"></script>
+	<script src="../scripts/search.js"></script>
+	<script src="../scripts/main.js"></script>
 </head>
 <body>
-    <header style="background: url(resources/images/index/sloth-boy.png) no-repeat; background-size: cover;">
-        <h1 align="center">
-            Sloth From <i>THE GOONIES'</i> Guide to New England
-        </h1>
-    </header>
-    <!-- find corresponding category and do style = "background-color: #838383;"-->
+	<div class="header">
+		<h1>Sloth From <i>THE GOONIES'</i> Guide to New England</h1>
+	</div>
 	<ul class="nav">
-        <li class="logo navItem">
-            <a href="index.html" style="background: url(resources/images/index/templogo.png) no-repeat; background-size: cover; height:8px;"></a>
-        </li>
+		<li class="logo navItem">
+			<a href="index.html"></a>
+		</li>
 		<li class="drop navItem">
 			<a href="history.html" class="dropbtn">History</a>
 			<div class="dropcontent">
@@ -84,27 +75,25 @@ For instructions on how to modify this file so that it contains actual content, 
 				<a href="somerset_power_station.html">Somerset Power Station</a>
 				<a href="english_station.html">English Station</a>
 				<a href="majestic_palace_theaters.html">Majestic/Palace Theaters</a>
-				<a href="wishlist.html1">Wishlist</a>
+				<a href="wishlist.html">Wishlist</a>
 			</div>
 		</li>
-        <li class="options navItem">
-            <a>About</a>
-        </li>
-        <li class="options drop navItem">
-            <a class="dropbtn">Login</a>
-            <div class="dropcontent logindrop">
-                <label for="user">Username: </label>
-                <input class="loginInput" maxlength="18" type="text" id="user" name="user">
-                <label for="pswd">Password: </label>
-                <input class="loginInput" maxlength="24" type="password" id="pswd" name="pswd">
-                <button type="submit" class="login">Login</button>
-            </div>
-        </li>
-    </ul>
-	<h2 style = "margin:auto" class = "contentHeader">#Name of attraction#</h2>
-	<div class = "imageWrapper">
-		<img class = "contentImage" alt = "#web url of image#" src = "resources/images/history/path.ext#">
+		<li class="options navItem">
+			<a href="about.html">About</a>
+		</li>
+		<li class="options navItem">
+			<a href="profile.html">Profile</a>
+		</li>
+	</ul>
+	<div id="contentContainer">
+		<div id="contentHeaderCont">
+			<h2 class="contentHeader">[Name of attraction]</h2>
+		</div>
+		<div class="imageWrapper">
+			<img class="contentImage" title="[web URL of image]" src="[path to image]">
+			<p>[optional picture caption]</p>
+		</div>
+		<p class="contentDescription">[Description of attraction]</p>
 	</div>
-	<p class = "contentDescription">#a few sentences about the given attraction.#</p>
 </body>
 </html>
