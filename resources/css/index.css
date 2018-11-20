@@ -49,6 +49,7 @@ body{
     transform: translate(0%, 0%);
     transition: transform 0.75s;
 	z-index: 1;
+	position: relative;
 }
 
 .navbar {
@@ -114,6 +115,7 @@ li.drop {
 
 .dropcontent a:hover{
     background-color: #c1c1c1;
+		z-index: 3;
 }
 
 .drop:hover .dropcontent {
