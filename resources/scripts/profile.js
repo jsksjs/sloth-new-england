@@ -1,3 +1,11 @@
+/**
+ * FirstName LastName
+ * 11/28/2018
+ * Doctor Andrew Jung
+ * This script validates the profile page, checking for the correct formats
+ * for the email, username, and personal info of the user.
+ */
+
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs

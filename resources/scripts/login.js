@@ -1,17 +1,25 @@
+/**
+ * FirstName LastName
+ * 11/28/2018
+ * Doctor Andrew Jung
+ * This script validates the login page, checking for the correct formats
+ * for the email and password of the user.
+ */
+
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs
 	this.validate = function(){		
-		let regUser = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;
+		let regEmail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-])+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 		let regPass = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;		
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;
         let height = 0;
-		if(!regUser.test(this["user"].value.toLowerCase())){
+		if(!regEmail.test(this["email"].value.toLowerCase())){
 			if(html !== "")
 				html += "<br/>";
-			html += "Invalid Username";
+			html += "Invalid Email";
             height += 18;
 			valid = false;
 		}

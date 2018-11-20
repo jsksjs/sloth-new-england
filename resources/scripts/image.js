@@ -1,3 +1,12 @@
+/**
+ * FirstName LastName
+ * 11/28/2018
+ * Doctor Andrew Jung
+ * This script allows the user to expand or retract the image on a content page
+ * with a single click. It focuses the image for the user by blurring and hiding the
+ * background and centering the new instance of the image.
+ */
+
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// outer container, separates inner img container and outer content from body

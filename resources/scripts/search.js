@@ -1,3 +1,11 @@
+/**
+ * FirstName LastName
+ * 11/28/2018
+ * Doctor Andrew Jung
+ * This script allows the user to instantly see the search results for 
+ * a Google search of the current content page.
+ */
+
 // Google disabled iframe embedding so we had to make use of their CSE API //
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
