@@ -218,3 +218,7 @@ footer{
 #pinLabel:hover{
     background-color: #666683;
 }
+
+.categoryBody {
+	padding-top: 50px;
+}
