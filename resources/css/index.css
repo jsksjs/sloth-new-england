@@ -119,7 +119,7 @@ li.drop {
 .drop:hover .dropcontent {
     display: flex;
     flex-direction: column;
-		z-index: 99;
+	z-index: 3;
 }
 
 #indexBody {
