@@ -48,11 +48,13 @@ body{
     white-space: nowrap;
     transform: translate(0%, 0%);
     transition: transform 0.75s;
+	z-index: 1;
 }
 
 .navbar {
 	position: absolute;
 	width: 100%;
+	z-index: 1;
 }
 
 .navbar.posTop {
@@ -107,6 +109,7 @@ li.drop {
     text-decoration: none;
     display: block;
     text-align: left;
+	z-index: 1;
 }
 
 .dropcontent a:hover{
@@ -116,6 +119,7 @@ li.drop {
 .drop:hover .dropcontent {
     display: flex;
     flex-direction: column;
+		z-index: 99;
 }
 
 #indexBody {
