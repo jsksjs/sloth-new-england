@@ -47,8 +47,6 @@
 
 		pinLabel = document.getElementById("pinLabel");
 
-		let pinned = document.cookie.split(";")[0];
-		pin.checked = (pinned === 'true');
 		topHeight = header.clientHeight + nav.clientHeight;
 	}
 
@@ -61,7 +59,7 @@
 			navbar.classList.add("posTop");
 			reset();
 		}
-		//if towards top of page, move navbar back to original position and show
+		// if towards top of page, move navbar back to original position and show
 		else if(currentScroll < header.clientHeight){
 			trigger.style.pointerEvents = "none";
 			navbar.classList.remove("posTop");
@@ -106,7 +104,7 @@
 	function reset(){
 		nav.style.transition = "none";
 		nav.style.transform = "translate(0%, 0%)";
-		nav.offsetHeight;
+		nav.offsetHeight; // force cache flush
 		nav.style.transition = "transform 0.75s";
 	}
 
