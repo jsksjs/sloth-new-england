@@ -1,5 +1,5 @@
 /**
- * FirstName LastName
+ * Sloth from the Goonies
  * 11/28/2018
  * Doctor Andrew Jung
  * This script allows the user to pin/hide the navigation bar at will.

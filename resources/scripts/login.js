@@ -1,5 +1,5 @@
 /**
- * FirstName LastName
+ * Sloth from the Goonies
  * 11/28/2018
  * Doctor Andrew Jung
  * This script validates the login page, checking for the correct formats
