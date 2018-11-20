@@ -1,134 +1,137 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
-	<meta charset = "UTF-8">
+	<meta charset="UTF-8">
 	<title>Sloth Love Abandoned Buildings!</title>
-	<link rel = "stylesheet" type = "text/css" href = "resources/css/index.css"/>
-	<link rel = "stylesheet" type = "text/css" href = "resources/css/category.css"/>
-	<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src = "resources/scripts/main.js"></script>
+	<link rel="stylesheet" type="text/css" href="resources/css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/css/category.css"/>
+	<script src="resources/scripts/main.js"></script>
 </head>
 <body>
-	<div class = "header">
+	<div class="header">
 		<h1>Sloth From <i>THE GOONIES'</i> Guide to New England</h1>
 	</div>
-	<div class = "navbar">
-		<ul class = "nav">
-			<li class = "logo navItem">
-				<a href = "index.html"></a>
+	<div class="navbar">
+		<ul class="nav">
+			<li id="logoBtn" class="options">
+				<a id="logo" href="index.html">🏠</a>
 			</li>
-			<li class = "drop navItem">
-				<a href = "history.html" class = "dropbtn">History</a>
-				<div class = "dropcontent">
-					<a href = "saugus_iron_works.html">Saugus Iron Works</a>
-					<a href = "salem_witch_trials.html">Salem Witch Trials</a>
-					<a href = "boston_harbor.html">Boston Harbor</a>
-					<a href = "boston_massacre.html">Boston Massacre</a>
-					<a href = "dungeon_rock.html">Dungeon Rock</a>
-					<a href = "mark_twain.html">Mark Twain</a>
-					<a href = "old_sturbridge_village.html">Old Sturbridge Village</a>
+			<li class="drop navItem">
+				<a href="history.html" class="dropbtn">History</a>
+				<div class="dropcontent">
+					<a href="saugus_iron_works.html">Saugus Iron Works</a>
+					<a href="salem_witch_trials.html">Salem Witch Trials</a>
+					<a href="boston_harbor.html">Boston Harbor</a>
+					<a href="boston_massacre.html">Boston Massacre</a>
+					<a href="dungeon_rock.html">Dungeon Rock</a>
+					<a href="mark_twain.html">Mark Twain</a>
+					<a href="old_sturbridge_village.html">Old Sturbridge Village</a>
 				</div>
 			</li>
-			<li class = "drop navItem">
-				<a href = "culture.html" class = "dropbtn">Culture</a>
-				<div class = "dropcontent">
-					<a href = "salem_halloween_events.html">Salem</a>
-					<a href = "house_of_blues.html">House of Blues</a>
-					<a href = "revere_beach.html">Revere Beach</a>
-					<a href = "the_beach_plum.html">The Beach Plum</a>
-					<a href = "six_flags.html">Six Flags</a>
-					<a href = "quassy.html">Quassy</a>
-					<a href = "misquamicut.html">Misquamicut</a>
+			<li class="drop navItem">
+				<a href="culture.html" class="dropbtn">Culture</a>
+				<div class="dropcontent">
+					<a href="salem_halloween_events.html">Salem</a>
+					<a href="house_of_blues.html">House of Blues</a>
+					<a href="revere_beach.html">Revere Beach</a>
+					<a href="the_beach_plum.html">The Beach Plum</a>
+					<a href="six_flags.html">Six Flags</a>
+					<a href="quassy.html">Quassy</a>
+					<a href="misquamicut.html">Misquamicut</a>
 				</div>
 			</li>
-			<li class = "drop navItem">
-				<a href = "sports.html" class = "dropbtn">Sports</a>
-				<div class = "dropcontent">
-					<a href = "uconn_basketball.html">UConn Basketball</a>
-					<a href = "hockey.html">Hockey</a>
-					<a href = "hartford_hawks.html">Hartford Hawks</a>
-					<a href = "gillette_stadium.html">Gillette Stadium</a>
-					<a href = "alumni_stadium.html">Alumni Stadium</a>
-					<a href = "dunkin_donuts_park.html">Dunkin' Donuts Park</a>
-					<a href = "fenway_park.html">Fenway Park</a>
+			<li class="drop navItem">
+				<a href="sports.html" class="dropbtn">Sports</a>
+				<div class="dropcontent">
+					<a href="uconn_basketball.html">UConn Basketball</a>
+					<a href="hockey.html">Hockey</a>
+					<a href="hartford_hawks.html">Hartford Hawks</a>
+					<a href="gillette_stadium.html">Gillette Stadium</a>
+					<a href="alumni_stadium.html">Alumni Stadium</a>
+					<a href="dunkin_donuts_park.html">Dunkin' Donuts Park</a>
+					<a href="fenway_park.html">Fenway Park</a>
 				</div>
 			</li>
-			<li class = "drop navItem">
-				<a href = "education.html" class = "dropbtn">Education</a>
-				<div class = "dropcontent">
-					<a href = "uhart.html">UHart</a>
-					<a href = "uconn.html">UConn</a>
-					<a href = "umass.html">UMass</a>
-					<a href = "mit.html">MIT</a>
-					<a href = "harvard.html">Harvard</a>
-					<a href = "yale.html">Yale</a>
-					<a href = "brown.html">Brown</a>
+			<li class="drop navItem">
+				<a href="education.html" class="dropbtn">Education</a>
+				<div class="dropcontent">
+					<a href="uhart.html">UHart</a>
+					<a href="uconn.html">UConn</a>
+					<a href="umass.html">UMass</a>
+					<a href="mit.html">MIT</a>
+					<a href="harvard.html">Harvard</a>
+					<a href="yale.html">Yale</a>
+					<a href="brown.html">Brown</a>
 				</div>
 			</li>
-			<li class = "drop navItem">
-				<a href = "abandoned_buildings.html" class = "dropbtn active" >Abandoned Buildings </a>
-				<div class = "dropcontent">
-					<a href = "colt_armory.html">Colt Armory</a>
-					<a href = "lynn_shoe_factories.html">Lynn</a>
-					<a href = "dudleytown.html">Dudleytown</a>
-					<a href = "somerset_power_station.html">Somerset Power Station</a>
-					<a href = "english_station.html">English Station</a>
-					<a href = "majestic_palace_theaters.html">Majestic/Palace Theaters</a>
-					<a href = "wishlist.html">Wishlist</a>
+			<li class="drop navItem">
+				<a href="abandoned_buildings.html" class="dropbtn active" >Abandoned Buildings </a>
+				<div class="dropcontent">
+					<a href="colt_armory.html">Colt Armory</a>
+					<a href="lynn_shoe_factories.html">Lynn</a>
+					<a href="dudleytown.html">Dudleytown</a>
+					<a href="somerset_power_station.html">Somerset Power Station</a>
+					<a href="english_station.html">English Station</a>
+					<a href="majestic_palace_theaters.html">Majestic/Palace Theaters</a>
+					<a href="wishlist.html">Wishlist</a>
 				</div>
 			</li>
-			<li class = "options navItem">
-				<a href = "about.html">About</a>
+			<li class="options navItem">
+				<a href="about.html">About</a>
 			</li>
-			<li class = "options navItem">
-				<a href = "profile.html">Profile</a>
+			<li class="options navItem">
+				<a href="profile.html">Profile</a>
+			</li>
+			<li id="pinBtn" class="options">
+                <label id="pinLabel" for="pin">📌</label>
+				<input type="checkbox" id="pin" name="pin">
 			</li>
 		</ul>
 	</div>
-	<div class = "categoryBody">
-		<h2 class = "categoryHeader">Abandoned Buildings</h2>
-		<p class = "categoryDescription">Sometimes, things in New England go wrong, and buildings have to be abandoned either because they aren't useful anymore, or everyone who once needed them has left, or because the building is unsafe, or the owner disappears to another country due to criminal charges. This page holds some of the <strong>best</strong> abandoned buildings in all of New England, as determined by the votes of a council of three arbitrary wizards.</p>
-		<div class = "contentDiv">
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "colt_armory.html">
-					<img class = "contentThumbnail" title = "https://en.wikipedia.org/wiki/Colt_Armory#/media/File:VIEW_SOUTH_OF_EAST_ARMORY_OF_NORTHEAST_CORNER._-_Colt_Fire_Arms_Company,_East_Armory_Building,_36-150_Huyshope_Avenue,_17-170_Van_Dyke_Avenue,_49_Vredendale_Avenue,_Hartford,_Hartford_HAER_CT-189-A-1.tif" src = "resources\images\abandoned_buildings\colt_armory.jpg">
-					<p class = "contentP">Colt Armory</p>
+	<div class="categoryBody">
+		<h2 class="categoryHeader">Abandoned Buildings</h2>
+		<p class="categoryDescription">Sometimes, things in New England go wrong, and buildings have to be abandoned either because they aren't useful anymore, or everyone who once needed them has left, or because the building is unsafe, or the owner disappears to another country due to criminal charges. This page holds some of the <strong>best</strong> abandoned buildings in all of New England, as determined by the votes of a council of three arbitrary wizards.</p>
+		<div class="contentDiv">
+			<div class="contentTile">
+				<a class="contentDescription" href="colt_armory.html">
+					<img class="contentThumbnail" title="https://en.wikipedia.org/wiki/Colt_Armory#/media/File:VIEW_SOUTH_OF_EAST_ARMORY_OF_NORTHEAST_CORNER._-_Colt_Fire_Arms_Company,_East_Armory_Building,_36-150_Huyshope_Avenue,_17-170_Van_Dyke_Avenue,_49_Vredendale_Avenue,_Hartford,_Hartford_HAER_CT-189-A-1.tif" src="resources\images\abandoned_buildings\colt_armory.jpg">
+					<p class="contentP">Colt Armory</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "lynn_shoe_factories.html">
-					<img class = "contentThumbnail" title = "http://patrickmurfin.blogspot.com/2015/05/stinkin-lousy-half-breed-foreigner-puts.html" src = "resources/images/abandoned_buildings/lynn.jpg">
-					<p class = "contentP">Lynn</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="lynn_shoe_factories.html">
+					<img class="contentThumbnail" title="http://patrickmurfin.blogspot.com/2015/05/stinkin-lousy-half-breed-foreigner-puts.html" src="resources/images/abandoned_buildings/lynn.jpg">
+					<p class="contentP">Lynn</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "dudleytown.html">
-					<img class = "contentThumbnail" title = "https://i.ytimg.com/vi/d_QoQX-dRwM/maxresdefault.jpg" src = "resources/images/abandoned_buildings/dudleytown.jpg">
-					<p class = "contentP">Dudleytown</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="dudleytown.html">
+					<img class="contentThumbnail" title="https://i.ytimg.com/vi/d_QoQX-dRwM/maxresdefault.jpg" src="resources/images/abandoned_buildings/dudleytown.jpg">
+					<p class="contentP">Dudleytown</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "somerset_power_station.html">
-					<img class = "contentThumbnail" title = "http://www.wbur.org/bostonomix/2017/05/31/brayton-power-plant-somerset" src = "resources/images/abandoned_buildings/somerset_power_station.jpg">
-					<p class = "contentP">Somerset Power Station</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="somerset_power_station.html">
+					<img class="contentThumbnail" title="http://www.wbur.org/bostonomix/2017/05/31/brayton-power-plant-somerset" src="resources/images/abandoned_buildings/somerset_power_station.jpg">
+					<p class="contentP">Somerset Power Station</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "english_station.html">
-					<img class = "contentThumbnail" title = "https://en.wikipedia.org/wiki/English_Station#/media/File:English_Station_from_Chapel_Street.jpg" src = "resources/images/abandoned_buildings/english_station.jpg">
-					<p class = "contentP">English Station</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="english_station.html">
+					<img class="contentThumbnail" title="https://en.wikipedia.org/wiki/English_Station#/media/File:English_Station_from_Chapel_Street.jpg" src="resources/images/abandoned_buildings/english_station.jpg">
+					<p class="contentP">English Station</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "majestic_palace_theaters.html">
-					<img class = "contentThumbnail" title = "http://www.damnedct.com/wordpress/wp-content/uploads/2010/08/poli9.jpg" src = "resources/images/abandoned_buildings/majestic_palace_theaters.jpg">
-					<p class = "contentP">Majestic/Palace Theaters</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="majestic_palace_theaters.html">
+					<img class="contentThumbnail" title="http://www.damnedct.com/wordpress/wp-content/uploads/2010/08/poli9.jpg" src="resources/images/abandoned_buildings/majestic_palace_theaters.jpg">
+					<p class="contentP">Majestic/Palace Theaters</p>
 				</a>
 			</div>
-			<div class = "contentTile">
-				<a class = "contentDescription" href = "wishlist.html">
-					<img class = "contentThumbnail" title = "https://media.glassdoor.com/l/7d/66/b7/77/the-hartford.jpg" src = "resources/images/abandoned_buildings/the_hartford.jpg">
-					<p class = "contentP">Wishlist</p>
+			<div class="contentTile">
+				<a class="contentDescription" href="wishlist.html">
+					<img class="contentThumbnail" title="https://media.glassdoor.com/l/7d/66/b7/77/the-hartford.jpg" src="resources/images/abandoned_buildings/the_hartford.jpg">
+					<p class="contentP">Wishlist</p>
 				</a>
 			</div>
 		</div>

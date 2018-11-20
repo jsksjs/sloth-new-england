@@ -46,6 +46,8 @@ body{
 	user-select:none;
 	font-size: 14pt;
     white-space: nowrap;
+    transform: translate(0%, 0%);
+    transition: transform 0.75s;
 }
 
 .navbar {
@@ -54,20 +56,17 @@ body{
 }
 
 .navbar.posTop {
-	position: fixed;
-	top: 0px;
-}
-
-.navbar.hideme {
-    opacity: 0;
+    position: fixed;
+    top: 0;
 }
 
 .navItem {
     flex: 1 1 auto;
+    max-height: 50px;
 }
 
 .dropbtn, .navItem{
-	background-color: #333;
+	background: #333;
 }
 
 .navItem a, .dropbtn {
@@ -123,15 +122,16 @@ li.drop {
 	padding-top: 70px;
 }
 
-.logo{
-	display: flex;
-    flex: 0;
+#logo{
+    min-width: 50px;
+    height: 100%;
+    font-size: 18pt;
+    padding: 8px 0;
+    cursor: pointer;
 }
 
-.logo>a{
-    background: url(../images/index/templogo.png) no-repeat center;
-    background-size: cover;
-    width: 12px;
+#logo:hover{
+    background-color: #836666;
 }
 
 .options{
@@ -153,9 +153,7 @@ li.drop {
     max-height: 445px;
     width: 100%;
     overflow: hidden;
-    background: #dadada;
     list-style: none;
-    position: relative;
 }
 
 .imgListItem .imgListLink img{
@@ -199,4 +197,24 @@ footer{
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
+}
+
+#pin{
+    height: 100%;
+    width: 50px;
+}
+
+#pinLabel{
+    position: absolute;
+    background: #333;
+    height: 50px;
+    width: 50px;
+    line-height: 225%;
+    font-size: 16pt;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#pinLabel:hover{
+    background-color: #666683;
 }
