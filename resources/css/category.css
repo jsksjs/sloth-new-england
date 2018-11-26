@@ -1,3 +1,8 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
 .categoryDescription {
 	padding: 10px;
 	text-align: center;
@@ -55,5 +60,3 @@
 .contentP{
 	font-size: 12pt;
 }
-
-
