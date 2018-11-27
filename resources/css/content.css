@@ -50,6 +50,7 @@ html,body { min-height:100%; }
     flex-direction: column;
     height: 100%;
     align-items: center;
+	margin-top: 50px;
 }
 
 #contentHeaderCont{
