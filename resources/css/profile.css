@@ -25,12 +25,11 @@ header>*{
     background: rgba(255,255,255,0.3);
 }
 
-.container{
-    height: 100%;
-    display: flex;
+.container{	
+    display:flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
+	justify-content: center;
+	min-height: calc(100% - 23px);
 }
 
 .top{
@@ -39,8 +38,7 @@ header>*{
     font-size: 14pt;
     text-align: center;
     justify-content: center;
-    align-items: center;
-    flex:1;
+    align-items: stretch;
 }
 
 .entry{
@@ -52,7 +50,6 @@ header>*{
     padding: 20px;
     color: #c2c2c2;
     overflow: hidden;
-	margin-bottom: 42px;
 }
 
 #profileImage{
@@ -91,6 +88,7 @@ input{
     -ms-user-select: none;
     user-select: none;
     border-top: 1px solid rgba(0,0,0,0.3);
+	flex: 0;
 }
 
 #message{
