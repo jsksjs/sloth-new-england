@@ -10,7 +10,7 @@
 (function(){
 	// validates profile inputs
 	this.validate = function(){
-		let regEmail = /([a-z0-9!#$%&'*+/=?^_`{|}~-])+@([a-z0-9]*[a-z0-9]\.)+[a-z0-9][a-z0-9]*/;
+		let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+@([a-z0-9]+\.[a-z0-9]+)+/;
 		let regUser = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;
 		let regNames = /(^[a-z]{0,20}$)/;
 		let log = document.getElementById("log");
