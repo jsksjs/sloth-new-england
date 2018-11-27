@@ -20,8 +20,8 @@ body{
 	-webkit-user-select: none;
 	-ms-user-select:none;
 	user-select:none;
-    background: url(../images/index/sloth-boy.png);
-    background-size: cover;
+    background: url(../images/index/sloth-yes.jpg);
+    /*background-size: cover;*/
 	overflow: hidden;
 }
 
