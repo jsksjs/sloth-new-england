@@ -1,3 +1,6 @@
+content_pages/
+navbar_pages/
+
 # Logs
 logs
 *.log
