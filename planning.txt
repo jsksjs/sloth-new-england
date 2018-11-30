@@ -1,0 +1,9 @@
+user-favorited pages:
+-add favorite table to database
+-write favorite.js:
+	-take URL or filename of current page
+	-take user ID from cookie
+-add favorite button to every content page
+-add favorite.js to every content page
+
+Users + login + profile:
