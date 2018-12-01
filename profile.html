@@ -3,16 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sloth Love New England!</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/profile.css"/>
-	<script src="resources/scripts/profile.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/profile.css"/>
+	<script src="/resources/scripts/profile.js"></script>
 </head>
 <body>
 <div class="container">
 	<div class="top">
-		<form class="entry" onsubmit="return validate()">
+		<form class="entry" onsubmit="return validate()" action="/profile/submit" method="post">
 			<p style="text-align: center;">Your Bio</p>
 			<a style="text-align: center;" href="#">
-				<img id="profileImage" src="resources/images/index/templogo.png"/>
+				<img id="profileImage" src="/resources/images/index/templogo.png"/>
 			</a>
 			<div class="inputs" title="REQUIRED">
 				<label for="email">Email:</label>
@@ -56,7 +56,7 @@
 		</form>
 	</div>
 	<footer class="end">
-		<a href="contact.html">Contact us</a>
+		<a href="/contact">Contact us</a>
 	</footer>
 </div>
 </body>

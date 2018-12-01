@@ -4,6 +4,7 @@ let fs = require("fs");
 let jwt = require("jsonwebtoken");
 let bp = require("body-parser");
 let ck = require("cookie-parser");
+let path = require("path");
 let app = express();
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
@@ -11,20 +12,32 @@ app.use(ck());
 
 let access = express.Router();
 
-app.get("/", function(req, res){
-    res.sendFile("login.html", {"root": __dirname});
+app.get("(/resources/*/*)", function(req, res){
+	res.sendFile(path.join(path.dirname(path.dirname(__dirname)), req.params[0]));
 });
 
-app.post("/", function(req, res){
-	fs.readFile("pass.cfg", function(err, data){
-		b.compare(req.body.password, data.toString(), function(err, match){
+app.get("/", function(req, res){
+    res.sendFile("splash.html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+app.get("/login", function(req, res){
+    res.sendFile("login.html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+app.get("/contact", function(req, res){
+    res.sendFile("contact.html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+app.post("/login", function(req, res){
+	fs.readFile(path.join(__dirname, "pass.cfg"), function(err, data){
+		b.compare(req.body.pswd, data.toString(), function(err, match){
 			if(err){
 				return res.status(500).json({
 					error: err
 				});
 			}
 			else if(match){
-				fs.readFile("private.key", function(err, key){
+				fs.readFile(path.join(__dirname, "private.key"), function(err, key){
 					if(err){
 						return res.status(500).json({
 						   error: err
@@ -33,42 +46,15 @@ app.post("/", function(req, res){
 					else{
 						jwt.sign({
 							id: 123123,
-							username: req.body.username
-						}, key, {expiresIn: 5000}, function(err, token){
-							res.cookie("token", token, {maxAge: 5000, httpOnly: true, domain: "localhost"});
-							return res.redirect("/auth/splash");
+							email: req.body.email
+						}, key, function(err, token){
+							res.cookie("token", token, {httpOnly: true, domain: "localhost"});
+							return res.redirect("/auth/index");
 						});
 					}
 				});
 			}
 			else{
-				let html = "<!DOCTYPE html>\n" +
-					"<html lang=\"en\">\n" +
-					"<head>\n" +
-					"\t<meta charset=\"UTF-8\">\n" +
-					"\t<title>Tests</title>\n" +
-					"</head>\n" +
-					"<body>\n" +
-					"<div>\n" +
-					"\t<div>\n" +
-					"\t\t<form action=\"/\" method=\"post\">\n" +
-					"\t\t\t<div>\n" +
-					"\t\t\t\t<label for=\"username\">Username:</label>\n" +
-					"\t\t\t\t<input type=\"text\" id=\"username\" name=\"username\" value="+req.body.username+">\n" +
-					"\t\t\t</div>\n" +
-					"\t\t\t<div>\n" +
-					"\t\t\t\t<label for=\"password\">Password:</label>\n" +
-					"\t\t\t\t<input type=\"password\" id=\"password\" name=\"password\" value="+req.body.password+">\n" +
-					"\t\t\t</div>\n" +
-					"\t\t\t<div>\n" +
-					"\t\t\t\t<input type=\"submit\" value=\"Log in\">\n" +
-					"\t\t\t</div>\n" +
-					"\t\t\t<div>Incorrect login</div>\n" +
-					"\t\t</form>\n" +
-					"\t</div>\n" +
-					"</div>\n" +
-					"</body>\n" +
-					"</html>";
 				return res.redirect("/");
 			}
 		});
@@ -82,7 +68,7 @@ app.use("/auth", access);
 access.all("*", function(req, res, next){
     let token = req.cookies.token;
     if(token !== undefined){
-        fs.readFile("private.key", function(err, data){
+        fs.readFile(path.join(__dirname, "private.key"), function(err, data){
             if(err){
                 return res.status(500).json({
                     error: err
@@ -106,12 +92,27 @@ access.all("*", function(req, res, next){
     }
 });
 
+
+access.use(express.static(path.dirname(path.dirname(__dirname))));
+
 access.get("/", function(req, res){
-    res.redirect("/splash");
+    res.redirect("/index");
 });
 
-access.get("/splash", function(req, res){
-    res.sendFile("splash.html", {"root": __dirname});
+access.get("/index", function(req, res){
+    res.sendFile("index.html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+access.get("(/about|/profile)", function(req, res){
+    res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
+	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", function(req, res){
+    res.sendFile(req.params[1]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
 // Running Server Details.
