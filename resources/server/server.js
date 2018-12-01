@@ -109,9 +109,9 @@ access.get("(/about|/profile)", function(req, res){
     res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
-access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/cookie)", function(req, res)){
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/cookie)", function(req, res){
 	console.log("this function was not finished");//TODO: finish
-}
+});
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
 	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
