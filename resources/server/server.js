@@ -24,8 +24,16 @@ app.get("/login", function(req, res){
     res.sendFile("login.html", {root: path.dirname(path.dirname(__dirname))});
 });
 
+app.get("/register", function(req, res){
+    res.sendFile("register.html", {root: path.dirname(path.dirname(__dirname))});
+});
+
 app.get("/contact", function(req, res){
-    res.sendFile("contact.html", {root: path.dirname(path.dirname(__dirname))});
+	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
+		let halves = data.toString().split("?");
+		let html = halves[0] + "Hi!<br><br>This message will NOT be sent to the admins." + halves[1];
+		res.send(html);
+	}); 
 });
 
 app.post("/login", function(req, res){
@@ -49,7 +57,9 @@ app.post("/login", function(req, res){
 							email: req.body.email
 						}, key, function(err, token){
 							res.cookie("user_info", {token: token,
-                                                    id: 123123},
+                                                    id: 123123,
+													username: "spaghettilad",
+													email: req.body.email},
                                 {httpOnly: true, domain: "localhost"});
 							return res.redirect("/auth/index");
 						});
@@ -107,6 +117,27 @@ access.get("/index", function(req, res){
 
 access.get("(/about|/profile)", function(req, res){
     res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+access.get("/contact", function(req, res){
+	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
+		let halves = data.toString().split("?");
+		let mailValue = halves[1].split("name=\"email\"");
+		let user = req.cookies.user_info;
+		let greetings = ["Hi there", "How's it going", "What's up", "Greetings", "Hey"];
+		if(user !== undefined && user.token !== undefined){
+			let username = user.username;
+			let email = user.email;
+			let html = halves[0] + greetings[Math.floor(Math.random()*Math.floor(5))] + ", " + 
+				username + "!<br><br>This message will be sent to the admins." +
+				mailValue[0] + "value=\"" + email + "\" name=\"email\" disabled" + mailValue[1];
+			console.log(html);
+			res.send(html);
+		}
+		else{
+			res.redirect("/profile");
+		}
+	});    
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
