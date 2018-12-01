@@ -48,7 +48,9 @@ app.post("/login", function(req, res){
 							id: 123123,
 							email: req.body.email
 						}, key, function(err, token){
-							res.cookie("token", token, {httpOnly: true, domain: "localhost"});
+							res.cookie("user_info", {token: token,
+                                                    id: 123123},
+                                {httpOnly: true, domain: "localhost"});
 							return res.redirect("/auth/index");
 						});
 					}
@@ -66,8 +68,9 @@ app.post("/login", function(req, res){
 app.use("/auth", access);
 
 access.all("*", function(req, res, next){
-    let token = req.cookies.token;
-    if(token !== undefined){
+    let user = req.cookies.user_info;
+    if(user !== undefined && user.token !== undefined){
+        let token = req.cookies.user_info.token;
         fs.readFile(path.join(__dirname, "private.key"), function(err, data){
             if(err){
                 return res.status(500).json({
@@ -80,7 +83,6 @@ access.all("*", function(req, res, next){
                         return res.status(401).json({error: true, message: "Unauthorized access"});
                     }
                     else{
-                        req.decoded = decoded;
                         return next();
                     }
                 });
