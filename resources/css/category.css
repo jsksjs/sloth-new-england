@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+.categoryBody{
+	transition: filter, 0.75s ease-out;
+}
+
 .categoryDescription {
 	padding: 10px;
 	text-align: center;
@@ -34,11 +38,9 @@
 	text-align: center;
 	overflow: hidden;
 	box-shadow: 0 0 8px 0 rgba(0,0,0,0.4);
-}
-
-.contentTile>a{
 	display: flex;
 	flex-direction: column;
+    cursor: pointer;
 }
 
 .contentTile:hover {
