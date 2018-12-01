@@ -7,64 +7,36 @@
 
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
-	// outer container, separates inner img container and outer content from body
-	let btn = document.createElement("button");
-	btn.type = "button";
-	btn.style.cssText =
-		"position: relative;" +
-		"width: 89px;" +
-		"margin: 10px 0 10px 0;" +
-		"padding: 2px;" +
-		"font-size: 11pt;";
+	// 
+	let cookieReq = window.location.href.substring(0, href.indexOf("#"))+"cookie";
+	console.log(cookieReq);
+	
+	console.log(cookieHref);
+	let btn = document.createElement("a");
+	//btn.type = "button";
+	btn.id = "favorite";
+	btn.href; //TODO: href for cookie
 	btn.innerHTML = "Favorite this page!";
-	btn.id = "favoriteButton";
 	btn.addEventListener("click", toggleFavorite);
-	/* TODO: delete?
-	// inner container for the image, moves within outer container
-	let innerContainer = document.createElement("div");
-	innerContainer.style.cssText =
-		"visibility: hidden;" +
-		"width: 95vw;" +
-		"height: 80vh;" +
-		"position: absolute;" +
-		"top: 15vh;" +
-		"transform: translate(0%, -125%);" +
-		"transition: transform 0.75s, visibility 1.5s linear;";
-	*/
 
 	// inject all dynamic elements on load
 	window.addEventListener("load", inject);
 	
 	function inject(){
-		imgContainer = document.getElementsByClassName("imageWrapper")[0];
 		btn.addEventListener("click", toggleFavorite);
-		imgContainer.appenChild(btn);
-	}
-	//TODO: delete function that exists here only for reference
-	function copiedInject(){
-		document.body.appendChild(container);
-		image = document.getElementsByClassName("contentImage")[0];
-		image.addEventListener("click", imgExpand);
-		
-		backgrnd = document.getElementById("contentContainer");
-		container.addEventListener("click", imgRetract);
-
-		let imgSrc = image.getAttribute("src");
-		container.appendChild(innerContainer);
-
-		innerContainer.style.background = "url(" + imgSrc + ") no-repeat center";
-		innerContainer.style.backgroundSize = "contain";
+		//imgContainer = document.getElementsByClassName("imageWrapper")[0];
+		//imgContainer.appendChild(btn);
+		document.body.appendChild(btn);
 	}
 
-	//toggle this whether the current page is favorited for this specific user, 
+	//toggle whether the current page is favorited for this specific user by communicating with database
 	function toggleFavorite(){
 		console.log(document.cookies);
-		console.log(document.cookies[0]);
 		//gets current URL apparently
 		//window.location
 	}
 	
-	// "expand" image (move it down)
+	// "expand" image (move it down) TODO: delete once unnecessary
 	function imgExpand(){
 		innerContainer.style.visibility = "visible";
 		innerContainer.style.transform = "translate(0%, 0)";
@@ -74,7 +46,7 @@
 		container.style.cursor = "zoom-out";
 	}
 
-	// "retract" image (move it up)
+	// "retract" image (move it up) TODO: delete once unnecessary
 	function imgRetract(){
 		innerContainer.style.visibility = "hidden";
 		innerContainer.style.transform = "translate(0%, -125%)";
