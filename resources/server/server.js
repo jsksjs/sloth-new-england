@@ -132,7 +132,7 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favor
 				error: err
 			});
 		}
-		let credentials data.toString().split(",");
+		let credentials = data.toString().split(",");
 		let fHost = credentials[0];
 		let fUser = credentials[1];
 		let fPassword = credentials[2];
@@ -145,10 +145,26 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favor
 			password: fPassword,
 			database: fDatabase
 		});
+		console.log("user_ID = "+user_ID);
+		con.query("SELECT * FROM favorite WHERE UserID = "+user_ID+";", function (err, result){
+			if(err) throw err;
+			//if user has not favorited page, favorite it, update cookie
+			if(result === undefined){
+				con.query("INSERT INTO favorite (UserID, URL) values ", function(err, result){
+					
+				});
+			}
+			//if user has favorited page
+			else{
+				
+			}
+			
+			
+
+			res.end();
+		});
 		
-		
-		
-		console.log(user_ID);
+
 	});
 	
 });
