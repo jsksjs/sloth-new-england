@@ -123,7 +123,7 @@ access.get("(/about|/profile)", function(req, res){
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favorite)", function(req, res){
 	let credentials;
 	//get hash of DB login credentials
-	fs.readFile("./credentials.cfg", "utf-8", function(err, data){
+	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
 		if(err) throw(err);
 		console.log("data "+data);
 		credentials = data.toString().split(",");
