@@ -65,3 +65,6 @@ typings/
 
 # all files/dirs starting with .
 .*
+
+*.key
+*.cfg
