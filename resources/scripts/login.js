@@ -5,7 +5,7 @@
  * This script validates the login page, checking for the correct formats
  * for the email and password of the user.
  */
-//TODO: make this page query the database for validation
+
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs

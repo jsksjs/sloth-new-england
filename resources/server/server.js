@@ -121,12 +121,27 @@ access.get("(/about|/profile)", function(req, res){
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favorite)", function(req, res){
-	let con = mysql.createConnection({
-		host: "localhost",
-		user:"root",
-		password: "123456",
-		database: "hello"
+	let credentials;
+	//get hash of DB login credentials
+	fs.readFile("./credentials.cfg", "utf-8", function(err, data){
+		if(err) throw(err);
+		console.log("data "+data);
+		credentials = data.toString().split(",");
+		console.log("creds "+credentials);
 	});
+	console.log("credentials again = "+credentials);
+	let fHost = credentials[0];
+	let fUser = credentials[1];
+	let fPassword = credentials[2];
+	let fDatabase = credentials[3];
+	
+	let con = mysql.createConnection({
+		host: fHost,
+		user: fUser,
+		password: fPassword,
+		database: fDatabase
+	});
+	
 	let user_ID = req.cookies.user_info.id;
 	console.log(user_ID);
 	//TODO: disable button while query is running by updating a cookie or sending a new page
