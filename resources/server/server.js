@@ -119,7 +119,7 @@ access.get("(/about|/profile)", function(req, res){
     res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
-access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favorite)", function(req, res){
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
 	//TODO: disable button while query is running by updating a cookie or sending a new page
 	//TODO: query database
 	//TODO: re-enable button
@@ -146,16 +146,33 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favor
 		});
 		console.log("user_ID = "+user_ID);
 		con.query("SELECT * FROM favorite WHERE UserID = "+user_ID+";", function (err, result){
-			if(err) throw err;
-			//if user has not favorited page, favorite it, update cookie
-			if(result === undefined){
-				con.query("INSERT INTO favorite (UserID, URL) values ", function(err, result){
-					
+			if(err){
+				return res.status(500).json({
+					error: err
 				});
 			}
-			//if user has favorited page
+			//if user has not favorited page, favorite it
+			console.log("req.params[0]+req.params[1]= "+req.params[0]+req.params[1]);
+			if(result === undefined){
+				con.query("INSERT INTO favorite (UserID, URL) VALUES ("+user_ID+","+req.params[0]+req.params[1]+");", function(err, result){
+					if(err){
+						return res.status(500).json({
+							error: err
+						});
+					}
+					//TODO: Cookie things
+				});
+			}
+			//if user has favorited page, remove it
 			else{
-				
+				con.query("DELETE FROM favorite WHERE (UserID="+user_ID+" AND URL="+req.params[0]+req.params[1]+");", function(err, result){
+					if(err){
+						return res.status(500).json({ //IT FUCKED HERE
+							error: err
+						});
+					}
+					//TODO: cookie things
+				});
 			}
 			
 			
