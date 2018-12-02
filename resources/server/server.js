@@ -121,33 +121,36 @@ access.get("(/about|/profile)", function(req, res){
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favorite)", function(req, res){
-	let credentials;
-	//get hash of DB login credentials
-	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
-		if(err) throw(err);
-		console.log("data "+data);
-		credentials = data.toString().split(",");
-		console.log("creds "+credentials);
-	});
-	console.log("credentials again = "+credentials);
-	let fHost = credentials[0];
-	let fUser = credentials[1];
-	let fPassword = credentials[2];
-	let fDatabase = credentials[3];
-	
-	let con = mysql.createConnection({
-		host: fHost,
-		user: fUser,
-		password: fPassword,
-		database: fDatabase
-	});
-	
-	let user_ID = req.cookies.user_info.id;
-	console.log(user_ID);
 	//TODO: disable button while query is running by updating a cookie or sending a new page
-	
 	//TODO: query database
 	//TODO: re-enable button
+	
+	//get DB login credentials
+	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		let credentials data.toString().split(",");
+		let fHost = credentials[0];
+		let fUser = credentials[1];
+		let fPassword = credentials[2];
+		let fDatabase = credentials[3];
+		let user_ID = req.cookies.user_info.id;
+		
+		let con = mysql.createConnection({
+			host: fHost,
+			user: fUser,
+			password: fPassword,
+			database: fDatabase
+		});
+		
+		
+		
+		console.log(user_ID);
+	});
+	
 });
 
 access.get("/contact", function(req, res){
