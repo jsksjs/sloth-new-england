@@ -110,7 +110,12 @@ access.get("(/about|/profile)", function(req, res){
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/cookie)", function(req, res){
-	console.log("this function was not finished");//TODO: finish
+	let user_ID = req.cookies.user_info.id;
+	console.log(user_ID);
+	//TODO: disable button while query is running by updating a cookie or sending a new page
+	
+	//TODO: query database
+	//TODO: re-enable button
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
