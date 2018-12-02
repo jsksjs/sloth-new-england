@@ -12,7 +12,7 @@
 	
 	// Construct cookie request by extracting useful part of URL (everything after localhost) and adding /cookie onto the end
 	//let cookieReq = href.substring(href.indexOf("/auth"))+"/cookie";
-	let cookieReq = href+"/cookie"; //TODO: figure out if I ever needed to extract what I did in the line above
+	let cookieReq = href+"/favorite"; //TODO: figure out if I ever needed to extract what I did in the line above
 	console.log("cookieReq = "+cookieReq);
 	let btn = document.createElement("a");
 	btn.id = "favorite";

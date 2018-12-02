@@ -1,6 +1,7 @@
 content_pages/
 navbar_pages/
-
+*.cfg
+*.key
 # Logs
 logs
 *.log

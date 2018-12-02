@@ -5,6 +5,7 @@ let jwt = require("jsonwebtoken");
 let bp = require("body-parser");
 let ck = require("cookie-parser");
 let path = require("path");
+let mysql = require('mysql');
 let app = express();
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
@@ -119,7 +120,13 @@ access.get("(/about|/profile)", function(req, res){
     res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
-access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/cookie)", function(req, res){
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*/favorite)", function(req, res){
+	let con = mysql.createConnection({
+		host: "localhost",
+		user:"root",
+		password: "123456",
+		database: "hello"
+	});
 	let user_ID = req.cookies.user_info.id;
 	console.log(user_ID);
 	//TODO: disable button while query is running by updating a cookie or sending a new page
