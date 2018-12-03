@@ -1,3 +1,47 @@
+/*
+"WHAT'S ON THE MENU TONITE, PUFF-MAMA?"
+"Oh, you know:
+-find a way to disable favorite button while favorite insert/delete queries are running
+	-button onclick?
+-after running insert/delete query, update button appearance:
+	-could return the page to them with the favorite button swapped (i.e. "favorite page" -> "unfavorite page")
+	-could have a button onclick -> [if innerHTML==="favorite" then "unfavorite", vice versa]
+"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
 let express = require("express");
 let b = require("bcrypt");
 let fs = require("fs");
@@ -37,38 +81,79 @@ app.get("/contact", function(req, res){
 });
 
 app.post("/login", function(req, res){
-	fs.readFile(path.join(__dirname, "pass.cfg"), function(err, data){
-		b.compare(req.body.pswd, data.toString(), function(err, match){
+	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		let credentials = data.toString().split(",");
+		let fHost = credentials[0];
+		let fUser = credentials[1];
+		let fPassword = credentials[2];
+		let fDatabase = credentials[3];
+		
+		let con = mysql.createConnection({
+			host: fHost,
+			user: fUser,
+			password: fPassword,
+			database: fDatabase
+		});
+		
+		let userEmail = req.body.email;
+		//query to see if the entered email address corresponds to an existing user
+		con.query('SELECT email, password, username FROM user WHERE email = ?', userEmail, function (err, result, fields){
+			con.end();
 			if(err){
 				return res.status(500).json({
 					error: err
 				});
 			}
-			else if(match){
-				fs.readFile(path.join(__dirname, "private.key"), function(err, key){
-					if(err){
-						return res.status(500).json({
-						   error: err
-						});
-					}
-					else{
-						jwt.sign({
-							id: 123123,
-							email: req.body.email
-						}, key, function(err, token){
-							res.cookie("user_info", {token: token,
-                                                    id: 123123,
-													username: "spaghettilad",
-													email: req.body.email},
-                                {httpOnly: true, domain: "localhost"});
-							return res.redirect("/auth/index");
-						});
-					}
-				});
+			let user = result[0];
+			//if user exists, i.e. email exists
+			let userUsername;
+			let userPassword;
+			if(user !== undefined){
+				userUsername = user.username;
+				userPassword = user.password;
 			}
+			//email does not exist
 			else{
-				return res.redirect("/");
+				return res.redirect("/login");
 			}
+			b.compare(req.body.pswd, userPassword, function(err, match){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+				//password is correct
+				else if(match){
+					fs.readFile(path.join(__dirname, "private.key"), function(err, key){
+						if(err){
+							return res.status(500).json({
+							   error: err
+							});
+						}
+						else{
+							jwt.sign({
+								username: userUsername,
+								email: userEmail
+							}, key, function(err, token){
+								res.cookie("user_info", {token: token,
+														username: userUsername,
+														email: userEmail},
+									{httpOnly: true, domain: "localhost"});
+								return res.redirect("/auth/index");
+							});
+						}
+					});
+				}
+				//password is incorrect
+				else{
+					return res.redirect("/login");
+				}
+			});
 		});
 	});
 });
@@ -121,7 +206,6 @@ access.get("(/about|/profile)", function(req, res){
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
 	//TODO: disable button while query is running by updating a cookie or sending a new page
-	//TODO: query database
 	//TODO: re-enable button
 	
 	//get DB login credentials
@@ -136,7 +220,7 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 		let fUser = credentials[1];
 		let fPassword = credentials[2];
 		let fDatabase = credentials[3];
-		let user_ID = req.cookies.user_info.id;
+		let userEmail = req.cookies.user_info.email;
 		
 		let con = mysql.createConnection({
 			host: fHost,
@@ -144,45 +228,63 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 			password: fPassword,
 			database: fDatabase
 		});
-		console.log("user_ID = "+user_ID);
-		con.query("SELECT * FROM favorite WHERE UserID = "+user_ID+";", function (err, result){
+		
+		let userURL = req.params[0]+req.params[1];
+		console.log("request coming from: "+userURL);
+		//see if the user has favorited this page
+		con.query("SELECT * FROM favorite WHERE UserEmail = ? AND URL = ?", [userEmail,userURL], function (err, selResult, selFields){
 			if(err){
 				return res.status(500).json({
 					error: err
 				});
 			}
-			//if user has not favorited page, favorite it
-			console.log("req.params[0]+req.params[1]= "+req.params[0]+req.params[1]);
-			if(result === undefined){
-				con.query("INSERT INTO favorite (UserID, URL) VALUES ("+user_ID+","+req.params[0]+req.params[1]+");", function(err, result){
-					if(err){
-						return res.status(500).json({
-							error: err
-						});
-					}
-					//TODO: Cookie things
-				});
+			//TODO: delete debugging console.logs and associated testing vars
+			//if query didn't return zero rows
+
+
+			//query for either insertion or deletion
+			let query;
+			
+			if(selResult !== undefined){
+				//if user has not favorited page, favorite it
+				if(selResult.length === 0){
+					console.log("Attempting to insert:");
+					con.query("INSERT INTO favorite SET ?", {userEmail: userEmail, URL: userURL}, function(err, result, fields){
+						if(err){
+							con.end();
+							return res.status(500).json({
+								error: err
+							});
+						}
+						console.log("Insert did not error.");
+						//TODO: delete debugging
+						//TODO: Cookie things
+					});	
+				}
+				//if user has favorited page, remove it
+				else{
+					console.log("Attempting to delete:"); //TODO: delete debugging
+					con.query("DELETE FROM favorite WHERE UserEmail=? AND URL=?", [userEmail, userURL], function(err, result, fields){
+						if(err){
+							console.log("Error when executing query: "+query);
+							con.end();
+							return res.status(500).json({
+								error: err
+							});
+						}
+						console.log("Delete did not error.");
+						//TODO: delete debugging
+						//TODO: cookie things
+					});
+				}
 			}
-			//if user has favorited page, remove it
 			else{
-				con.query("DELETE FROM favorite WHERE (UserID="+user_ID+" AND URL="+req.params[0]+req.params[1]+");", function(err, result){
-					if(err){
-						return res.status(500).json({ //IT FUCKED HERE
-							error: err
-						});
-					}
-					//TODO: cookie things
-				});
+				console.log("results of select were undefined. Figure out what that means.");
 			}
-			
-			
 
-			res.end();
+			
 		});
-		
-
 	});
-	
 });
 
 access.get("/contact", function(req, res){
