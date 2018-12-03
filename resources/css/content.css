@@ -15,7 +15,6 @@ html,body { min-height:100%; }
 
 .imageWrapper {
     text-align: center;
-    overflow: hidden;
 	max-width: 95vw;
 	margin-left: 10vw;
 	margin-right: 10vw;
