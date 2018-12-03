@@ -30,8 +30,7 @@ app.get("/register", function(req, res){
 
 app.get("/contact", function(req, res){
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
-		let halves = data.toString().split("?");
-		let html = halves[0] + "Hi!<br><br>This message will NOT be sent to the admins." + halves[1];
+		let html = data.toString().replace("?", "Hi!<br><br>This message will NOT be sent to the admins.");
 		res.send(html);
 	}); 
 });
@@ -120,18 +119,17 @@ access.get("(/about|/profile)", function(req, res){
 });
 
 access.get("/contact", function(req, res){
-	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
-		let halves = data.toString().split("?");
-		let mailValue = halves[1].split("name=\"email\"");
+	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){		
 		let user = req.cookies.user_info;
 		let greetings = ["Hi there", "How's it going", "What's up", "Greetings", "Hey"];
 		if(user !== undefined && user.token !== undefined){
 			let username = user.username;
 			let email = user.email;
-			let html = halves[0] + greetings[Math.floor(Math.random()*Math.floor(5))] + ", " + 
-				username + "!<br><br>This message will be sent to the admins." +
-				mailValue[0] + "value=\"" + email + "\" name=\"email\" disabled" + mailValue[1];
-			console.log(html);
+			let val = greetings[Math.floor(Math.random()*Math.floor(5))] + ", " + 
+				username + "!<br><br>This message will be sent to the admins.";
+			let html = data.toString().replace("?", val);
+			let valEmail = "name=\"email\"";
+			html = html.replace(valEmail, valEmail + "value=\"" + email + "\" disabled");
 			res.send(html);
 		}
 		else{
