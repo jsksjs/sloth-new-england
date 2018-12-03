@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/category.css"/>
 	<script src="/resources/scripts/navbar.js"></script>
 	<script src="/resources/scripts/content.js"></script>
+	<script src="/resources/scripts/comment.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -94,38 +95,7 @@
 		<p class="categoryDescription">The history of New England is an incredibly interesting topic. 
 		New England was founded by English colonists who killed literally everybody they crossed paths 
 		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic. 
-		New England was founded by English colonists who killed literally everybody they crossed paths 
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic. 
-		New England was founded by English colonists who killed literally everybody they crossed paths 
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic. 
-		New England was founded by English colonists who killed literally everybody they crossed paths 
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic. 
-		New England was founded by English colonists who killed literally everybody they crossed paths 
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic. 
-		New England was founded by English colonists who killed literally everybody they crossed paths 
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square 
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		<br><br>
-		The history of New England is an incredibly interesting topic.
-		New England was founded by English colonists who killed literally everybody they crossed paths
-		with. Thus, the region could be thought of as a mass-indian grave spanning thousands of square
-		miles, and a testament to the unbridled cruelty of humanity brought on by greed.
-		</p>
+		miles, and a testament to the unbridled cruelty of humanity brought on by greed.</p>
 		<div class="contentDiv">
 			<div class="contentTile" data-src="history/saugus_iron_works">
 				<img class="contentThumbnail" title="https://en.wikipedia.org/wiki/Saugus_Iron_Works_National_Historic_Site#/media/File:Saugus_Iron_Mill.jpg" src="/resources/images/history/saugus_iron_mill.jpg">
@@ -156,6 +126,33 @@
                 <p class="contentP">Old Sturbridge Village</p>
 			</div>
 		</div>
+		<br>
+		<div class="comment-container">
+			<h1>Leave a comment</h1>
+			<form action="/" method="post">
+				<input type="text" id="name" name="name" placeholder="Your name">
+				<textarea type="text" id="comment" name="comment" placeholder="Type your message here"></textarea>
+				<input type="submit" class="submit" value="Submit" onclick="post()">
+			</form>
+		</div>
+		<div class="comment-section">
+			<h1>Comments</h1>
+			<!-- Test -->
+			<div class="comment-box">
+				<p class="author">Name</p>
+				<p class="commment-text">Text from comment goes here</p>
+			</div><br>
+			<div class="comment-box">
+				<p class="author">Name</p>
+				<p class="commment-text">Text from comment goes here</p>
+			</div><br>
+			<div class="comment-box">
+				<p class="author">Name</p>
+				<p class="commment-text">Text from comment goes here</p>
+			</div>
+			<!-- Test -->
+		</div>
+		<br>
 	</div>
 </body>
 </html>
