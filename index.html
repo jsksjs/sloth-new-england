@@ -89,35 +89,30 @@
 			</li>
 		</ul>
 	</div>
-	<div class="categoryBody">
-		<div class="imgContainer">
-			<!--<div class="imgList">
-				<div class="imgListItem">
-					<a class="imgListLink" href="#">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</div>
-				<div class="imgListItem">
-					<a class="imgListLink">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</div>
-				<div class="imgListItem">
-					<a class="imgListLink">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</div>
-			</div>-->
-			<button class="buttonLeft" onclick="plusDivs(-1)">&#10094;</button>
-			<button class="buttonRight" onclick="plusDivs(1)">&#10095;</button>
-		</div>
-		<p class="contentDescription imgDescription">This is a rare image of New England before it was colonized by humans.</p>
-		<div id="NEDContainer">
-			<p class="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.
-				<br/>
-			</p>
-			<footer>Sloth Love New England!</footer>
-		</div>
+	<div id="indexBody">
+        <div id="imgListContainer">
+            <button class="mover" id="mLeft" onclick="moveLeft"><</button>
+            <div id="imgList">
+                <div class="imgListItem leftImage" id="carl"></div>
+                <div class="imgListItem activeImage" id="sloth"></div>
+                <div class="imgListItem rightImage" id="carl2"></div>
+            </div>
+            <button class="mover" id="mRight" onclick="moveRight">></button>
+            <svg id="cirCon">
+                <circle class="circ" cx="63" cy="10" r="7"></circle>
+                <circle class="circ circActive" cx="80" cy="10" r="7"></circle>
+                <circle class="circ" cx="97" cy="10" r="7"></circle>
+            </svg>
+        </div>
+        <div id="desc">
+            <div class="imgDescription">
+                <p >This is a rare image of New England before it was colonized by humans.</p>
+            </div>
+            <div id="NEDContainer">
+                <p id="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.<br/></p>
+            </div>
+        </div>
+        <footer class="end">Sloth Love New England!</footer>
 	</div>
 </body>
 </html>

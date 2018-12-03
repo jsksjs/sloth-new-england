@@ -111,8 +111,22 @@ access.get("/", function(req, res){
 });
 
 access.get("/index", function(req, res){
-    res.sendFile("index.html", {root: path.dirname(path.dirname(__dirname))});
+	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "index.html"),function(err,data) {
+		let html = "";
+		html += "<div class='imgListItem'>";
+		html += "<a class='imgListLink' href='#'>";
+		html += "<img src='/resources/images/index/CarlsWatching.jpg'></a></div>";
+		html += "<div class='imgListItem'>";
+		html += "<a class='imgListLink' href='#'>";
+		html += "<img src='resources/images/history/saugus_iron_works.jpg'></a></div>";
+		html += "<div class='imgListItem'>";
+		html += "<a class='imgListLink' href='#'>";
+		html += "<img src='resources/images/history/witch-trials-2-018.jpg'></a></div>";
+		//return res.send(data.toString().replace("?", html));
+		return res.send(data.toString());
+	});
 });
+
 
 access.get("(/about|/profile)", function(req, res){
     res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});

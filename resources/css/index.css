@@ -5,7 +5,8 @@
 
 body, html{
     background: #ebebeb;
-	width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body{
@@ -124,10 +125,6 @@ li.drop {
 	z-index: 3;
 }
 
-#indexBody {
-	padding-top: 70px;
-}
-
 #logo{
     min-width: 50px;
     height: 100%;
@@ -146,26 +143,75 @@ li.drop {
     flex: 0;
 }
 
-.imgContainer{
-    text-align: center;
-    max-height: 445px;
-    overflow: hidden;
-	flex-direction: row;
+#indexBody{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 50px;
+    height: calc(100% - 105px);
 }
 
-.imgList{
+#imgListContainer{
+    display: flex;
+    align-self: center;
+    flex-direction: row;
+    position: relative;
+}
+
+#mRight{
+    right: 0;
+}
+
+.mover{
+    position:absolute;
+    width: 40px;
+    height: 445px;
+    margin: 10px 0;
+    background-color: Transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-weight: bolder;
+}
+
+.mover:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#imgList{
     margin-top: 10px;
     margin-bottom: 10px;
-    max-width: 100%;
+    min-height: 445px;
     max-height: 445px;
-    width: 100%;
+    min-width: 600px;
+    max-width: 600px;
+    text-align: center;
     overflow: hidden;
-    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex:1;
 }
 
-.imgListItem .imgListLink img{
-    height: 445px;
-    width: 445px;
+#desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex:1;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.imgListItem{
+    min-height: 445px;
+    max-height: 445px;
+    min-width: 600px;
+    max-width: 600px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select:none;
@@ -179,31 +225,12 @@ li.drop {
     padding: 5px;
 }
 
-.NEDescription{
-    font-size: 14pt;
-    text-align: center;
-    background: orange;
-    padding: 10px 0 150px 0;
-}
-
 #NEDContainer{
-    border-top: 1px solid rgba(0,0,0,0.3);
-}
-
-footer{
-    position: relative;
-    bottom: 0;
-    height: 22px;
-    margin-top: -22px;
-    clear: both;
-    border-top: 1px solid rgba(0,0,0,0.3);
-    background: #ebebeb;
-    padding: 5px;
-    text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select:none;
-	user-select:none;
+    justify-self: center;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
 }
 
 #pin{
@@ -226,6 +253,48 @@ footer{
     background-color: #666683;
 }
 
-.categoryBody {
-	padding-top: 50px;
+.end{
+    justify-content: flex-end;
+    height: 22px;
+    background: #ebebeb;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    border-top: 1px solid rgba(0,0,0,0.3);
+}
+
+#sloth{
+    background: url(../images/index/sloth-yes.jpg);
+    /*background-size: cover;*/
+}
+
+#carl, #carl2{
+    background: url(../images/index/CarlsWatching.jpg);
+    /*background-size: cover;*/
+}
+
+#cirCon{
+    position: absolute;
+    left: calc(50% - 80px);
+    bottom: 15px;
+    width: 160px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.circ{
+    fill: rgba(0, 0, 0, 0.5);
+}
+
+.circ:hover{
+    fill: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.circActive{
+    fill: rgba(255, 255, 255, 0.5);
+    stroke: black;
 }

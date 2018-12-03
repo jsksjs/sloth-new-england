@@ -4,6 +4,7 @@
 }
 
 .categoryBody{
+	padding-top: 50px;
 	transition: filter, 0.75s ease-out;
 }
 
