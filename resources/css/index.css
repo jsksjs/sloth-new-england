@@ -150,6 +150,7 @@ li.drop {
     text-align: center;
     max-height: 445px;
     overflow: hidden;
+	flex-direction: row;
 }
 
 .imgList{

@@ -5,6 +5,8 @@
 	<title>Sloth Love New England!</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/index.css">
 	<script src="/resources/scripts/navbar.js"></script>
+	<script src="/resources/scripts/carousel.js"></script>
+	<script src="/resources/scripts/slider.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -89,24 +91,25 @@
 	</div>
 	<div class="categoryBody">
 		<div class="imgContainer">
-			<ul class="imgList">
-				<!-- active image is always first -->
-				<li class="imgListItem">
+			<!--<div class="imgList">
+				<div class="imgListItem">
 					<a class="imgListLink" href="#">
 						<img src="/resources/images/index/Carl'sWatching.jpg">
 					</a>
-				</li>
-				<li class="imgListItem">
+				</div>
+				<div class="imgListItem">
 					<a class="imgListLink">
 						<img src="/resources/images/index/Carl'sWatching.jpg">
 					</a>
-				</li>
-				<li class="imgListItem">
+				</div>
+				<div class="imgListItem">
 					<a class="imgListLink">
 						<img src="/resources/images/index/Carl'sWatching.jpg">
 					</a>
-				</li>
-			</ul>
+				</div>
+			</div>-->
+			<button class="buttonLeft" onclick="plusDivs(-1)">&#10094;</button>
+			<button class="buttonRight" onclick="plusDivs(1)">&#10095;</button>
 		</div>
 		<p class="contentDescription imgDescription">This is a rare image of New England before it was colonized by humans.</p>
 		<div id="NEDContainer">
