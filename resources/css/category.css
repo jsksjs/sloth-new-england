@@ -82,7 +82,6 @@
 	padding: 15px;
 	padding-top: 0px;
 	width: 320px;
-	color: steelblue;
 }
 
 .comment-info {
@@ -98,7 +97,7 @@
 	width: 100%;
 	border: 2px solid #333;
 }
-#comment{
+.comment-area{
 	font-family: "Arial", "Times New Roman";
 	font-size: 15px;
 	display: block;
@@ -108,7 +107,7 @@
 	height: 100px;
 	border: 2px solid #333;
 }
-.submit {
+.comment-submit {
 	font-family: "Arial", "Times New Roman";
 	font-size: 16px;
 	padding: 7px;
