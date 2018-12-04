@@ -227,6 +227,8 @@ li.drop {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: black;
+    cursor: pointer;
 }
 
 .imgDescription{
@@ -277,21 +279,20 @@ li.drop {
 }
 
 .viewImage{
-    cursor: pointer;
     object-fit: contain;
     width: 600px;
     transform: translate(0, 0);
-    -webkit-transition: -webkit-transform 0.75s ease-out;
-    -moz-transition: -moz-transform 0.75s ease-out;
-    -o-transition: -o-transform 0.75s ease-out;
-    transition: transform 0.75s ease-out;
+    -webkit-transition: -webkit-transform 500ms linear;
+    -moz-transition: -moz-transform 500ms linear;
+    -o-transition: -o-transform 500ms linear;
+    transition: transform 500ms linear;
 }
 
 #cirCon{
     position: absolute;
-    left: calc(50% - 80px);
-    bottom: 15px;
-    width: 160px;
+    left: calc(50% - 100px);
+    bottom: 10px;
+    width: 200px;
     height: 20px;
     background-color: rgba(0, 0, 0, 0.2);
     overflow: hidden;
