@@ -26,10 +26,10 @@
 	let innerContainer = document.createElement("div");
 	innerContainer.style.cssText =
 		"visibility: hidden;" +
-		"width: 95vw;" +
-		"height: 80vh;" +
+		"width: 100vw;" +
+		"height: 95vh;" +
 		"position: absolute;" +
-		"top: 15vh;" +
+		"top: 2.5vh;" +
 		"transform: translate(0%, -125%);" +
 		"transition: transform 0.75s, visibility 1.5s linear;";
 

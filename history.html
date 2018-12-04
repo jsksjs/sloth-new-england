@@ -128,15 +128,15 @@
 		</div>
 		<br>
 		<div class="comment-container">
-			<h1>Leave a comment</h1>
-			<form action="/" method="post">
-				<input type="text" id="name" name="name" placeholder="Your name">
-				<textarea type="text" id="comment" name="comment" placeholder="Type your message here"></textarea>
-				<input type="submit" class="submit" value="Submit" onclick="post()">
+			<h1 class="comment-title">Leave a comment</h1>
+			<form id="comment-form" action="/" method="post">
+				<input class="comment-info" type="text" id="name" name="name" placeholder="Your name">
+				<textarea id="comment-area" type="text" id="comment" name="comment" placeholder="Type your message here"></textarea>
+				<input class="comment-info" type="submit" class="submit" value="Submit">
 			</form>
 		</div>
 		<div class="comment-section">
-			<h1>Comments</h1>
+			<h1 class="comment-title">Comments</h1>
 			<!-- Test -->
 			<div class="comment-box">
 				<p class="author">Name</p>

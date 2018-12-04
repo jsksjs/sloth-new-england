@@ -71,20 +71,24 @@
 	height: 285px;
 	width: 97%;
 }
-h1 {
+
+.comment-title {
 	padding: 15px;
 	font-size: 24px;
 	color: #333;
 }
-form {
+
+#comment-form {
 	padding: 15px;
 	padding-top: 0px;
 	width: 320px;
 	color: steelblue;
 }
-input {
+
+.comment-info {
 	padding: 10px;
 }
+
 #name{
 	font-family: "Arial", "Times New Roman";
 	font-size: 15px;

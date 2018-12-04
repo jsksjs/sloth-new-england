@@ -15,27 +15,25 @@ html,body { min-height:100%; }
 
 .imageWrapper {
     text-align: center;
-	max-width: 95vw;
 	margin-left: 10vw;
 	margin-right: 10vw;
+	overflow:hidden;
 }
 
 .contentImage {
     background: #dadada;
-    max-height: 60vh;
 	cursor: zoom-in;
+	max-width: 95vw;
+	max-height: 65vh
 }
 
 .contentDescription {
 	padding: 10px;
 	font-size: 12pt;
-	max-width: 75vw;
 }
 
 #contentContainer>p:not(.contentDescription){
 	padding: 2vh 0 2vh 0;
-	max-width: 90vw;
-	min-height: 100%;
 }
 
 .imageWrapper>p{
@@ -47,9 +45,7 @@ html,body { min-height:100%; }
     transition: filter, 0.75s ease-out;
     display: flex;
     flex-direction: column;
-    height: 100%;
     align-items: center;
-	margin-top: 50px;
 }
 
 #contentHeaderCont{
