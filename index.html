@@ -91,17 +91,23 @@
 	</div>
 	<div id="indexBody">
         <div id="imgListContainer">
-            <button class="mover" id="mLeft" onclick="moveLeft"><</button>
+            <button class="mover" id="mLeft" onclick="moveLeft()"><</button>
             <div id="imgList">
-                <div class="imgListItem leftImage" id="carl"></div>
-                <div class="imgListItem activeImage" id="sloth"></div>
-                <div class="imgListItem rightImage" id="carl2"></div>
+                <div class="imgListItem leftImage leftImageEnd">
+                    <img class="viewImage" src="/resources/images/index/CarlsWatching.jpg">
+                </div>
+                <div class="imgListItem activeImage">
+                    <img class="viewImage" src="/resources/images/index/sloth-yes.jpg">
+                </div>
+                <div class="imgListItem rightImage rightImageEnd">
+                    <img class="viewImage" src="/resources/images/index/templogo.png">
+                </div>
             </div>
-            <button class="mover" id="mRight" onclick="moveRight">></button>
+            <button class="mover" id="mRight" onclick="moveRight()">></button>
             <svg id="cirCon">
-                <circle class="circ" cx="63" cy="10" r="7"></circle>
+                <circle class="circ circLeftEnd" cx="63" cy="10" r="7"></circle>
                 <circle class="circ circActive" cx="80" cy="10" r="7"></circle>
-                <circle class="circ" cx="97" cy="10" r="7"></circle>
+                <circle class="circ circRightEnd" cx="97" cy="10" r="7"></circle>
             </svg>
         </div>
         <div id="desc">
