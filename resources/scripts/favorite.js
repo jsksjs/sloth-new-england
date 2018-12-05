@@ -9,7 +9,7 @@
 (function(){
 	// get URL of current page
 	let href = window.location.href;
-	
+
 	// Construct cookie request by extracting useful part of URL (everything after localhost) and adding /cookie onto the end
 	//let cookieReq = href.substring(href.indexOf("/auth"))+"/cookie";
 	let cookieReq = href+"/favorite"; //TODO: figure out if I ever needed to extract what I did in the line above
@@ -18,13 +18,18 @@
 	btn.id = "favorite";
 	btn.href = cookieReq;
 	btn.innerHTML = "Favorite this page!";
+	btn.onclick = function(){
+		this.disabled = true;
+	}
 
 	// inject all dynamic elements on load
 	window.addEventListener("load", inject);
-	
+
 	//injects dynamic elements
 	function inject(){
 		document.body.appendChild(btn);
 	}
+	
+	
 	
 })();
