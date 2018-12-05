@@ -1,18 +1,29 @@
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 
+    // image movers
     let moveL, moveR;
+    // circles active?
+    let act;
+
+    // get the image movers, assign them
     window.addEventListener("load", hook);
     function hook(){
         moveL = document.getElementById("mLeft");
         moveR = document.getElementById("mRight");
+        act = true;
     }
 
+    // when image clicked, bring to location
     this.divClick = function(e){
         window.location = e.getAttribute("data-src");
     };
 
+    // on circle click, move to specified circle
     this.circClick = function(e, time){
+        if(act === false)
+            return false;
+        act = false;
         time = Number(time);
         let curr = document.getElementsByClassName("circActive")[0];
         let diff = Number(curr.id) - Number(e.id);
@@ -26,6 +37,7 @@
         }
     };
 
+    // use the correct timing for circle transitions
     function timeCirc(e, time){
         setTimeout(function(){
             let curr = document.getElementsByClassName("circActive")[0];
@@ -34,13 +46,16 @@
                 moveRight(time);
                 setTimeout(timeCirc(e, time), time);
             }
-            if(diff > 0) {
+            else if(diff > 0) {
                 moveLeft(time);
                 setTimeout(timeCirc(e, time), time);
             }
+            else
+                act = true;
         }, time);
     }
 
+    // move the viewer left
     this.moveLeft = function(time){
         moveL.disabled = true;
         moveR.disabled = true;
@@ -80,6 +95,7 @@
         node.classList.remove("circActive");
     };
 
+    // move the viewer right
     this.moveRight = function(time){
         moveL.disabled = true;
         moveR.disabled = true;
