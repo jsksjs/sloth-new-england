@@ -7,19 +7,21 @@
 
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
-	// get URL of current page
+	/*// get URL of current page
 	let href = window.location.href;
 
 	// Construct cookie request by extracting useful part of URL (everything after localhost) and adding /cookie onto the end
 	//let cookieReq = href.substring(href.indexOf("/auth"))+"/cookie";
-	let cookieReq = href+"/favorite"; //TODO: figure out if I ever needed to extract what I did in the line above
+	let cookieReq = href + "/favorite"; //TODO: figure out if I ever needed to extract what I did in the line above
 	console.log("cookieReq = "+cookieReq);
 	let btn = document.createElement("a");
-	btn.id = "favorite";
+	btn.id = "favoriteButton";
 	btn.href = cookieReq;
 	btn.innerHTML = "Favorite this page!";
 	btn.onclick = function(){
-		this.disabled = true;
+		btn.style.pointerEvents = "none";
+		//btn.disabled = true;
+		//btn.href = "";
 	}
 
 	// inject all dynamic elements on load
@@ -31,5 +33,5 @@
 	}
 	
 	
-	
+	*/
 })();

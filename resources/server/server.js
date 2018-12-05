@@ -258,7 +258,6 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 						}
 						console.log("Insert did not error.");
 						//TODO: delete debugging
-						//TODO: Cookie things
 					});	
 				}
 				//if user has favorited page, remove it
@@ -274,15 +273,30 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 						}
 						console.log("Delete did not error.");
 						//TODO: delete debugging
-						//TODO: cookie things
 					});
 				}
 			}
 			else{
 				console.log("results of select were undefined. Figure out what that means.");
 			}
+			con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, sel2Result, sel2Fields){
+				let user = req.cookies.user_info;
+				let favoritePages =[];
+				let i;
+				console.log("selResult.length==="+selResult.length);
+				for(i = 0; i < sel2Result.length; i++){
+					favoritePages.push(sel2Result[i].URL);
+				}
+				res.cookie("favorites", {token: user.token,
+										username: user.username,
+										email: user.email,
+										favorites: favoritePages},
+										{httpOnly: true, domain: "localhost"});
+				//TODO: Finish. injects button into html
+				//let href = window.location.href;
 
-			
+				return res.redirect("/auth"+userURL);
+			});
 		});
 	});
 });
@@ -312,7 +326,72 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", functi
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", function(req, res){
-    res.sendFile(req.params[1]+".html", {root: path.dirname(path.dirname(__dirname))});
+	//get database login
+	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		let credentials = data.toString().split(",");
+		let fHost = credentials[0];
+		let fUser = credentials[1];
+		let fPassword = credentials[2];
+		let fDatabase = credentials[3];
+		let userEmail = req.cookies.user_info.email;
+		
+		let con = mysql.createConnection({
+			host: fHost,
+			user: fUser,
+			password: fPassword,
+			database: fDatabase
+		});
+		
+		let userURL = req.params[0]+req.params[1];
+		
+		//TODO: DO THIS WITH COOKIE INSTEAD OF DB
+		con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, sel2Fields){
+			fs.readFile(path.join(path.dirname(path.dirname(__dirname)), req.params[1]+".html"),function(err,data) {
+				//construct button
+				/*let btn = document.createElement("a");
+				btn.id = "favoriteButton";
+				btn.href = userURL+"/favorite";
+				if(sel2Result.includes(userURL)) btn.innerHTML = "Unfavorite this page?";
+				else btn.innerHTML = "Favorite this page!";
+				btn.onclick = function(){
+					btn.style.pointerEvents = "none";
+				}*/
+			let isFavorited = false;
+			if (selResult !== undefined){
+				if (selResult.length !== 0){
+					let i;
+					for(i = 0; i < selResult.length; i++){
+						if(selResult[i].URL === userURL){
+							isFavorited = true;
+							break;
+						}
+					}
+				}
+			}	
+			else{
+				console.log("Something broke really badly");
+			}	
+				
+				let html = "<a "+
+							"id = 'favoriteButton' "+
+							"href = '/auth"+userURL+"/favorite' "+
+							"onclick = 'this.style.pointerEvents = \"none\";'"
+							+">";
+				if(isFavorited) html += "Unfavorite this page?";
+				else html += "Favorite this page!";
+				html += "</a>";
+				//console.log("button html = "+html); TODO:DElete debugging
+				
+				return res.send(data.toString().replace("</body>", html+"</body>"));
+			});
+			//res.sendFile(req.params[1]+".html", {root: path.dirname(path.dirname(__dirname))});
+		});
+	});
 });
 
 // Running Server Details.
