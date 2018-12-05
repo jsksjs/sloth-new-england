@@ -1,11 +1,9 @@
 /*
 "WHAT'S ON THE MENU TONITE, PUFF-MAMA?"
 "Oh, you know:
--find a way to disable favorite button while favorite insert/delete queries are running
-	-button onclick?
--after running insert/delete query, update button appearance:
-	-could return the page to them with the favorite button swapped (i.e. "favorite page" -> "unfavorite page")
-	-could have a button onclick -> [if innerHTML==="favorite" then "unfavorite", vice versa]
+-make login give cookie to user
+-make register insert into DB and automatically log the user in
+-make 
 "
 
 
@@ -81,18 +79,23 @@ app.get("/contact", function(req, res){
 });
 
 app.post("/login", function(req, res){
+	/*
+	This block also updates cookie
+	*/
+	//get DB login credentials to query DB
 	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
 		if(err){
 			return res.status(500).json({
 				error: err
 			});
 		}
+		
+		//set up connection to database
 		let credentials = data.toString().split(",");
 		let fHost = credentials[0];
 		let fUser = credentials[1];
 		let fPassword = credentials[2];
 		let fDatabase = credentials[3];
-		
 		let con = mysql.createConnection({
 			host: fHost,
 			user: fUser,
@@ -100,8 +103,9 @@ app.post("/login", function(req, res){
 			database: fDatabase
 		});
 		
+		//email to be checked in user table
 		let userEmail = req.body.email;
-		//query to see if the entered email address corresponds to an existing user
+		//query to see if the entered email address corresponds to an existing user. If exists, give login cookie. If not, reload page.
 		con.query('SELECT email, password, username FROM user WHERE email = ?', userEmail, function (err, result, fields){
 			con.end();
 			if(err){
@@ -110,46 +114,66 @@ app.post("/login", function(req, res){
 				});
 			}
 			let user = result[0];
-			//if user exists, i.e. email exists
+			
+			//extract user info for cookie
 			let userUsername;
 			let userPassword;
 			if(user !== undefined){
 				userUsername = user.username;
 				userPassword = user.password;
 			}
-			//email does not exist
+			//if email does not exist
 			else{
 				return res.redirect("/login");
 			}
+			
+			//check if entered password matches existing bcrypted password
 			b.compare(req.body.pswd, userPassword, function(err, match){
 				if(err){
 					return res.status(500).json({
 						error: err
 					});
 				}
-				//password is correct
-				else if(match){
-					fs.readFile(path.join(__dirname, "private.key"), function(err, key){
+				//if password is correct
+				if(match){
+					//query for all the user's favorites and create the cookie
+					con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
 						if(err){
 							return res.status(500).json({
-							   error: err
+								error: err
 							});
 						}
-						else{
-							jwt.sign({
-								username: userUsername,
-								email: userEmail
-							}, key, function(err, token){
-								res.cookie("user_info", {token: token,
-														username: userUsername,
-														email: userEmail},
-									{httpOnly: true, domain: "localhost"});
-								return res.redirect("/auth/index");
-							});
-						}
+						
+						fs.readFile(path.join(__dirname, "private.key"), function(err, key){
+							if(err){
+								return res.status(500).json({
+								   error: err
+								});
+							}
+							//send cookie to user
+							else{
+								//extract favorited pages from query result
+								let favoritePages = [];
+								for(i = 0; i < selResult.length; i++){
+									favoritePages.push(selResult[i].URL);
+								}
+								
+								jwt.sign({
+									username: userUsername,
+									email: userEmail
+								}, key, function(err, token){
+									res.cookie("user_info", {token: token,
+															username: userUsername,
+															email: userEmail,
+															favorites: favoritePages},
+										{httpOnly: true, domain: "localhost"});
+									return res.redirect("/auth/index");
+								});
+							}
+						});
 					});
 				}
-				//password is incorrect
+				//if password is incorrect, reload page
 				else{
 					return res.redirect("/login");
 				}
@@ -205,23 +229,24 @@ access.get("(/about|/profile)", function(req, res){
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
-	//TODO: disable button while query is running by updating a cookie or sending a new page
-	//TODO: re-enable button
-	
-	//get DB login credentials
+	/*
+	This block as a whole runs when user attempts to favorite/unfavorite a page. It updates the database with user's updated favorited page, then updates the cookie, then reloads the page.
+	*/
+	//get DB login credentials to query DB
 	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
 		if(err){
 			return res.status(500).json({
 				error: err
 			});
 		}
+		
+		//set up connection to database
 		let credentials = data.toString().split(",");
 		let fHost = credentials[0];
 		let fUser = credentials[1];
 		let fPassword = credentials[2];
 		let fDatabase = credentials[3];
 		let userEmail = req.cookies.user_info.email;
-		
 		let con = mysql.createConnection({
 			host: fHost,
 			user: fUser,
@@ -229,26 +254,24 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 			database: fDatabase
 		});
 		
-		let userURL = req.params[0]+req.params[1];
+		//the /[category]/[content] part of the URL of the requested page
+		let userURL = req.params[0] + req.params[1];
 		console.log("request coming from: "+userURL);
-		//see if the user has favorited this page
+		//query to see if the user has favorited this page, and if so, unfavorite it. If not, favorite it. Then, update cookie and reload.
+		//TODO: Do this with cookie-checking instead of querying
 		con.query("SELECT * FROM favorite WHERE UserEmail = ? AND URL = ?", [userEmail,userURL], function (err, selResult, selFields){
 			if(err){
 				return res.status(500).json({
 					error: err
 				});
 			}
-			//TODO: delete debugging console.logs and associated testing vars
-			//if query didn't return zero rows
-
-
-			//query for either insertion or deletion
-			let query;
 			
+			//if query executed successfully
 			if(selResult !== undefined){
-				//if user has not favorited page, favorite it
+				//if user has NOT favorited page, favorite it
 				if(selResult.length === 0){
 					console.log("Attempting to insert:");
+					//insert record into favorite table
 					con.query("INSERT INTO favorite SET ?", {userEmail: userEmail, URL: userURL}, function(err, result, fields){
 						if(err){
 							con.end();
@@ -260,12 +283,12 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 						//TODO: delete debugging
 					});	
 				}
-				//if user has favorited page, remove it
+				//if user HAS favorited page, remove it
 				else{
 					console.log("Attempting to delete:"); //TODO: delete debugging
+					//remove record from favorite table
 					con.query("DELETE FROM favorite WHERE UserEmail=? AND URL=?", [userEmail, userURL], function(err, result, fields){
 						if(err){
-							console.log("Error when executing query: "+query);
 							con.end();
 							return res.status(500).json({
 								error: err
@@ -276,26 +299,31 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 					});
 				}
 			}
+			//if query did not execute properly
 			else{
 				console.log("results of select were undefined. Figure out what that means.");
 			}
+			//query for all of the user's favorite pages so that cookie can be updated
+			//TODO: this could be done possibly more efficiently by checking if the current page is in the existing cookie.favorites
 			con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, sel2Result, sel2Fields){
+				//extract info from existing cookie
 				let user = req.cookies.user_info;
 				let favoritePages =[];
+				
+				console.log("sel2Result.length===" + sel2Result.length); //TODO: delete debugging
+				//put each favorited page's URL into cookie
 				let i;
-				console.log("selResult.length==="+selResult.length);
 				for(i = 0; i < sel2Result.length; i++){
 					favoritePages.push(sel2Result[i].URL);
 				}
-				res.cookie("favorites", {token: user.token,
+				//send updated cookie
+				res.cookie("user_info", {token: user.token,
 										username: user.username,
 										email: user.email,
 										favorites: favoritePages},
 										{httpOnly: true, domain: "localhost"});
-				//TODO: Finish. injects button into html
-				//let href = window.location.href;
-
-				return res.redirect("/auth"+userURL);
+				//reload page (so that favorite/unfavorite button updates)
+				return res.redirect("/auth" + userURL);
 			});
 		});
 	});
@@ -326,7 +354,10 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", functi
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", function(req, res){
-	//get database login
+	/*
+	This block serves content pages to the user.
+	*/
+	//get DB login credentials to query DB
 	fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
 		if(err){
 			return res.status(500).json({
@@ -361,22 +392,22 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", fu
 				btn.onclick = function(){
 					btn.style.pointerEvents = "none";
 				}*/
-			let isFavorited = false;
-			if (selResult !== undefined){
-				if (selResult.length !== 0){
-					let i;
-					for(i = 0; i < selResult.length; i++){
-						if(selResult[i].URL === userURL){
-							isFavorited = true;
-							break;
+				let isFavorited = false;
+				if (selResult !== undefined){
+					if (selResult.length !== 0){
+						let i;
+						for(i = 0; i < selResult.length; i++){
+							if(selResult[i].URL === userURL){
+								isFavorited = true;
+								break;
+							}
 						}
 					}
-				}
-			}	
-			else{
-				console.log("Something broke really badly");
-			}	
-				
+				}	
+				else{
+					console.log("Something broke really badly");
+				}	
+					
 				let html = "<a "+
 							"id = 'favoriteButton' "+
 							"href = '/auth"+userURL+"/favorite' "+
@@ -389,7 +420,6 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", fu
 				
 				return res.send(data.toString().replace("</body>", html+"</body>"));
 			});
-			//res.sendFile(req.params[1]+".html", {root: path.dirname(path.dirname(__dirname))});
 		});
 	});
 });
