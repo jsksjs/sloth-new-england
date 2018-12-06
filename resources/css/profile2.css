@@ -1,0 +1,129 @@
+html, body{
+    height: 100%;
+    width: 100%;
+    background: #ebebeb;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    text-align: center;
+    min-height: 54px;
+    max-height: 108px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+header>*{
+    padding: 10px;
+    font-size: 22pt;
+    background: rgba(255,255,255,0.3);
+}
+
+.container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+
+}
+
+.top{
+    display:flex;
+    flex-direction: row;
+
+    font-size: 14pt;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+.entry{
+    border: 3px solid rgba(134, 78, 226, 0.8);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: #3c3f41;
+    padding: 20px;
+    color: #c2c2c2;
+    overflow: hidden;
+    margin-bottom: 42px;
+}
+
+#profileImage{
+    width: 256px;
+    height: 256px;
+    background: #2a2d2f;
+    margin: auto;
+}
+
+.inputs{
+    margin: 10px;
+	display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+
+label{
+    width: 85px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+input:not(#submit){
+    flex: 1;
+}
+
+#login, #register{
+    padding: 3px;
+	font-size: 10pt;
+	font-family: arial;
+	cursor: default;
+}
+
+#register{
+	width: 78px;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: initial;
+}
+
+
+.actions{
+    display: flex;
+    justify-content: right;
+}
+
+.end{
+    justify-content: flex-end;
+    height: 22px;
+    background: #ebebeb;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    border-top: 1px solid rgba(0,0,0,0.3);
+}
+
+#log, #nagBox{
+    border-top: 1px #c2c2c2 solid;
+    visibility: hidden;
+    max-height: 0;
+    font-size: 12pt;
+    background: white;
+    transition: background 1s, visiblity 1s, max-height 0.1s linear;
+    text-align: left;
+    padding: 5px;
+    color: #bf143d;
+}

@@ -1,14 +1,4 @@
-/**
- * Sloth from the Goonies
- * 11/28/2018
- * Doctor Andrew Jung
- * This script validates the login page, checking for the correct formats
- * for the email and password of the user.
- */
-
-// anonymous wrapper because I was sick of thinking of new variable names
 (function(){
-	// validates profile inputs
 	this.validate = function(){		
 		let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+@([a-z0-9]+\.[a-z0-9]+)+/;
 		let regPass = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,32}/;		
@@ -43,5 +33,30 @@
 			log.style.borderTop = "1px #c2c2c2 solid";
 		}
 		return valid;
+	}
+	
+	this.comparePassBoxes = function(){
+		let pass1 = document.getElementById("password").value;
+		let pass2 = document.getElementById("passwordVerify").value;
+		let submitButton = document.getElementById("submit");
+		let nagBox = document.getElementById("nagBox");
+		
+		let html = "";
+		let height = 0;
+		
+		if(pass1 !== pass2){
+			nagBox.style.maxHeight = height+"px";
+			nagBox.style.visibility = "visible";
+			nagBox.style.background = "none";
+			nagBox.innerHTML = "<br><p>ERROR ERROR ERROR PASSWORDS MUST MATCH REEEEEEEEEEEEEEEEEEEEEEEEEEE</p>";
+			submitButton.disabled = true;
+		}
+		else{
+			nagBox.style.maxHeight = "0px";
+			nagBox.style.visibility = "hidden";
+			nagBox.style.background = "white";
+			nagBox.style.borderTop = "1px #c2c2c2 solid";
+			nagBox.innerHTML = "";
+		}
 	}
 })();
