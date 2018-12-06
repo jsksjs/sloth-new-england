@@ -42,13 +42,13 @@
 		let nagBox = document.getElementById("nagBox");
 		
 		let html = "";
-		let height = 0;
+		let height = 18;
 		
 		if(pass1 !== pass2){
 			nagBox.style.maxHeight = height+"px";
 			nagBox.style.visibility = "visible";
 			nagBox.style.background = "none";
-			nagBox.innerHTML = "<br><p>ERROR ERROR ERROR PASSWORDS MUST MATCH REEEEEEEEEEEEEEEEEEEEEEEEEEE</p>";
+			nagBox.innerHTML = "<p>Passwords do not match!</p>";
 			submitButton.disabled = true;
 		}
 		else{

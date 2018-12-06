@@ -25,36 +25,31 @@ header>*{
     background: rgba(255,255,255,0.3);
 }
 
-.container{
-    height: 100%;
-    display: flex;
+.container{	
+    display:flex;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-
+	justify-content: center;
+	min-height: calc(100% - 23px);
 }
 
 .top{
     display:flex;
     flex-direction: row;
-
     font-size: 14pt;
     text-align: center;
     justify-content: center;
-    align-items: center;
-    flex:1;
+    align-items: stretch;
 }
 
 .entry{
     border: 3px solid rgba(134, 78, 226, 0.8);
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: right;
     background: #3c3f41;
     padding: 20px;
     color: #c2c2c2;
     overflow: hidden;
-    margin-bottom: 42px;
 }
 
 #profileImage{
@@ -66,54 +61,40 @@ header>*{
 
 .inputs{
     margin: 10px;
-	display: flex;
-    flex-direction: row;
-    justify-content: stretch;
 }
 
-
-label{
-    width: 85px;
-    text-align: right;
-    padding-right: 5px;
-}
-
-input:not(#submit){
-    flex: 1;
-}
-
-#login, #register{
+#submit{
     padding: 3px;
-	font-size: 10pt;
-	font-family: arial;
-	cursor: default;
 }
-
-#register{
-	width: 78px;
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
-}
-
 
 .actions{
     display: flex;
     justify-content: right;
 }
 
-.end{
-    justify-content: flex-end;
+input{
+    color: #000000;
+}
+
+.end{    
+	position: fixed;
+	bottom: 0;
+	width: 100%;
     height: 22px;
     background: #ebebeb;
     text-align: center;
     -moz-user-select: none;
     -webkit-user-select: none;
-    -ms-user-select:none;
-    user-select:none;
+    -ms-user-select: none;
+    user-select: none;
     border-top: 1px solid rgba(0,0,0,0.3);
+	flex: 0;
+}
+
+#message{
+    vertical-align: top;
+    min-height: 150px;
+    min-width: 330px;
 }
 
 #log, #nagBox{
