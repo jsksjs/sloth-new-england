@@ -65,4 +65,29 @@
 		}
 		return valid;
 	}
+	
+	this.comparePassBoxes = function(){
+		let pass1 = document.getElementById("password").value;
+		let pass2 = document.getElementById("passwordVerify").value;
+		let submitButton = document.getElementById("submit");
+		let nagBox = document.getElementById("nagBox");
+		
+		let html = "";
+		let height = 18;
+		
+		if(pass1 !== pass2){
+			nagBox.style.maxHeight = height+"px";
+			nagBox.style.visibility = "visible";
+			nagBox.style.background = "none";
+			nagBox.innerHTML = "<p>PASSWORDS MUST MATCH REEEEEEE</p>";
+			submitButton.disabled = true;
+		}
+		else{
+			nagBox.style.maxHeight = "0px";
+			nagBox.style.visibility = "hidden";
+			nagBox.style.background = "white";
+			nagBox.style.borderTop = "1px #c2c2c2 solid";
+			nagBox.innerHTML = "";
+		}
+	}
 })();
