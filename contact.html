@@ -9,7 +9,7 @@
 <body>
 <div class="container">
 	<div class="top">
-		<form id="cForm" class="entry" onsubmit="return validate()">
+		<form id="cForm" class="entry" onsubmit="return validate()" action="contact" method="post">
 			<p>?</p>
 			<div class="inputs">
 				<label for="email">Email:</label>
@@ -17,7 +17,7 @@
 			</div>
 			<div class="inputs">
 				<label for="subject">Subject:</label>
-				<input type="text" id="subject" maxlength="60" name="pswd">
+				<input type="text" id="subject" maxlength="60" name="subject">
 			</div>
 			<div class="inputs">
 				<label id="msglabel" for="message">Message:</label>
