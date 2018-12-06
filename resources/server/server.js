@@ -61,9 +61,7 @@ let access = express.Router();
 let con;
 fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data){
 	if(err){
-		return res.status(500).json({
-			error: err
-		});
+		return "File not found";
 	}
 	//set up connection to database
 	let credentials = data.toString().split(",");
@@ -191,13 +189,11 @@ app.post("/login", function(req, res){
 app.post("/register", function(req, res){
 	let userEmail = req.body.email;
 	let userUsername = req.body.user;
-	let userFirst = req.body.fname;
-	let userMiddle = req.body.mname;
-	let userLast = req.body.lname;
-	let userAge = req.body.age == '' ? null:req.body.age; //make userAge null if value is nul
+	let userFirst = req.body.fname === '' ? null:req.body.fname;
+	let userMiddle = req.body.mname === '' ? null:req.body.mname;
+	let userLast = req.body.lname === '' ? null:req.body.lname;
+	let userAge = req.body.age === '' ? null:req.body.age; //make userAge null if value is nul
 	let userGender = req.body.gender;
-	console.log("userGender = "+userGender);
-	console.log("userGender.value = "+userGender.value);
 	//hash plaintext password so it can be stored in DB safely
 	console.log("hashing password");
 	b.hash(req.body.password.toString(), 10, function(err, hash){
@@ -270,15 +266,16 @@ access.get("(/about)", function(req, res){
 });
 
 access.get("/profile", function(req, res){
-	console.log("BITCHES BE LIKE");
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){	
 		if(err){
 			return res.status(500).json({
 				error: err
 			});
 		}
-		console.log("req.cookie.user_info.email = "+req.cookies.user_info.email);
-		data = data.toString().replace('id="email"', ('id="email" disabled value="nick@email.com" '));
+		let user = req.cookies.user_info;
+		console.log("req.cookie.user_info.email = "+user.email);
+		data = data.toString().replace('id="email"', 'id="email" disabled value="' + user.email + '" ')
+			.replace('id="user"', 'id="user" value="' + user.username + '" ');
 		res.send(data);
 	});
 });
