@@ -1,45 +1,3 @@
-/*
-"WHAT'S ON THE MENU TONITE, PUFF-MAMA?"
-"Oh, you know:
--make login give cookie to user
--make register insert into DB and automatically log the user in
--make 
-"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
 let express = require("express");
 let b = require("bcrypt");
 let fs = require("fs");
@@ -219,8 +177,6 @@ app.post("/register", function(req, res){
 	res.redirect("/login");
 });
 
-// access
-
 app.use("/auth", access);
 
 access.all("*", function(req, res, next){
@@ -250,7 +206,6 @@ access.all("*", function(req, res, next){
     }
 });
 
-
 access.use(express.static(path.dirname(path.dirname(__dirname))));
 
 access.get("/", function(req, res){
@@ -273,10 +228,19 @@ access.get("/profile", function(req, res){
 			});
 		}
 		let user = req.cookies.user_info;
-		console.log("req.cookie.user_info.email = "+user.email);
-		data = data.toString().replace('id="email"', 'id="email" disabled value="' + user.email + '" ')
-			.replace('id="user"', 'id="user" value="' + user.username + '" ');
-		res.send(data);
+		console.log("user.email = "+user.email); //TODO: delete debugging
+		//Get all existing user information to populate profile fields
+		con.query("SELECT * FROM user WHERE email = ?", [user.email], function (err, selResult, selFields){
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+			//TODO: last working here trying to populate fields of form with user data. after that's done, write UPDATE query.
+			data = data.toString().replace('id="email"', 'id="email" disabled value="' + user.email + '" ')
+				.replace('id="user"', 'id="user" value="' + user.username + '" ');
+			res.send(data);
+		});
 	});
 });
 
