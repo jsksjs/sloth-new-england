@@ -5,6 +5,7 @@
 	<title>Sloth Love New England!</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/index.css">
 	<script src="/resources/scripts/navbar.js"></script>
+	<script src="/resources/scripts/carousel.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -87,34 +88,26 @@
 			</li>
 		</ul>
 	</div>
-	<div class="categoryBody">
-		<div class="imgContainer">
-			<ul class="imgList">
-				<!-- active image is always first -->
-				<li class="imgListItem">
-					<a class="imgListLink" href="#">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</li>
-				<li class="imgListItem">
-					<a class="imgListLink">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</li>
-				<li class="imgListItem">
-					<a class="imgListLink">
-						<img src="/resources/images/index/Carl'sWatching.jpg">
-					</a>
-				</li>
-			</ul>
-		</div>
-		<p class="contentDescription imgDescription">This is a rare image of New England before it was colonized by humans.</p>
-		<div id="NEDContainer">
-			<p class="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.
-				<br/>
-			</p>
-			<footer>Sloth Love New England!</footer>
-		</div>
+	<div id="indexBody">
+        <div id="imgListContainer">
+            <button class="mover" id="mLeft" onclick="moveLeft(350)"><</button>
+            <div id="imgList">
+                t=?
+            </div>
+            <button class="mover" id="mRight" onclick="moveRight(350)">></button>
+            <svg id="cirCon">
+                t=@
+            </svg>
+        </div>
+        <div id="desc">
+            <div class="imgDescription">
+                <p>Welcome to New England!</p>
+            </div>
+            <div id="NEDContainer">
+                <p id="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.<br/></p>
+            </div>
+        </div>
+        <footer class="end">Sloth Love New England!</footer>
 	</div>
 </body>
 </html>
