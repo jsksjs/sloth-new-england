@@ -2,10 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "dependencies": {
-    "jsonwebtoken": "latest",
+    "bcrypt": "latest",
     "body-parser": "latest",
     "cookie-parser": "latest",
-    "bcrypt": "latest",
-    "express": "latest"
+    "express": "^4.16.4",
+    "jsonwebtoken": "latest",
+    "mysql": "^2.16.0"
   }
 }

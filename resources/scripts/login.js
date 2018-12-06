@@ -11,7 +11,7 @@
 	// validates profile inputs
 	this.validate = function(){		
 		let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+@([a-z0-9]+\.[a-z0-9]+)+/;
-		let regPass = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;		
+		let regPass = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,32}/;		
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;

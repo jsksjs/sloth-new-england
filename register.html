@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>Sloth Love New England!</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/profile.css"/>
-	<script src="/resources/scripts/navbar.js"></script>
 	<script src="/resources/scripts/profile.js"></script>
 </head>
 <body>
@@ -24,6 +23,15 @@
 				<input type="text" id="user" maxlength="16" name="user">
 			</div>
 			<div class="inputs">
+				<label for="password">Password:</label>
+				<input onchange = "comparePassBoxes()" type="password" id="password" maxlength="32" name="password">
+			</div>
+			<div class="inputs">
+				<label for="passwordVerify">Retype password:</label>
+				<input onchange="comparePassBoxes()"type="password" id="passwordVerify" maxlength="32" name="passwordVerify">
+			</div>
+			<div id="nagBox"></div>
+			<div class="inputs">
 				<label for="fname">First Name:</label>
 				<input type="text" id="fname" maxlength="20" name="fname">
 			</div>
@@ -37,22 +45,23 @@
 			</div>
 			<div class="inputs">
 				<label for="age">Age:</label>
-				<input type="number" id="age" max="122" name="age">
+				<input type="number" id="age" min = "1" max="122" name="age">
 			</div>
 			<div class="inputs">
 				<label for="age">Gender:</label>
 				<div class="radios">
 					<label for="m">Male:</label>
-					<input type="radio" id="m" name="gender">
+					<input type="radio" id="m" value = "M" name="gender">
 				</div>
 				<div class="radios">
 					<label for="f">Female:</label>
-					<input type="radio" id="f" name="gender">
+					<input type="radio" id="f" value = "F" name="gender">
 				</div>
 			</div>
 			<div class="inputs actions">
 				<input id="submit" type="submit" value="Submit">
 			</div>
+			<div id="log"></div>
 		</form>
 	</div>
 	<footer class="end">

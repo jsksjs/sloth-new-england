@@ -9,19 +9,28 @@
 <body>
 <div class="container">
 	<div class="top">
-		<form class="entry" onsubmit="return validate()" action="/profile/submit" method="post">
+		<form class="entry" onsubmit="return validate()" action="/register" method="post">
 			<p style="text-align: center;">Your Bio</p>
 			<a style="text-align: center;" href="#">
 				<img id="profileImage" src="/resources/images/index/templogo.png"/>
 			</a>
-			<div class="inputs" title="REQUIRED">
+			<div class="inputs">
 				<label for="email">Email:</label>
-				<input type="text" id="email" maxlength="45" name="email" required>
+				<input type="text" id="email" maxlength="45" name="email">
 			</div>
-			<div class="inputs" title="REQUIRED: 3 to 16 characters long">
+			<div class="inputs">
 				<label for="user">Username:</label>
-				<input type="text" id="user" maxlength="16" name="user" required>
+				<input type="text" id="user" maxlength="16" name="user">
 			</div>
+			<div class="inputs">
+				<label for="password">Password:</label>
+				<input onchange = "comparePassBoxes()" type="password" id="password" maxlength="32" name="password">
+			</div>
+			<div class="inputs">
+				<label for="passwordVerify">Retype password:</label>
+				<input onchange="comparePassBoxes()"type="password" id="passwordVerify" maxlength="32" name="passwordVerify">
+			</div>
+			<div id="nagBox"></div>
 			<div class="inputs">
 				<label for="fname">First Name:</label>
 				<input type="text" id="fname" maxlength="20" name="fname">
@@ -36,17 +45,17 @@
 			</div>
 			<div class="inputs">
 				<label for="age">Age:</label>
-				<input type="number" id="age" max="122" min="3" name="age" pattern="\d*">
+				<input type="number" id="age" min = "1" max="122" name="age">
 			</div>
 			<div class="inputs">
 				<label for="age">Gender:</label>
 				<div class="radios">
 					<label for="m">Male:</label>
-					<input type="radio" id="m" name="gender">
+					<input type="radio" id="m" value = "M" name="gender">
 				</div>
 				<div class="radios">
 					<label for="f">Female:</label>
-					<input type="radio" id="f" name="gender">
+					<input type="radio" id="f" value = "F" name="gender">
 				</div>
 			</div>
 			<div class="inputs actions">
@@ -56,7 +65,7 @@
 		</form>
 	</div>
 	<footer class="end">
-		<a href="/auth/contact">Contact us</a>
+		<a href="/contact">Contact us</a>
 	</footer>
 </div>
 </body>
