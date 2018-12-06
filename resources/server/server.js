@@ -254,7 +254,7 @@ access.all("*", function(req, res, next){
 access.use(express.static(path.dirname(path.dirname(__dirname))));
 
 access.get("/", function(req, res){
-    res.redirect("/index");
+    return res.redirect("index");
 });
 
 let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_events"},
@@ -460,6 +460,17 @@ access.get("/contact", function(req, res){
 		else{
 			res.redirect("/profile");
 		}
+	});
+});
+
+access.post("/contact", function(req, res){
+	con.query("INSERT INTO user_message SET ?", {Sent: "", UserEmail: req.body.email, Subject: req.body.subject, Message: req.body.message}, function(err, result, fields){
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		console.log("Insert did not error.\n"); //TODO: delete debugging
 	});
 });
 
