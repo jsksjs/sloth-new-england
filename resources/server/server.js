@@ -190,19 +190,32 @@ app.post("/login", function(req, res){
 app.post("/register", function(req, res){
 	let userEmail = req.body.email;
 	let userUsername = req.body.user;
-	let userPassword = req.body.password;
 	let userFirst = req.body.fname;
 	let userMiddle = req.body.mname;
 	let userLast = req.body.lname;
 	let userAge = req.body.age;
 	let userGender = req.body.gender;
-	con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUserName, Password: userPassword, FName: userFirst, MName: userMiddle, LName: userLast, Age, userAge, Gender: userGender}, function (err, result, fields){
+	//hash plaintext password so it can be stored in DB safely
+	console.log("hashing password");
+	b.hash("bingo", 10, function(err, hash){
 		if(err){
+			console.log("password hashing error");
 			return res.status(500).json({
 				error: err
 			});
 		}
-		let user = result[0];
+		console.log("Attempting to insert user into DB..."); //TODO: delete debugging
+		//insert user with given data into DB
+		con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
+			if(err){
+				console.log("insertion error");
+				return res.status(500).json({
+					error: err
+				});
+			}
+			let user = result[0];
+			console.log("user inserted into DB.");
+		});
 	});
 });
 

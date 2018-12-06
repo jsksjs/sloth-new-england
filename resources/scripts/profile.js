@@ -88,6 +88,7 @@
 			nagBox.style.background = "white";
 			nagBox.style.borderTop = "1px #c2c2c2 solid";
 			nagBox.innerHTML = "";
+			submitButton.disabled = false;
 		}
 	}
 })();
