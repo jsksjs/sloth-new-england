@@ -106,9 +106,10 @@ app.post("/login", function(req, res){
 		//email to be checked in user table
 		let userEmail = req.body.email;
 		//query to see if the entered email address corresponds to an existing user. If exists, give login cookie. If not, reload page.
-		con.query('SELECT email, password, username FROM user WHERE email = ?', userEmail, function (err, result, fields){
+		con.query('SELECT email, password, username FROM user WHERE email = ?', [userEmail], function (err, result, fields){
 			con.end();
 			if(err){
+				console.log("ERROR ERROR ERROR ERROR REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE: "+result[0].email); //TODO: delete debugging
 				return res.status(500).json({
 					error: err
 				});
@@ -144,6 +145,13 @@ app.post("/login", function(req, res){
 							});
 						}
 						
+						//extract favorited pages from query result
+						let favoritePages = [];
+						for(i = 0; i < selResult.length; i++){
+							favoritePages.push(selResult[i].URL);
+						}
+						
+						//Get private key 
 						fs.readFile(path.join(__dirname, "private.key"), function(err, key){
 							if(err){
 								return res.status(500).json({
@@ -152,26 +160,29 @@ app.post("/login", function(req, res){
 							}
 							//send cookie to user
 							else{
-								//extract favorited pages from query result
-								let favoritePages = [];
-								for(i = 0; i < selResult.length; i++){
-									favoritePages.push(selResult[i].URL);
-								}
-								
+								console.log("making cookie");
 								jwt.sign({
 									username: userUsername,
 									email: userEmail
 								}, key, function(err, token){
+									if(err){
+										return res.status(500).json({
+											error: err
+										});
+									}
 									res.cookie("user_info", {token: token,
 															username: userUsername,
 															email: userEmail,
 															favorites: favoritePages},
 										{httpOnly: true, domain: "localhost"});
+									console.log("returning auth.index from inner");
 									return res.redirect("/auth/index");
 								});
 							}
 						});
 					});
+					console.log("returning auth.index from outer");
+					//return res.redirect("/auth/index"); //TODO: delete debugging
 				}
 				//if password is incorrect, reload page
 				else{
