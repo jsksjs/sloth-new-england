@@ -13,6 +13,7 @@
 		let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+@([a-z0-9]+\.[a-z0-9]+)+/;
 		let regUser = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;
 		let regNames = /(^[a-z]{0,20}$)/;
+		let regPass = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,32}/;
 		let log = document.getElementById("log");
 		let html = "";
 		let valid = true;
@@ -50,7 +51,14 @@
 			height += 18;
 			valid = false;
 		}
-
+		if(!regPass.test(this["password"].value.toLowerCase())){
+			if(html !== ""){
+				html += "<br/>";
+			}
+			html += "Invalid Password";
+			height += 18;
+			valid = false;
+		}
 		log.innerHTML = "<p>" + html + "</p>";
 		if(!valid){
 			log.style.maxHeight = height+"px";

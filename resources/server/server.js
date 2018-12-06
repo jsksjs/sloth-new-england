@@ -50,8 +50,9 @@ let path = require("path");
 let mysql = require('mysql');
 let app = express();
 
-app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
+
 app.use(ck());
 
 let access = express.Router();
@@ -193,11 +194,13 @@ app.post("/register", function(req, res){
 	let userFirst = req.body.fname;
 	let userMiddle = req.body.mname;
 	let userLast = req.body.lname;
-	let userAge = req.body.age;
+	let userAge = req.body.age == '' ? null:req.body.age; //make userAge null if value is nul
 	let userGender = req.body.gender;
+	console.log("userGender = "+userGender);
+	console.log("userGender.value = "+userGender.value);
 	//hash plaintext password so it can be stored in DB safely
 	console.log("hashing password");
-	b.hash("bingo", 10, function(err, hash){
+	b.hash(req.body.password.toString(), 10, function(err, hash){
 		if(err){
 			console.log("password hashing error");
 			return res.status(500).json({
@@ -208,7 +211,6 @@ app.post("/register", function(req, res){
 		//insert user with given data into DB
 		con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
 			if(err){
-				console.log("insertion error");
 				return res.status(500).json({
 					error: err
 				});
@@ -217,6 +219,8 @@ app.post("/register", function(req, res){
 			console.log("user inserted into DB.");
 		});
 	});
+	console.log("redirecting to login");
+	res.redirect("/login");
 });
 
 // access
@@ -261,8 +265,22 @@ access.get("/index", function(req, res){
     res.sendFile("index.html", {root: path.dirname(path.dirname(__dirname))});
 });
 
-access.get("(/about|/profile)", function(req, res){
-    res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+access.get("(/about)", function(req, res){
+	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+});
+
+access.get("/profile", function(req, res){
+	console.log("BITCHES BE LIKE");
+	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){	
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		console.log("req.cookie.user_info.email = "+req.cookies.user_info.email);
+		data = data.toString().replace('id="email"', ('id="email" disabled value="nick@email.com" '));
+		res.send(data);
+	});
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
@@ -353,7 +371,7 @@ access.get("/contact", function(req, res){
 		else{
 			res.redirect("/profile");
 		}
-	});    
+	});
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
