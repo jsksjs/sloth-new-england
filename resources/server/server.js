@@ -48,6 +48,7 @@ let bp = require("body-parser");
 let ck = require("cookie-parser");
 let path = require("path");
 let mysql = require('mysql');
+let moment = require("moment");
 let app = express();
 
 app.use(bp.json());
@@ -76,20 +77,16 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		database: fDatabase
 	});
 });
+
 app.get("(/resources/*/*)", function(req, res){
 	res.sendFile(path.join(path.dirname(path.dirname(__dirname)), req.params[0]));
 });
 
-app.get("/", function(req, res){
-    res.sendFile("splash.html", {root: path.dirname(path.dirname(__dirname))});
-});
-
-app.get("/login", function(req, res){
-    res.sendFile("login.html", {root: path.dirname(path.dirname(__dirname))});
-});
-
-app.get("/register", function(req, res){
-    res.sendFile("register.html", {root: path.dirname(path.dirname(__dirname))});
+app.get("(/|/login|/register)", function(req, res){
+    let param = req.params[0];
+    if(param === "/")
+        param = "splash";
+    res.sendFile(param + ".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
 app.get("/contact", function(req, res){
@@ -97,6 +94,21 @@ app.get("/contact", function(req, res){
 		let html = data.toString().replace("?", "Hi!<br><br>This message will NOT be sent to the admins.");
 		res.send(html);
 	}); 
+});
+
+app.post("/contact", function(req, res){
+    con.query("INSERT INTO guest_message SET ?", {ContactID: null,
+            ContactEmail: req.body.email, Subject: req.body.subject, Message: req.body.message,
+            Sent: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')},
+        function(err){
+            if(err){
+                return res.status(500).json({
+                    error: err
+                });
+            }
+            else
+                return res.redirect("login");
+        });
 });
 
 app.post("/login", function(req, res){
@@ -194,16 +206,13 @@ app.post("/register", function(req, res){
 	let userLast = req.body.lname === '' ? null:req.body.lname;
 	let userAge = req.body.age === '' ? null:req.body.age; //make userAge null if value is nul
 	let userGender = req.body.gender;
-	//hash plaintext password so it can be stored in DB safely
-	console.log("hashing password");
+	//hash plaintext password so it can be stored in DB safely;
 	b.hash(req.body.password.toString(), 10, function(err, hash){
 		if(err){
-			console.log("password hashing error");
 			return res.status(500).json({
 				error: err
 			});
 		}
-		console.log("Attempting to insert user into DB..."); //TODO: delete debugging
 		//insert user with given data into DB
 		con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
 			if(err){
@@ -211,19 +220,20 @@ app.post("/register", function(req, res){
 					error: err
 				});
 			}
-			let user = result[0];
-			console.log("user inserted into DB.");
 		});
 	});
-	console.log("redirecting to login");
 	res.redirect("/login");
+});
+
+app.get("(/|/auth/)", function(req, res){
+    return res.redirect("index");
 });
 
 // access
 
 app.use("/auth", access);
 
-access.all("*", function(req, res, next){
+function verify(req, res, next){
     let user = req.cookies.user_info;
     if(user !== undefined && user.token !== undefined){
         let token = req.cookies.user_info.token;
@@ -248,14 +258,15 @@ access.all("*", function(req, res, next){
     else{
         return res.redirect("/");
     }
+}
+
+access.all("*", function(req, res, next){
+    verify(req, res, next);
 });
 
 
 access.use(express.static(path.dirname(path.dirname(__dirname))));
 
-access.get("/", function(req, res){
-    return res.redirect("index");
-});
 
 let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_events"},
     {"resources/images/culture/house.jpg": "culture/house_of_blues"},
@@ -264,7 +275,6 @@ let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_
     {"resources/images/culture/six.jpg": "culture/six_flags"},
     {"resources/images/culture/quassy.jpg": "culture/quassy"},
     {"resources/images/culture/beach.JPG": "culture/misquamicut"},
-
     {"resources/images/history/saugus_iron_mill.jpg": "history/saugus_iron_works"},
     {"resources/images/history/witch-trials-2-018.jpg": "history/salem_witch_trials"},
     {"resources/images/history/boston_harbor.jpg": "history/boston_harbor"},
@@ -272,7 +282,6 @@ let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_
     {"resources/images/history/dungeon_rock.jpg": "history/dungeon_rock"},
     {"resources/images/history/mark_twain.jpg": "history/mark_twain"},
     {"resources/images/history/old_sturbridge.jpg": "history/old_sturbridge_village"},
-
     {"resources/images/sports/uconn.jpg": "sports/uconn_basketball"},
     {"resources/images/sports/ne-hockey.jpg": "sports/hockey"},
     {"resources/images/sports/uhawks.jpg": "sports/hartford_hawks"},
@@ -280,7 +289,6 @@ let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_
     {"resources/images/sports/alumni2.jpg": "sports/alumni_stadium"},
     {"resources/images/sports/dunkindonuts.jpg": "sports/dunkin_donuts_park"},
     {"resources/images/sports/fenway.jpg": "sports/fenway_park"},
-
     {"resources/images/education/uhartview.jpg": "education/uhart"},
     {"resources/images/education/storrs-campus.jpg": "education/uconn"},
     {"resources/images/education/umassimage.jpg": "education/umass"},
@@ -288,7 +296,6 @@ let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_
     {"resources/images/education/harvardsquare.jpg": "education/harvard"},
     {"resources/images/education/yaleimage.jpg": "education/yale"},
     {"resources/images/education/browncampus.jpg": "education/brown"},
-
     {"resources/images/abandoned_buildings/colt_armory.jpg": "abandoned_buildings/colt_armory"},
     {"resources/images/abandoned_buildings/lynn.jpg": "abandoned_buildings/lynn_shoe_factories"},
     {"resources/images/abandoned_buildings/dudtown.png": "abandoned_buildings/dudleytown"},
@@ -450,7 +457,7 @@ access.get("/contact", function(req, res){
 		if(user !== undefined && user.token !== undefined){
 			let username = user.username;
 			let email = user.email;
-			let val = greetings[Math.floor(Math.random()*Math.floor(5))] + ", " + 
+			let val = greetings[Math.floor(Math.random()*Math.floor(greetings.length))] + ", " +
 				username + "!<br><br>This message will be sent to the admins.";
 			let html = data.toString().replace("?", val);
 			let valEmail = "name=\"email\"";
@@ -464,14 +471,17 @@ access.get("/contact", function(req, res){
 });
 
 access.post("/contact", function(req, res){
-	con.query("INSERT INTO user_message SET ?", {Sent: "", UserEmail: req.body.email, Subject: req.body.subject, Message: req.body.message}, function(err, result, fields){
+    let user = req.cookies.user_info;
+	con.query("INSERT INTO user_message SET ?", {Sent: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+        UserEmail: user.email, Subject: req.body.subject, Message: req.body.message},
+        function(err){
 		if(err){
 			return res.status(500).json({
 				error: err
 			});
 		}
-		console.log("Insert did not error.\n"); //TODO: delete debugging
 	});
+    return res.redirect("index");
 });
 
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
