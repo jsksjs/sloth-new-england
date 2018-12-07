@@ -36,10 +36,12 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 	});
 });
 
+// serve resources like images and css
 app.get("(/resources/*/*)", function(req, res){
 	res.sendFile(path.join(path.dirname(path.dirname(__dirname)), req.params[0]));
 });
 
+// splash, login, register
 app.get("(/|/login|/register)", function(req, res){
     let param = req.params[0];
     if(param === "/")
@@ -47,6 +49,7 @@ app.get("(/|/login|/register)", function(req, res){
     res.sendFile(param + ".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
+// serve contact
 app.get("/contact", function(req, res){
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
 		let html = data.toString().replace("?", "Hi!<br><br>This message will NOT be sent to the admins.");
@@ -54,6 +57,7 @@ app.get("/contact", function(req, res){
 	}); 
 });
 
+// when user posts to server from contact, insert info and redirect to login
 app.post("/contact", function(req, res){
     con.query("INSERT INTO guest_message SET ?", {ContactID: null,
             ContactEmail: req.body.email, Subject: req.body.subject, Message: req.body.message,
@@ -69,6 +73,7 @@ app.post("/contact", function(req, res){
         });
 });
 
+// take care of login and authentication
 app.post("/login", function(req, res){
 	/*
 	This block directs user to index and serves fresh cookie
@@ -156,6 +161,7 @@ app.post("/login", function(req, res){
 	});
 });
 
+// register a user in the DB and redirect to login
 app.post("/register", function(req, res){
 	//extract params for query
 	let userEmail = req.body.email;
@@ -186,12 +192,16 @@ app.post("/register", function(req, res){
 	res.redirect("/login");
 });
 
+// on attempt to access auth, move to index
 app.get("(/|/auth/)", function(req, res){
     return res.redirect("index");
 });
 
+// authorized pathing
 app.use("/auth", access);
 
+// verify one is allowed to access a page
+// either allowing them through or redirecting them to splash
 function verify(req, res, next){
     let user = req.cookies.user_info;
     if(user !== undefined && user.token !== undefined){
@@ -219,13 +229,15 @@ function verify(req, res, next){
     }
 }
 
+// verify one is allowed to access any authorized content
 access.all("*", function(req, res, next){
     verify(req, res, next);
 });
 
+// from authorized pages, serve static resources
 access.use(express.static(path.dirname(path.dirname(__dirname))));
 
-
+// mapping of images to urls
 let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_events"},
     {"resources/images/culture/house.jpg": "culture/house_of_blues"},
     {"resources/images/culture/revere-beach.jpg": "culture/revere_beach"},
@@ -262,6 +274,7 @@ let imgToUrl = [{"resources/images/culture/salem.JPG": "culture/salem_halloween_
     {"resources/images/abandoned_buildings/majestic_palace_theaters.jpg": "abandoned_buildings/majestic_palace_theaters"},
     {"resources/images/abandoned_buildings/the_hartford.jpg": "abandoned_buildings/wishlist"}];
 
+// serve image viewer on index
 access.get("/index", function(req, res){
     let template ="<div data-src='!' onclick='divClick(this)' class='#'>" +
         "<img class='viewImage' src='?'>" +
@@ -318,10 +331,12 @@ access.get("/index", function(req, res){
 	});
 });
 
+// about page
 access.get("(/about)", function(req, res){
 	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
+// profile page with edits
 access.get("/profile", function(req, res){
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){	
 		if(err){
@@ -409,6 +424,7 @@ access.post("/profile", function(req, res){
 	return res.redirect("/auth/index");
 });
 
+// perform favorite/unfavorite and redirect to same page
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
 	/*
 	This block as a whole runs when user attempts to favorite/unfavorite a page. It updates the database with user's updated favorited page, then updates the cookie, then reloads the page.
@@ -480,6 +496,8 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 	});
 });
 
+// contact page for users
+// gives a random message to user
 access.get("/contact", function(req, res){
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){		
 		let user = req.cookies.user_info;
@@ -500,6 +518,7 @@ access.get("/contact", function(req, res){
 	});
 });
 
+// inserts contact message into user_message table and redirects to index
 access.post("/contact", function(req, res){
     let user = req.cookies.user_info;
 	con.query("INSERT INTO user_message SET ?", {Sent: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
@@ -514,10 +533,12 @@ access.post("/contact", function(req, res){
     return res.redirect("index");
 });
 
+// serve category pages
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
 	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
+// server content pages and insert favorite buttton
 access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", function(req, res){
 	/*
 	This block serves content pages to the user.
