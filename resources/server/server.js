@@ -490,8 +490,8 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", fu
 		if(isFavorited) html += "Unfavorite this page?";
 		else html += "Favorite this page!";
 		html += "</a>";
-		
-		return res.send(data.toString().replace("</body>", html+"</body>"));
+		console.log(data.toString());
+		return res.send(data.toString().replace("</div>\r\n</body>", html+"</div>\r\n</body>"));
 	});
 });
 
