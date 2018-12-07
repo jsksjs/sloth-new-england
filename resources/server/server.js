@@ -157,14 +157,13 @@ app.post("/login", function(req, res){
 });
 
 app.post("/register", function(req, res){
+	//extract params for query
 	let userEmail = req.body.email;
-	console.log("you are in register.post");//TODO: DELETE DEBUGGING
-	console.log("userEmail in /register = "+userEmail);
 	let userUsername = req.body.user;
 	let userFirst = req.body.fname === '' ? null:req.body.fname;
 	let userMiddle = req.body.mname === '' ? null:req.body.mname;
 	let userLast = req.body.lname === '' ? null:req.body.lname;
-	let userAge =req.body.age === '' ? null:req.body.age; //TODO: MAKE IT SO AGE ISN'T NULL ALWAYS ONCE THIS TEST RUNS
+	let userAge =req.body.age === '' ? null:req.body.age;
 	let userGender = req.body.gender;
 	//hash plaintext password so it can be stored in DB safely;
 	b.hash(req.body.password.toString(), 10, function(err, hash){
@@ -174,6 +173,7 @@ app.post("/register", function(req, res){
 			});
 		}
 		//insert user with given data into DB
+		console.log("Inserting new user into DB...");
 		con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
 			if(err){
 				return res.status(500).json({
@@ -181,8 +181,9 @@ app.post("/register", function(req, res){
 				});
 			}
 		});
+		console.log("Query Executed without error.\n");
 	});
-	res.redirect("/login"); //TODO: UNCOMMENT THIS ONCE QUERY ERROR FIXED
+	res.redirect("/login");
 });
 
 app.get("(/|/auth/)", function(req, res){
@@ -322,7 +323,6 @@ access.get("(/about)", function(req, res){
 });
 
 access.get("/profile", function(req, res){
-	console.log("you are on profile.get"); //TODO: DELETE DEBUGGING
 	fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){	
 		if(err){
 			return res.status(500).json({
@@ -337,66 +337,30 @@ access.get("/profile", function(req, res){
 					error: err
 				});
 			}
-
+			
+			//Extract params from query result
 			let FName = selResult[0].FName === null ? '':selResult[0].FName;
 			let MName = selResult[0].MName === null ? '':selResult[0].MName;
 			let LName = selResult[0].LName === null ? '':selResult[0].LName;
 
-			console.log("FOR LOOP TIME:")
-			for(let i = 0; i< selFields.length; i++){
-				console.log(selFields[i].name);
-			}
-			console.log("END FOR LOOP TIME");
-			//console.log("NOW CHECKING if things are null"); //TODO: DELETE DEBUGGING once profile autofills fields
-			
-			/*//TODO: This might be useful but delete once done debugging profile autofill
-			fname = selResult.fname;
-			mname = selResult.mname;
-			lname = selResult.lname;
-			*/
-			//TODO: figure out what's wrong with this code if profile editing page does not autofill existing fields
-/*			if(selResult.fname !== undefined && selResult.fname !== null){
-				console.log("fname null");//TODO: DELETE DEBUGGING
-				fname = selResult.fname;
-			}
-			else fname = null;
-			if(selResult.mname !== undefined && selResult.mname !== null){
-				console.log("mname null");//TODO: DELETE DEBUGGING
-				mname = selResult.mname;
-			}
-			else mname = null;
-			if(selResult.lname !== undefined && selResult.lname !== null){
-				console.log("lname null");//TODO: DELETE DEBUGGING
-				lname = selResult.lname;
-			}
-			else lname = null;
-			*/
-			//TODO: last working here trying to populate fields of form with user data. after that's done, write UPDATE query.
-			console.log("fucking age = "+selResult[0].Age);
+			//dynamically change parts of page that need to be changed
 			data = data.toString().replace('profile.js','profile2.js');
 			data = data.replace('/register', '/auth/profile');
 			data = data.replace('id="email"', 'id="email" disabled value="' + user.email + '" ').replace('id="user"', 'id="user" value="' + user.username + '" ').replace('id="fname"','id="fname" value="' + FName + '" ').replace('id="mname"','id="mname" value="' + MName + '" ').replace('id="lname"','id="lname" value="' + LName + '" ').replace('id="age"', 'id="age" value="' + selResult[0].Age +'" ');
-			//depending on user gender select whichever radiobutton
+			//depending on user gender, select (AKA check) corresponding radiobutton
 			if(selResult[0].Gender === 'M'){
-				console.log("GENDER M");//TODO: DELETE DEBUGGING
 				data = data.replace('id="m"', 'id="M" checked ');
 			}
 			else if(selResult[0].Gender === 'F'){
-				console.log("GENDER F");//TODO: DELETE DEBUGGING
 				data = data.replace('id="f"', 'id="F" checked ');
 			}
-			else{
-				console.log("NO FUCKING GENDER"); //TODO: DELETE DEBUGGING
-			}
 			
-			//IF user entered anything in password fields, insert new password. Else, dont update password
 			res.send(data);
 		});
 	});
 });
 
 access.post("/profile", function(req, res){
-	console.log("you are on POST of /profile page"); //TODO: delete debugging
 	let userUsername = req.body.user;
 	let userFirst = req.body.fname === '' ? null:req.body.fname;
 	let userMiddle = req.body.mname === '' ? null:req.body.mname;
@@ -413,22 +377,23 @@ access.post("/profile", function(req, res){
 				error: err
 			});
 		}
-		//UPDATE user set UserName = 'Nick_the_Lad' WHERE username = 'Nick_The_Lad2'; //TODO: DElete query included for reference
-		//Create boilerplate for update query/params
+		
+		//Initialize UPDATE query and its parameter list 
 		query = "UPDATE user SET ";
 		params = [];
-		//Add params to update to query/params
+		//add parameters to be updated to query/params
+		//IFF user entered a new password, insert relevant password bits into query
 		if(req.body.password !== '' && req.body.password !== undefined && req.body.password !== null){
 			query += "password = ?, ";
 			params.push(hash);
 		}
+		//add other parameters to query/params
 		params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender);
 		query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ? "
 		//add WHERE clause to query/params
 		query += "WHERE email = ?";
 		params.push(userEmail);
 		query += ";";
-		
 		
 		console.log("now running update query: "+query); //TODO: delete debugging
 		console.log("with params: "+params); //TODO: delete debugging
@@ -493,7 +458,7 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/fav
 	}
 	
 	//query for all of the user's favorite pages so that cookie can be updated
-	//TODO: this could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
+	//TODO: this work could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
 	con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
 		//extract info from existing cookie
 		let user = req.cookies.user_info;
