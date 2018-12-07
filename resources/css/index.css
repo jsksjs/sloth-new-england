@@ -156,6 +156,7 @@ li.drop {
     align-self: center;
     flex-direction: row;
     position: relative;
+    z-index: 0;
 }
 
 
