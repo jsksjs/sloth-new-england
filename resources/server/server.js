@@ -425,7 +425,7 @@ access.post("/profile", function(req, res){
 });
 
 // perform favorite/unfavorite and redirect to same page
-access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture|/favorites)(/*)(/favorite)", function(req, res){
 	/*
 	This block as a whole runs when user attempts to favorite/unfavorite a page. It updates the database with user's updated favorited page, then updates the cookie, then reloads the page.
 	*/
@@ -538,8 +538,111 @@ access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", functi
 	res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
 });
 
+// serve favorites page
+access.get("(/favorites)", function(req, res){
+	let working = path.dirname(path.dirname(__dirname));
+	//read favorites.html template so content can be inserted
+	fs.readFile(path.join(working, "/favorites.html"), function(err, favorites){
+		if(err){
+			return res.status(500).json({
+				error: err
+			});
+		}
+		favorites = favorites.toString();
+		//index at which every created contentTile can be inserted into HTML read from favorites.html
+		let tileIndex = favorites.indexOf("*|contentTiles|*") + 16;
+		
+		con.query("SELECT URL FROM favorite WHERE useremail = ?", [req.cookies.user_info.email], function (err, result, fields){
+            if(err){
+                return res.status(500).json({
+                    error: err
+                });
+            }		
+			//if user has any favorites, insert content tiles and description of favorites
+			if(result.length > 0){
+				//template for contentTile, to be used to create real contentTiles
+				let contentTile = '<div class="contentTile" data-src="*|URL|*"><img class="contentThumbnail" title="*|title|*" src = "*|src|*"><p class="contentP">*|contentPText|*</p></div>';
+				
+				//name of page to be read from
+				let page;
+				//the HTML of the contentTile to be inserted into favorites page
+				let newTile;
+				
+				//variables to hold information extracted from users' favorite content pages
+				//url value read from of HTML img url
+				let rURL;
+				//value of HTML img src
+				let rSrc;
+				//value of the text inside contentP
+				//let rContentPText; //TODO: Use this variable to extract the text contained in actual contentTile contentP elements instead of phrases
+				
+				//So the contentTiles don't have the right contentP text because I read from content pages instead of the category pages they come from. However, I don't want to refactor everything, so instead of a single generic phrase in contentP, we get these. But hey, now this mistake looks like a feature, soooo 
+				let phrases = ["Visit this one again?", "This one's a good one.", "How about this one?", "I like this one too.", "A classic.", "A real classic.", "Another classic.", "Classy.", "Top-tier attraction.", "One for the ages.", "The best thing in New England?", "New England, <i>embodied.</i>", "I love this one.", "10/10. -IGN", "A quality piece, this one.", "A perfect 5/7.", "\"Epic.\"", "<i>\"GGRRRLLRYLYRPLLRGLBBR\"</i>", "This remind sloth of CHUNK!", "Baby Ruth!", "Choco-late!", "Ride!"];
+				//index of random phrase to insert into contentP
+				let phrase;
+				
+				//phrases that have been used. Will allow for repeats, but only if the user has favorited more pages than there are phrases.
+				let used = [];
+				
+				//Read each of the user's favorites in order to extract the needed fields from them
+				for(let i = 0; i < result.length; i++){
+					if(err){
+						console.log("error trying to read "+page);
+						return res.status(500).json({
+							error: err
+						});
+					};
+					
+					//remove random phrase from phrases
+					if(phrases.length > 0){
+						phrase = phrases.splice(Math.floor(Math.random() * phrases.length), 1);
+						//put phrase into used array
+						used.push(phrase);
+					}
+					else{
+						phrases = used;
+						used = [];
+					}
+					
+					page = result[i].URL.split("/")[2] + ".html";
+					
+					//read favorited page to extract data
+					let data = fs.readFileSync(path.join(working, page));
+					data = data.toString();
+					
+					//extract title
+					let index1 = data.indexOf('"contentImage" title="')+22;
+
+					let truncated = data.substring(index1);
+
+					//the string length of the img url. used to extract url and find beginning of img src.
+					let len = truncated.indexOf('"');
+					rURL = "/auth"+result[i].URL;
+					
+					//truncated = entire html file after ' src=" '
+					truncated = truncated.substring(len + 7);
+					//rSrc = <img> src
+					rSrc = truncated.substring(0,truncated.indexOf('"'));
+					
+					//replace *|tags|* in generic tile to create new contentTile
+					newTile = contentTile.replace("*|URL|*", rURL).replace("*|title|*","Visit this page to see the source!").replace("*|src|*",rSrc).replace("*|contentPText|*", phrase);
+					
+					//insert newly created contentTile into favorites page
+					favorites = [favorites.slice(0, tileIndex), newTile, favorites.slice(tileIndex)].join('');
+				}
+				favorites = favorites.replace("*|categoryDescription|*", "These are your favorite pages. Sloth approve.").replace("*|contentTiles|*","");
+			}
+			//if user has no favorites, insert message about having no favorites
+			else{
+				favorites = favorites.replace("*|categoryDescription|*", "You have no favorited pages.\nSloth says: \" :( \"").replace("*|contentTiles|*","<p>This is where your favorite pages would go, <strong>if you had any.</strong></p>");
+			}
+			res.send(favorites);
+		});	
+	});
+});
+
 // server content pages and insert favorite buttton
-access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)", function(req, res){
+access.get("(/history|/abandoned_buildings|/education|/sports|/culture|/favorites)(/*)", function(req, res){
 	/*
 	This block serves content pages to the user.
 	*/
