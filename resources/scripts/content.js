@@ -45,6 +45,9 @@
 		container.addEventListener("click", frameRetract);
 
 		container.appendChild(ifr);
+		let url = window.location.toString().split("/");
+		backgrnd.innerHTML += ('<br><iframe class="comment-container" onload="resize(this)" src="' +
+            url[url.length-1] + '/commentFrame"></iframe><br>')
 	}
 
 	// "expand" image (move it down)
