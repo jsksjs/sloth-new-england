@@ -46,8 +46,14 @@
 
 		container.appendChild(ifr);
 		let url = window.location.toString().split("/");
-		backgrnd.innerHTML += ('<br><iframe class="comment-container" onload="resize(this)" src="' +
-            url[url.length-1] + '/commentFrame"></iframe><br>')
+		let commentFrame = document.createElement("iframe");
+		commentFrame.classList.add("comment-container");
+        commentFrame.src = url[url.length-1] + "/commentFrame";
+		commentFrame.addEventListener("load", function(){
+            this.height = (this.contentWindow.document.body.scrollHeight+50) + "px";
+            this.width = (this.contentWindow.document.body.scrollWidth) + "px";
+        });
+		backgrnd.appendChild(commentFrame);
 	}
 
 	// "expand" image (move it down)
@@ -56,7 +62,7 @@
 	        ifr.src = this.dataset.src;
 		ifr.style.visibility = "visible";
 		ifr.style.transform = "translate(0%, 0)";
-		backgrnd.style.filter = "blur(5px) opacity(0.1%)";
+		backgrnd.style.filter = "blur(5px) opacity(0.01%)";
 		container.style.pointerEvents = "auto";
 		container.style.cursor = "zoom-out";
 	}
