@@ -65,7 +65,7 @@
 	font-size: 12pt;
 }
 
-.comment-container {
+.comment-frame {
 	display: flex;
 	align-self: center;
 	font-family: "Arial", "Times New Roman", serif;

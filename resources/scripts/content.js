@@ -47,11 +47,15 @@
 		container.appendChild(ifr);
 		let url = window.location.toString().split("/");
 		let commentFrame = document.createElement("iframe");
-		commentFrame.classList.add("comment-container");
+		commentFrame.classList.add("comment-frame");
         commentFrame.src = url[url.length-1] + "/commentFrame";
 		commentFrame.addEventListener("load", function(){
-            this.height = (this.contentWindow.document.body.scrollHeight+50) + "px";
+            this.height = (this.contentWindow.document.body.scrollHeight*1.05) + "px"
             this.width = (this.contentWindow.document.body.scrollWidth) + "px";
+        });
+		document.addEventListener("resize", function(){
+            commentFrame.height =  (commentFrame.contentWindow.document.body.scrollHeight*1.3) + "px"
+            commentFrame.width = (commentFrame.contentWindow.document.body.scrollWidth) + "px";
         });
 		backgrnd.appendChild(commentFrame);
 	}
