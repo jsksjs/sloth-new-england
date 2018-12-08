@@ -156,40 +156,46 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
                 }
             });
         });
-    });
+	});
 
-    app.post("/register", function(req, res){
-        let userEmail = req.body.email;
-        let userUsername = req.body.user;
-        let userFirst = req.body.fname === '' ? null:req.body.fname;
-        let userMiddle = req.body.mname === '' ? null:req.body.mname;
-        let userLast = req.body.lname === '' ? null:req.body.lname;
-        let userAge = req.body.age === '' ? null:req.body.age; //make userAge null if value is nul
-        let userGender = req.body.gender;
-        //hash plaintext password so it can be stored in DB safely;
-        b.hash(req.body.password.toString(), 10, function(err, hash){
-            if(err){
-                return res.status(500).json({
-                    error: err
-                });
-            }
-            //insert user with given data into DB
-            con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
-                if(err){
-                    return res.status(500).json({
-                        error: err
-                    });
-                }
-            });
-        });
-        res.redirect("/login");
-    });
+	// register a user in the DB and redirect to login
+	app.post("/register", function(req, res){
+		//extract params for query
+		let userEmail = req.body.email;
+		let userUsername = req.body.user;
+		let userFirst = req.body.fname === '' ? null:req.body.fname;
+		let userMiddle = req.body.mname === '' ? null:req.body.mname;
+		let userLast = req.body.lname === '' ? null:req.body.lname;
+		let userAge =req.body.age === '' ? null:req.body.age;
+		let userGender = req.body.gender;
+		//hash plaintext password so it can be stored in DB safely;
+		b.hash(req.body.password.toString(), 10, function(err, hash){
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+			//insert user with given data into DB
+			console.log("Inserting new user into DB...");
+			con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+			});
+			console.log("Query Executed without error.\n");
+		});
+		res.redirect("/login");
+	});
 
-    app.get("(/|/auth/)", function(req, res){
-        return res.redirect("index");
-    });
+	// on attempt to access auth, move to index
+	app.get("(/|/auth/)", function(req, res){
+		return res.redirect("index");
+	});
 
-    app.use("/auth", access);
+	// authorized pathing
+	app.use("/auth", access);
 
     function verify(req, res, next){
         let user = req.cookies.user_info;
@@ -316,34 +322,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         });
     });
 
-    access.get("(/about)", function(req, res){
-        res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
-    });
-
-    access.get("/profile", function(req, res){
-        fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){
-            if(err){
-                return res.status(500).json({
-                    error: err
-                });
-            }
-            let user = req.cookies.user_info;
-            console.log("user.email = "+user.email); //TODO: delete debugging
-            //Get all existing user information to populate profile fields
-            con.query("SELECT * FROM user WHERE email = ?", [user.email], function (err, selResult, selFields){
-                if(err){
-                    return res.status(500).json({
-                        error: err
-                    });
-                }
-                //TODO: last working here trying to populate fields of form with user data. after that's done, write UPDATE query.
-                data = data.toString().replace('id="email"', 'id="email" disabled value="' + user.email + '" ')
-                    .replace('id="user"', 'id="user" value="' + user.username + '" ');
-                res.send(data);
-            });
-        });
-    });
-
     access.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/*)(/favorite)", function(req, res){
         /*
         This block as a whole runs when user attempts to favorite/unfavorite a page. It updates the database with user's updated favorited page, then updates the cookie, then reloads the page.
@@ -415,40 +393,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         });
     });
 
-    access.get("/contact", function(req, res){
-        fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
-            let user = req.cookies.user_info;
-            let greetings = ["Hi there", "How's it going", "What's up", "Greetings", "Hey"];
-            if(user !== undefined && user.token !== undefined){
-                let username = user.username;
-                let email = user.email;
-                let val = greetings[Math.floor(Math.random()*Math.floor(greetings.length))] + ", " +
-                    username + "!<br><br>This message will be sent to the admins.";
-                let html = data.toString().replace("?", val);
-                let valEmail = "name=\"email\"";
-                html = html.replace(valEmail, valEmail + "value=\"" + email + "\" disabled");
-                res.send(html);
-            }
-            else{
-                res.redirect("/profile");
-            }
-        });
-    });
-
-    access.post("/contact", function(req, res){
-        let user = req.cookies.user_info;
-        con.query("INSERT INTO user_message SET ?", {Sent: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
-            UserEmail: user.email, Subject: req.body.subject, Message: req.body.message},
-            function(err){
-            if(err){
-                return res.status(500).json({
-                    error: err
-                });
-            }
-        });
-        return res.redirect("index");
-    });
-
     access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
         res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
     });
@@ -499,6 +443,360 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
             return res.send(data.toString().replace("</div>\r\n</body>", html+"</div>\r\n</body>"));
         });
     });
+
+	// about page
+	access.get("(/about)", function(req, res){
+		res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+	});
+
+	// profile page with edits
+	access.get("/profile", function(req, res){
+		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "profile.html"), function(err, data){	
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+			let user = req.cookies.user_info;
+			//Get all existing user information to populate profile fields
+			con.query("SELECT * FROM user WHERE email = ?", [user.email], function (err, selResult, selFields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+				
+				//Extract params from query result
+				let FName = selResult[0].FName === null ? '':selResult[0].FName;
+				let MName = selResult[0].MName === null ? '':selResult[0].MName;
+				let LName = selResult[0].LName === null ? '':selResult[0].LName;
+
+				//dynamically change parts of page that need to be changed
+				data = data.toString().replace('profile.js','profile2.js');
+				data = data.replace('/register', '/auth/profile');
+				data = data.replace('id="email"', 'id="email" disabled value="' + user.email + '" ').replace('id="user"', 'id="user" value="' + user.username + '" ').replace('id="fname"','id="fname" value="' + FName + '" ').replace('id="mname"','id="mname" value="' + MName + '" ').replace('id="lname"','id="lname" value="' + LName + '" ').replace('id="age"', 'id="age" value="' + selResult[0].Age +'" ');
+				//depending on user gender, select (AKA check) corresponding radiobutton
+				if(selResult[0].Gender === 'M'){
+					data = data.replace('id="m"', 'id="M" checked ');
+				}
+				else if(selResult[0].Gender === 'F'){
+					data = data.replace('id="f"', 'id="F" checked ');
+				}
+				
+				res.send(data);
+			});
+		});
+	});
+
+	access.post("/profile", function(req, res){
+		let userUsername = req.body.user;
+		let userFirst = req.body.fname === '' ? null:req.body.fname;
+		let userMiddle = req.body.mname === '' ? null:req.body.mname;
+		let userLast = req.body.lname === '' ? null:req.body.lname;
+		let userAge = req.body.age === '' ? null:req.body.age;
+		let userGender = req.body.gender;
+		let userEmail = req.cookies.user_info.email;
+		let userPassword = req.body.password;
+		
+		//encrypt user-entered password
+		b.hash(req.body.password.toString(), 10, function(err, hash){
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+			
+			//Initialize UPDATE query and its parameter list 
+			query = "UPDATE user SET ";
+			params = [];
+			//add parameters to be updated to query/params
+			//IFF user entered a new password, insert relevant password bits into query
+			if(req.body.password !== '' && req.body.password !== undefined && req.body.password !== null){
+				query += "password = ?, ";
+				params.push(hash);
+			}
+			//add other parameters to query/params
+			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender);
+			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ? "
+			//add WHERE clause to query/params
+			query += "WHERE email = ?";
+			params.push(userEmail);
+			query += ";";
+			
+			console.log("now running update query: "+query); //TODO: delete debugging
+			console.log("with params: "+params); //TODO: delete debugging
+			con.query(query, params, function (err, result, fields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+				console.log("update query ran successfully.\n");
+			});
+		});
+		return res.redirect("/auth/index");
+	});
+
+	// perform favorite/unfavorite and redirect to same page
+	access.get("(/history|/abandoned_buildings|/education|/sports|/culture|/favorites)(/*)(/favorite)", function(req, res){
+		/*
+		This block as a whole runs when user attempts to favorite/unfavorite a page. It updates the database with user's updated favorited page, then updates the cookie, then reloads the page.
+		*/
+
+		//the /[category]/[content] part of the URL of the requested page
+		let userURL = req.params[0] + req.params[1];
+		console.log("DB being queried from " + userURL); //TODO: Delete debugging
+
+		//determine if current page is favorited or not TODO: make this a function so less extraneous code
+		let user = req.cookies.user_info;
+		let userEmail = user.email;
+		let userFavorites = user.favorites;
+		let isFavorited = false;
+		for(i = 0; i < userFavorites.length; i++){
+			if(userFavorites[i] === userURL){
+				isFavorited = true;
+				break;
+			}
+		}
+		
+		//if page is favorited, delete record from favorite table
+		if(isFavorited){
+			console.log("Attempting to delete:"); //TODO: delete debugging
+			//remove record from favorite table
+			con.query("DELETE FROM favorite WHERE UserEmail=? AND URL=?", [userEmail, userURL], function(err, result, fields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+				console.log("Delete did not error.\n"); //TODO: delete debugging
+			});
+		}
+		//if page not favorited, add new record to favorite table
+		else{
+			console.log("Attempting to insert:");
+			//insert record into favorite table
+			con.query("INSERT INTO favorite SET ?", {userEmail: userEmail, URL: userURL}, function(err, result, fields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}
+				console.log("Insert did not error.\n"); //TODO: delete debugging
+			});	
+		}
+		
+		//query for all of the user's favorite pages so that cookie can be updated
+		//TODO: this work could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
+		con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
+			//extract info from existing cookie
+			let user = req.cookies.user_info;
+			let favoritePages =[];
+			
+			//put each favorited page's URL into cookie
+			let i;
+			for(i = 0; i < selResult.length; i++){
+				favoritePages.push(selResult[i].URL);
+			}
+			//send updated cookie
+			res.cookie("user_info", {token: user.token,
+									username: user.username,
+									email: user.email,
+									favorites: favoritePages},
+									{httpOnly: true, domain: "localhost"});
+			//reload page (so that favorite/unfavorite button updates)
+			return res.redirect("/auth" + userURL);
+		});
+	});
+
+	// contact page for users
+	// gives a random message to user
+	access.get("/contact", function(req, res){
+		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){		
+			let user = req.cookies.user_info;
+			let greetings = ["Hi there", "How's it going", "What's up", "Greetings", "Hey"];
+			if(user !== undefined && user.token !== undefined){
+				let username = user.username;
+				let email = user.email;
+				let val = greetings[Math.floor(Math.random()*Math.floor(greetings.length))] + ", " +
+					username + "!<br><br>This message will be sent to the admins.";
+				let html = data.toString().replace("?", val);
+				let valEmail = "name=\"email\"";
+				html = html.replace(valEmail, valEmail + "value=\"" + email + "\" disabled");
+				res.send(html);
+			}
+			else{
+				res.redirect("/profile");
+			}
+		});
+	});
+
+	// inserts contact message into user_message table and redirects to index
+	access.post("/contact", function(req, res){
+		let user = req.cookies.user_info;
+		con.query("INSERT INTO user_message SET ?", {Sent: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+			UserEmail: user.email, Subject: req.body.subject, Message: req.body.message},
+			function(err){
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+		});
+		return res.redirect("index");
+	});
+
+	// serve category pages
+	access.get("(/history|/abandoned_buildings|/education|/sports|/culture)", function(req, res){
+		res.sendFile(req.params[0]+".html", {root: path.dirname(path.dirname(__dirname))});
+	});
+
+	// serve favorites page
+	access.get("(/favorites)", function(req, res){
+		let working = path.dirname(path.dirname(__dirname));
+		//read favorites.html template so content can be inserted
+		fs.readFile(path.join(working, "/favorites.html"), function(err, favorites){
+			if(err){
+				return res.status(500).json({
+					error: err
+				});
+			}
+			favorites = favorites.toString();
+			//index at which every created contentTile can be inserted into HTML read from favorites.html
+			let tileIndex = favorites.indexOf("*|contentTiles|*") + 16;
+			
+			con.query("SELECT URL FROM favorite WHERE useremail = ?", [req.cookies.user_info.email], function (err, result, fields){
+				if(err){
+					return res.status(500).json({
+						error: err
+					});
+				}		
+				//if user has any favorites, insert content tiles and description of favorites
+				if(result.length > 0){
+					//template for contentTile, to be used to create real contentTiles
+					let contentTile = '<div class="contentTile" data-src="*|URL|*"><img class="contentThumbnail" title="*|title|*" src = "*|src|*"><p class="contentP">*|contentPText|*</p></div>';
+					
+					//name of page to be read from
+					let page;
+					//the HTML of the contentTile to be inserted into favorites page
+					let newTile;
+					
+					//variables to hold information extracted from users' favorite content pages
+					//url value read from of HTML img url
+					let rURL;
+					//value of HTML img src
+					let rSrc;
+					//value of the text inside contentP
+					//let rContentPText; //TODO: Use this variable to extract the text contained in actual contentTile contentP elements instead of phrases
+					
+					//So the contentTiles don't have the right contentP text because I read from content pages instead of the category pages they come from. However, I don't want to refactor everything, so instead of a single generic phrase in contentP, we get these. But hey, now this mistake looks like a feature, soooo 
+					let phrases = ["Visit this one again?", "This one's a good one.", "How about this one?", "I like this one too.", "A classic.", "A real classic.", "Another classic.", "Classy.", "Top-tier attraction.", "One for the ages.", "The best thing in New England?", "New England, <i>embodied.</i>", "I love this one.", "10/10. -IGN", "A quality piece, this one.", "A perfect 5/7.", "\"Epic.\"", "<i>\"GGRRRLLRYLYRPLLRGLBBR\"</i>", "This remind sloth of CHUNK!", "Baby Ruth!", "Choco-late!", "Ride!"];
+					//index of random phrase to insert into contentP
+					let phrase;
+					
+					//phrases that have been used. Will allow for repeats, but only if the user has favorited more pages than there are phrases.
+					let used = [];
+					
+					//Read each of the user's favorites in order to extract the needed fields from them
+					for(let i = 0; i < result.length; i++){
+						if(err){
+							console.log("error trying to read "+page);
+							return res.status(500).json({
+								error: err
+							});
+						};
+						
+						//remove random phrase from phrases
+						if(phrases.length > 0){
+							phrase = phrases.splice(Math.floor(Math.random() * phrases.length), 1);
+							//put phrase into used array
+							used.push(phrase);
+						}
+						else{
+							phrases = used;
+							used = [];
+						}
+						
+						page = result[i].URL.split("/")[2] + ".html";
+						
+						//read favorited page to extract data
+						let data = fs.readFileSync(path.join(working, page));
+						data = data.toString();
+						
+						//extract title
+						let index1 = data.indexOf('"contentImage" title="')+22;
+
+						let truncated = data.substring(index1);
+
+						//the string length of the img url. used to extract url and find beginning of img src.
+						let len = truncated.indexOf('"');
+						rURL = "/auth"+result[i].URL;
+						
+						//truncated = entire html file after ' src=" '
+						truncated = truncated.substring(len + 7);
+						//rSrc = <img> src
+						rSrc = truncated.substring(0,truncated.indexOf('"'));
+						
+						//replace *|tags|* in generic tile to create new contentTile
+						newTile = contentTile.replace("*|URL|*", rURL).replace("*|title|*","Visit this page to see the source!").replace("*|src|*",rSrc).replace("*|contentPText|*", phrase);
+						
+						//insert newly created contentTile into favorites page
+						favorites = [favorites.slice(0, tileIndex), newTile, favorites.slice(tileIndex)].join('');
+					}
+					favorites = favorites.replace("*|categoryDescription|*", "These are your favorite pages. Sloth approve.").replace("*|contentTiles|*","");
+				}
+				//if user has no favorites, insert message about having no favorites
+				else{
+					favorites = favorites.replace("*|categoryDescription|*", "You have no favorited pages.\nSloth says: \" :( \"").replace("*|contentTiles|*","<p>This is where your favorite pages would go, <strong>if you had any.</strong></p>");
+				}
+				res.send(favorites);
+			});	
+		});
+	});
+
+	// server content pages and insert favorite buttton
+	access.get("(/history|/abandoned_buildings|/education|/sports|/culture|/favorites)(/*)", function(req, res){
+		/*
+		This block serves content pages to the user.
+		*/
+		//get DB login credentials to query DB
+		let userURL = req.params[0] + req.params[1];
+		
+		//Read .html of current page to insert button and serve to user
+		fs.readFile(path.join(path.dirname(path.dirname(__dirname)), req.params[1]+".html"),function(err,data) {
+			//determine if current page is favorited or not TODO: make this a function so less extraneous code
+			let user = req.cookies.user_info;
+			let userEmail = user.email;
+			let userFavorites = user.favorites;
+			let isFavorited = false;
+			for(i = 0; i < userFavorites.length; i++){
+				if(userFavorites[i] === userURL){
+					isFavorited = true;
+					break;
+				}
+			}
+			//TODO: Delete debugging below once button styled correctly
+			//construct button
+			/*let btn = document.createElement("a");
+			btn.id = "favoriteButton";
+			btn.href = userURL+"/favorite";
+			if(selResult.includes(userURL)) btn.innerHTML = "Unfavorite this page?";
+			else btn.innerHTML = "Favorite this page!";
+			btn.onclick = function(){
+				btn.style.pointerEvents = "none";
+			}*/
+			let html = "<a "+
+						"id = 'favoriteButton' "+
+						"href = '/auth"+userURL+"/favorite' "+
+						"onclick = 'this.style.pointerEvents = \"none\";'"
+						+">";
+			if(isFavorited) html += "Unfavorite this page?";
+			else html += "Favorite this page!";
+			html += "</a>";
+			return res.send(data.toString().replace("</div>\r\n</body>", html+"</div>\r\n</body>"));
+		});
+	});
+
 	
     // Running Server Details.
     let server = app.listen(8082, function(){

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Sloth Love New England!</title>
-	<link rel="stylesheet" type="text/css" href="/resources/css/index.css">
+	<title>Sloth Love History!</title>
+	<link rel="stylesheet" type="text/css" href="/resources/css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="/resources/css/category.css"/>
 	<script src="/resources/scripts/navbar.js"></script>
-	<script src="/resources/scripts/carousel.js"></script>
+	<script src="/resources/scripts/fcontent.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -32,7 +33,7 @@
 				<a href="abandoned_buildings" class="dropbtn">Abandoned Buildings</a>
 			</li>
 			<li class="drop navItem">
-				<a href="favorites" class="dropbtn">Favorites</a>
+				<a href="favorites" class="dropbtn active">Favorites</a>
 			</li>
 			<li class="options navItem">
 				<a href="about">About</a>
@@ -46,26 +47,12 @@
 			</li>
 		</ul>
 	</div>
-	<div id="indexBody">
-        <div id="imgListContainer">
-            <button class="mover" id="mLeft" onclick="moveLeft(350)"><</button>
-            <div id="imgList">
-                t=?
-            </div>
-            <button class="mover" id="mRight" onclick="moveRight(350)">></button>
-            <svg id="cirCon">
-                t=@
-            </svg>
-        </div>
-        <div id="desc">
-            <div class="imgDescription">
-                <p>Welcome to New England!</p>
-            </div>
-            <div id="NEDContainer">
-                <p id="NEDescription">New England is <strike>cool</strike> <i>very cool</i>.<br/></p>
-            </div>
-        </div>
-        <footer class="end">Sloth Love New England!</footer>
+	<div class="categoryBody">
+		<h2 class="categoryHeader">Favorites</h2>
+		<p class="categoryDescription">*|categoryDescription|*</p>
+		<div class="contentDiv">
+			*|contentTiles|*
+		</div>
 	</div>
 </body>
 </html>
