@@ -51,7 +51,8 @@
 		container.addEventListener("click", frameRetract);
         document.getElementById("profile").addEventListener("click", frameExpand);
         document.getElementById("about").addEventListener("click", frameExpand);
-        document.getElementById("contact").addEventListener("click", frameExpand);
+		if(document.getElementById("contact"))
+			document.getElementById("contact").addEventListener("click", frameExpand);
 		container.appendChild(ifr);
 	}
 
