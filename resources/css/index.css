@@ -73,10 +73,6 @@ body{
 	background: #333;
 }
 
-.navItem a{
-	
-}
-
 .navItem a, .navItem p, .dropbtn {
     display: flex;
     flex: 1;
@@ -147,6 +143,11 @@ li.drop {
     flex-direction: column-reverse;
     flex: 0;
 }
+
+.options > a:hover, .options > p:hover{
+	background: olive;
+}
+
 
 #indexBody{
     display: flex;
