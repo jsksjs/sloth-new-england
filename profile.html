@@ -11,7 +11,7 @@
 	<div class="top">
 		<form class="entry" enctype="multipart/form-data" onsubmit="return validate()" action="/register" method="post">
 			<p style="text-align: center;">Your Bio</p>
-			<input type="file" onchange="readURL(this)" name="image" id="image">
+			<input type="file" onchange="readURL(this)" name="image" id="image" accept="image/*">
 			<img id="profileImage" onclick="openBrowser()" src="?=i"/>
 			<div class="inputs">
 				<label for="email">Email:</label>
