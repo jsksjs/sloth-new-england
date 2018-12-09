@@ -22,7 +22,7 @@ module.exports = function(con) {
         fs.readFile(path.join(path.dirname(path.dirname(__dirname)), req.params[1] + ".html"), function (err, data) {
             let template1 = "<div class='comment-box'><div class='comment-head'><img class='profile-image' width='64' height='64' src='?=i'/>";
 			let template2 = "<p class='author'>?=@</p>";
-            let template3 = "</div><p class='comment-text'>?=!</p><p class='time'>?=t</p></div><br>";	
+            let template3 = "</div><p class='comment-text'>?=!</p><p class='time'>?=t</p></div><br>";
 			let remove = "<a class='comment-remove' href='/auth" + (req.params[0] + req.params[1]) + "/remove?=o'>❌</a>";
             let user = req.cookies.user_info;
 			if(user !== undefined && user.token !== undefined){
@@ -32,13 +32,13 @@ module.exports = function(con) {
 							return res.status(500).json({
 								error: err
 							});
-						}	
+						}
 						let comments = "";
 						for(let i of result){
 							let img = i.Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,' + i.Image.toString("base64");
 							comments += (template1.replace("?=i", img)
-							+ template2.replace("?=@", i.UserName) 
-							+ ((i.Email === i.ComEmail && i.Email === user.email) ? remove.replace("?=o", "?id="+encodeURIComponent(i.Sent + "&" + i.Email)) : '')
+							+ template2.replace("?=@", i.UserName)
+							+ ((i.Email === i.ComEmail && i.Email === user.email) ? remove.replace("?=o", "?id="+encodeURIComponent(i.Sent + "&" + i.Email)): '')
 							+ template3.replace("?=!", i.Message).replace("?=t", i.Sent))
 						}
 						return res.send(data.toString()

@@ -179,7 +179,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				});
 			}
 			//insert user with given data into DB
-			console.log("Inserting new user into DB...");
 			con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
 				if(err){
 					return res.status(500).json({
@@ -343,7 +342,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 
         //the /[category]/[content] part of the URL of the requested page
         let userURL = req.params[0] + req.params[1];
-        console.log("DB being queried from " + userURL); //TODO: Delete debugging
 
         //determine if current page is favorited or not TODO: make this a function so less extraneous code
         let user = req.cookies.user_info;
@@ -366,7 +364,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
                         error: err
                     });
                 }
-                console.log("Delete did not error.\n"); //TODO: delete debugging
             });
         }
         //if page not favorited, add new record to favorite table
@@ -378,7 +375,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
                         error: err
                     });
                 }
-                console.log("Insert did not error.\n"); //TODO: delete debugging
             });
         }
 
