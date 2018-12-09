@@ -25,6 +25,7 @@ body{
 	margin-left: 10px;
 	flex-direction: column;
 	align-self: center;
+	flex: 1;
 }
 
 .time{
@@ -118,3 +119,17 @@ body{
 .profile-image{
 	box-shadow: 0 0 2px 0 rgba(0,0,0,0.9);
 }
+
+.comment-remove{
+	align-self: flex-start;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+	transition: all 0.4s;
+}
+
+.comment-remove:hover{
+	border-radius: 50%;
+    background-color: #c3c3c3;
+}
+

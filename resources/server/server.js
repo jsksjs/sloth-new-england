@@ -222,7 +222,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 									});
 								}
 								if(selResult[0] === undefined){
-									return res.redirect("/");
+									return res.redirect("/login");
 								}
 								else{
 									return next();
@@ -234,7 +234,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
             });
         }
         else{
-            return res.redirect("/");
+            return res.redirect("/login");
         }
     }
 
@@ -557,6 +557,11 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		});
         setTimeout(function(){res.redirect("/auth/profile")}, 100);
 	});
+	
+	access.get("/logout", function(req, res){
+		res.clearCookie("user_info");
+		return res.redirect("/login");
+	});
 
 	// perform favorite/unfavorite and redirect to same page
 	access.get("(/history|/abandoned_buildings|/education|/sports|/culture|/favorites)(/*)(/favorite)", function(req, res){
@@ -659,7 +664,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				});
 			}
 		});
-		return res.redirect("index");
+		return res.redirect("contact");
 	});
 
 	// serve category pages

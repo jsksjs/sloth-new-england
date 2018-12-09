@@ -50,7 +50,8 @@
 		
 		container.addEventListener("click", frameRetract);
         document.getElementById("profile").addEventListener("click", frameExpand);
-        document.getElementById("about").addEventListener("click", frameExpand);		
+        document.getElementById("about").addEventListener("click", frameExpand);
+        document.getElementById("contact").addEventListener("click", frameExpand);
 		container.appendChild(ifr);
 	}
 
@@ -65,6 +66,10 @@
         else if(this.dataset.src === "profile"){
             ifr.style.height = "calc(100vh - 115px)";
             ifr.style.width = "300px";
+        }
+		else if(this.dataset.src === "contact"){
+            ifr.style.height = "380px";
+            ifr.style.width = "478px";
         }
 		ifr.style.visibility = "visible";
 		ifr.style.transform = "translate(0," + document.body.scrollTop + "px)";

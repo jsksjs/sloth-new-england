@@ -73,6 +73,10 @@ body{
 	background: #333;
 }
 
+.navItem a{
+	
+}
+
 .navItem a, .navItem p, .dropbtn {
     display: flex;
     flex: 1;
@@ -315,4 +319,10 @@ li.drop {
 .circActive{
     fill: rgba(255, 255, 255, 0.5);
     stroke: black;
+}
+
+#contact{
+	 cursor: pointer;
+     color: blue;
+     text-decoration: underline;
 }
