@@ -222,7 +222,10 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 									});
 								}
 								if(selResult[0] === undefined){
-									return res.redirect("/login");
+									return res.redirect("/");
+								}
+								else{
+									return next();
 								}
 							});
                         }
