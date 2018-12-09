@@ -5,14 +5,28 @@
     let moveL, moveR;
     // circles active?
     let act;
-
+	// autoscroll speeds
+	let left, right;
+	let delay;
+	
     // get the image movers, assign them
     window.addEventListener("load", hook);
     function hook(){
         moveL = document.getElementById("mLeft");
         moveR = document.getElementById("mRight");
         act = true;
+		autoScroll = true;
+		left = 350;
+		right = 350;
+		delay = 4000;
+		scrollDelay = setTimeout(function(){auto(left, right);}, delay);
     }
+	
+	let scrollDelay;
+	function auto(l, r){
+		moveRight(r);
+		scrollDelay = setTimeout(function(){auto(left, right);}, delay);
+	}
 
     // when image clicked, bring to location
     this.divClick = function(e){
@@ -24,6 +38,7 @@
         if(act === false)
             return false;
         act = false;
+		clearTimeout(scrollDelay);
         time = Number(time);
         let curr = document.getElementsByClassName("circActive")[0];
         let diff = Number(curr.id) - Number(e.id);
@@ -50,13 +65,24 @@
                 moveLeft(time);
                 setTimeout(timeCirc(e, time), time);
             }
-            else
-                act = true;
+            else{
+				act = true;
+				scrollDelay = setTimeout(function(){auto(left, right);}, delay);
+			}
         }, time);
     }
+	
+	this.manualLeft = function(time){
+		act = false;
+		clearTimeout(scrollDelay);
+		moveLeft(time);
+		scrollDelay = setTimeout(function(){auto(left, right);}, delay);
+		act = true;
+	};
 
     // move the viewer left
-    this.moveLeft = function(time){
+    this.moveLeft = function(time){				
+		clearTimeout(scrollDelay);
         moveL.disabled = true;
         moveR.disabled = true;
         let active = document.getElementsByClassName("activeImage")[0].firstElementChild;
@@ -95,8 +121,17 @@
         node.classList.remove("circActive");
     };
 
+	this.manualRight = function(time){
+		act = false;
+		clearTimeout(scrollDelay);
+		moveRight(time);
+		scrollDelay = setTimeout(function(){auto(left, right);}, delay);
+		act = true;
+	};
+	
     // move the viewer right
     this.moveRight = function(time){
+		clearTimeout(scrollDelay);
         moveL.disabled = true;
         moveR.disabled = true;
         let active = document.getElementsByClassName("activeImage")[0].firstElementChild;
