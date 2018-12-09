@@ -187,7 +187,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 					});
 				}
 			});
-			console.log("Query Executed without error.\n");
 		});
 		res.redirect("/login");
 	});
@@ -216,7 +215,16 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
                             return res.status(401).json({error: true, message: "Unauthorized access"});
                         }
                         else{
-                            return next();
+							con.query("SELECT * FROM user WHERE email = ?", [user.email], function (err, selResult, selFields){
+							   if(err){
+									return res.status(500).json({
+										error: err
+									});
+								}
+								if(selResult[0] === undefined){
+									return res.redirect("/login");
+								}
+							});
                         }
                     });
                 }
@@ -348,7 +356,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 
         //if page is favorited, delete record from favorite table
         if(isFavorited){
-            console.log("Attempting to delete:"); //TODO: delete debugging
             //remove record from favorite table
             con.query("DELETE FROM favorite WHERE UserEmail=? AND URL=?", [userEmail, userURL], function(err, result, fields){
                 if(err){
@@ -361,7 +368,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         }
         //if page not favorited, add new record to favorite table
         else{
-            console.log("Attempting to insert:");
             //insert record into favorite table
             con.query("INSERT INTO favorite SET ?", {userEmail: userEmail, URL: userURL}, function(err, result, fields){
                 if(err){
