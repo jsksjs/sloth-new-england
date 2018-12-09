@@ -60,16 +60,28 @@
 		}
 		log.innerHTML = "<p>" + html + "</p>";
 		if(!valid){
+			document.body.style.maxWidth = "106%";
+			document.body.offsetHeight;
+			document.body.style.right = "0";
 			log.style.maxHeight = height+"px";
 			log.style.visibility = "visible";
 			log.style.background = "none";
 		}
 		else{
+			document.body.style.maxWidth = "100%";
+			document.body.offsetHeight;
+			document.body.style.left = "0";
 			log.style.maxHeight = "0px";
 			log.style.visibility = "hidden";
 			log.style.background = "white";
 			log.style.borderTop = "1px #c2c2c2 solid";
 		}
+		if(valid){
+			document.body.style.maxWidth = "106%";
+			document.body.offsetHeight;
+			document.body.style.right = "0";
+		}
+			
 		return valid;
 	};
 	
@@ -83,8 +95,11 @@
 			nagBox.style.maxHeight = height+"px";
 			nagBox.style.visibility = "visible";
 			nagBox.style.background = "none";
-			nagBox.innerHTML = "<p>PASSWORDS MUST MATCH REEEEEEE</p>";
+			nagBox.innerHTML = "<p>PASSWORDS MUST MATCH REEEEE</p>";
 			submitButton.disabled = true;
+			document.body.style.maxWidth = "106%";
+			document.body.offsetHeight;
+			document.body.style.right = "0";
 		}
 		else{
 			nagBox.style.maxHeight = "0px";
@@ -95,4 +110,17 @@
 			submitButton.disabled = false;
 		}
 	}
+	
+	this.openBrowser = function(){
+		document.getElementById("image").click();
+	}
+	
+	this.readURL = function(input) {
+		let reader = new FileReader();
+		
+		reader.onload = function(e){
+			document.getElementById("profileImage").src = e.target.result;
+		};
+	   reader.readAsDataURL(input.files[0]);
+    }
 })();

@@ -20,14 +20,18 @@ let router = express.Router();
 module.exports = function(con) {
     router.get("(/history|/abandoned_buildings|/education|/sports|/culture)(/commentFrame)", function (req, res) {
         fs.readFile(path.join(path.dirname(path.dirname(__dirname)), req.params[1] + ".html"), function (err, data) {
-            let template1 = "<div class='comment-box'><p class='author'>?=@</p>";
-            let template2 = "<p class='comment-text'>?=!</p><p class='time'>?=t</p></div><br>";
+            let template1 = "<div class='comment-box'><div class='comment-head'><img class='profile-image' width='64' height='64' src='?=i'/>";
+			let template2 = "<p class='author'>?=@</p></div>";
+            let template3 = "<p class='comment-text'>?=!</p><p class='time'>?=t</p></div><br>";			
             let user = req.cookies.user_info;
-            con.query('SELECT comment.Sent, comment.Message, user.UserName FROM comment inner join user on comment.Email = user.Email WHERE comment.Origin = ?', [req.params[0]],
+            con.query('SELECT comment.Sent, comment.Message, user.UserName, user.Image FROM comment inner join user on comment.Email = user.Email WHERE comment.Origin = ?', [req.params[0]],
                 function (err, result, fields) {
                     let comments = "";
                     for(let i of result){
-                        comments += (template1.replace("?=@", i.UserName) + template2.replace("?=!", i.Message).replace("?=t", i.Sent))
+						//let img = selResult[0].Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,'+selResult[0].Image.toString("base64");
+						let img = i.Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,' + i.Image.toString("base64");
+                        comments += (template1.replace("?=i", img)
+						+ template2.replace("?=@", i.UserName) + template3.replace("?=!", i.Message).replace("?=t", i.Sent))
                     }
                     return res.send(data.toString()
                         .replace('value=""', 'value="' + user.username + '" ')

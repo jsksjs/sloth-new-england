@@ -9,6 +9,9 @@ let mysql = require('mysql');
 let moment = require("moment");
 let cm = require("./comment");
 let app = express();
+let multer = require("multer");
+let storage = multer.memoryStorage();
+let upload = multer({storage: storage});
 
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
@@ -470,11 +473,19 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				let FName = selResult[0].FName === null ? '':selResult[0].FName;
 				let MName = selResult[0].MName === null ? '':selResult[0].MName;
 				let LName = selResult[0].LName === null ? '':selResult[0].LName;
+				let decoder = new TextDecoder();
+				let img = selResult[0].Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,' + selResult[0].Image.toString("base64");
 
 				//dynamically change parts of page that need to be changed
 				data = data.toString().replace('profile.js','profile2.js');
 				data = data.replace('/register', '/auth/profile');
-				data = data.replace('id="email"', 'id="email" disabled value="' + user.email + '" ').replace('id="user"', 'id="user" value="' + user.username + '" ').replace('id="fname"','id="fname" value="' + FName + '" ').replace('id="mname"','id="mname" value="' + MName + '" ').replace('id="lname"','id="lname" value="' + LName + '" ').replace('id="age"', 'id="age" value="' + selResult[0].Age +'" ');
+				data = data.replace('?=i', img)
+				.replace('id="email"', 'id="email" disabled value="' + user.email + '" ')
+				.replace('id="user"', 'id="user" value="' + user.username + '" ')
+				.replace('id="fname"','id="fname" value="' + FName + '" ')
+				.replace('id="mname"','id="mname" value="' + MName + '" ')
+				.replace('id="lname"','id="lname" value="' + LName + '" ')
+				.replace('id="age"', 'id="age" value="' + selResult[0].Age +'" ');
 				//depending on user gender, select (AKA check) corresponding radiobutton
 				if(selResult[0].Gender === 'M'){
 					data = data.replace('id="m"', 'id="M" checked ');
@@ -487,8 +498,8 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 			});
 		});
 	});
-
-	access.post("/profile", function(req, res){
+	
+	access.post("/profile", upload.single("image"), function(req, res, next){
 		let userUsername = req.body.user;
 		let userFirst = req.body.fname === '' ? null:req.body.fname;
 		let userMiddle = req.body.mname === '' ? null:req.body.mname;
@@ -516,8 +527,8 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				params.push(hash);
 			}
 			//add other parameters to query/params
-			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender);
-			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ? ";
+			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender, req.file.buffer);
+			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ?, image = ? ";
 			//add WHERE clause to query/params
 			query += "WHERE email = ?";
 			params.push(userEmail);

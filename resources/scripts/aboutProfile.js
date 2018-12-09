@@ -24,7 +24,7 @@
 		"visibility: hidden;" +
 		"background: none;" +
 		"border: none;" +
-		"height: 714px;" +
+		"height: 710px;" +
 		"position: absolute;" +
 		"top: 105px;" +
 		"transform: translate(0%, -250%);" +
@@ -44,7 +44,7 @@
             backgrnd = document.getElementById("indexBody");
 		container.addEventListener("click", frameRetract);
         document.getElementById("profile").addEventListener("click", frameExpand);
-        document.getElementById("about").addEventListener("click", frameExpand);
+        document.getElementById("about").addEventListener("click", frameExpand);		
 		container.appendChild(ifr);
 	}
 
@@ -57,7 +57,7 @@
 	        ifr.style.width = "500px";
 	    }
         else if(this.dataset.src === "profile"){
-            ifr.style.height = "730px";
+            ifr.style.height = "710px";
             ifr.style.width = "300px";
         }
 		ifr.style.visibility = "visible";

@@ -9,11 +9,10 @@
 <body>
 <div class="container">
 	<div class="top">
-		<form class="entry" onsubmit="return validate()" action="/register" method="post">
+		<form class="entry" enctype="multipart/form-data" onsubmit="return validate()" action="/register" method="post">
 			<p style="text-align: center;">Your Bio</p>
-			<a style="text-align: center;" href="#">
-				<img id="profileImage" src="/resources/images/index/templogo.png"/>
-			</a>
+			<input type="file" onchange="readURL(this)" name="image" id="image">
+			<img id="profileImage" onclick="openBrowser()" src="?=i"/>
 			<div class="inputs">
 				<label for="email">Email:</label>
 				<input type="text" id="email" maxlength="45" name="email">
