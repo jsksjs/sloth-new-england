@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/resources/css/index.css">
 	<script src="/resources/scripts/navbar.js"></script>
 	<script src="/resources/scripts/carousel.js"></script>
+	<script src="/resources/scripts/aboutProfile.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -34,12 +35,12 @@
 			<li class="drop navItem">
 				<a href="favorites" class="dropbtn">Favorites</a>
 			</li>
-			<li class="options navItem">
-				<a href="about">About</a>
-			</li>
-			<li class="options navItem">
-				<a href="profile">Profile</a>
-			</li>
+            <li id="about" class="options navItem" data-src="about">
+                <p>About</p>
+            </li>
+            <li id="profile" class="options navItem" data-src="profile">
+                <p>Profile</p>
+            </li>
 			<li id="pinBtn" class="options">
 				<label id="pinLabel" for="pin">📌</label>
 				<input type="checkbox" id="pin" name="pin">

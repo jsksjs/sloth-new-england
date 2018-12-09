@@ -72,7 +72,7 @@
 			log.style.borderTop = "1px #c2c2c2 solid";
 		}
 		return valid;
-	}
+	};
 	
 	this.comparePassBoxes = function(){
 		let pass1 = document.getElementById("password").value;

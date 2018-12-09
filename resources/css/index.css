@@ -73,7 +73,7 @@ body{
 	background: #333;
 }
 
-.navItem a, .dropbtn {
+.navItem a, .navItem p, .dropbtn {
     display: flex;
     flex: 1;
 	flex-direction: column;
@@ -81,9 +81,10 @@ body{
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.navItem a:hover, .drop:hover .dropbtn {
+.navItem a:hover, .navItem p:hover, .drop:hover .dropbtn {
     background-color: #838383;
 }
 
@@ -149,6 +150,7 @@ li.drop {
     flex: 1;
     padding-top: 50px;
     height: calc(100% - 105px);
+    transition: filter, 0.75s ease-out;
 }
 
 #imgListContainer{

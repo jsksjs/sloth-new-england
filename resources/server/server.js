@@ -507,8 +507,8 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 			}
 			
 			//Initialize UPDATE query and its parameter list 
-			query = "UPDATE user SET ";
-			params = [];
+			let query = "UPDATE user SET ";
+			let params = [];
 			//add parameters to be updated to query/params
 			//IFF user entered a new password, insert relevant password bits into query
 			if(req.body.password !== '' && req.body.password !== undefined && req.body.password !== null){
@@ -517,24 +517,21 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 			}
 			//add other parameters to query/params
 			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender);
-			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ? "
+			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ? ";
 			//add WHERE clause to query/params
 			query += "WHERE email = ?";
 			params.push(userEmail);
 			query += ";";
-			
-			console.log("now running update query: "+query); //TODO: delete debugging
-			console.log("with params: "+params); //TODO: delete debugging
+
 			con.query(query, params, function (err, result, fields){
 				if(err){
 					return res.status(500).json({
 						error: err
 					});
 				}
-				console.log("update query ran successfully.\n");
 			});
 		});
-		return res.redirect("/auth/index");
+        setTimeout(function(){res.redirect("/auth/profile")}, 100);
 	});
 
 	// perform favorite/unfavorite and redirect to same page
@@ -545,7 +542,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 
 		//the /[category]/[content] part of the URL of the requested page
 		let userURL = req.params[0] + req.params[1];
-		console.log("DB being queried from " + userURL); //TODO: Delete debugging
 
 		//determine if current page is favorited or not TODO: make this a function so less extraneous code
 		let user = req.cookies.user_info;

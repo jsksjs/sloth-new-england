@@ -4,8 +4,6 @@
  * Doctor Andrew Jung
  * This script validates the profile editing page, checking for the correct formats for the email, username, password, and personal info of the user.
  */
-\t\t\t<li class="drop navItem">\r\n\t\t\t\t<a href="abandoned_buildings" class="dropbtn">Abandoned Buildings</a>\r\n\t\t\t</li>
-\t\t\t<li class="drop navItem">\r\n\t\t\t\t<a href="abandoned_buildings" class="dropbtn">Abandoned Buildings</a>\r\n\t\t\t</li>\r\n\t\t\t<li class="drop navItem">\r\n\t\t\t\t<a href="favorites" class="dropbtn">Favorites</a>\r\n\t\t\t</li>
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs
@@ -73,7 +71,7 @@
 			log.style.borderTop = "1px #c2c2c2 solid";
 		}
 		return valid;
-	}
+	};
 	
 	this.comparePassBoxes = function(){
 		let pass1 = document.getElementById("password").value;
