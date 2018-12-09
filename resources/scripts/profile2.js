@@ -2,7 +2,8 @@
  * Sloth from the Goonies
  * 11/28/2018
  * Doctor Andrew Jung
- * This script validates the profile editing page, checking for the correct formats for the email, username, password, and personal info of the user.
+ * This script validates the profile editing page, checking for the correct formats
+ * for the email, username, password, and personal info of the user.
  */
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
@@ -11,7 +12,6 @@
 		let regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+@([a-z0-9]+\.[a-z0-9]+)+/;
 		let regUser = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,16}/;
 		let regNames = /(^[a-z]{0,20}$)/;
-		//let regPass = /(^$\|(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,32})/; //TODO: Delete previous attempt if next works
 		let regPass = /^$|(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]){3,32}/;
 		let log = document.getElementById("log");
 		let html = "";
@@ -78,10 +78,7 @@
 		let pass2 = document.getElementById("passwordVerify").value;
 		let submitButton = document.getElementById("submit");
 		let nagBox = document.getElementById("nagBox");
-		
-		let html = "";
 		let height = 18;
-		
 		if(pass1 !== pass2){
 			nagBox.style.maxHeight = height+"px";
 			nagBox.style.visibility = "visible";

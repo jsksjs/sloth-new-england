@@ -5,7 +5,6 @@
  * This script validates the profile page, checking for the correct formats
  * for the email, username, and personal info of the user.
  */
-
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 	// validates profile inputs
@@ -79,10 +78,7 @@
 		let pass2 = document.getElementById("passwordVerify").value;
 		let submitButton = document.getElementById("submit");
 		let nagBox = document.getElementById("nagBox");
-		
-		let html = "";
 		let height = 18;
-		
 		if(pass1 !== pass2){
 			nagBox.style.maxHeight = height+"px";
 			nagBox.style.visibility = "visible";

@@ -50,7 +50,7 @@
 		commentFrame.classList.add("comment-frame");
         commentFrame.src = url[url.length-1] + "/commentFrame";
 		commentFrame.addEventListener("load", function(){
-            this.height = (this.contentWindow.document.body.scrollHeight*1.05) + "px"
+            this.height = (this.contentWindow.document.body.scrollHeight*1.05) + "px";
             this.width = (this.contentWindow.document.body.scrollWidth) + "px";
         });
 		document.addEventListener("resize", function(){

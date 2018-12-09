@@ -57,7 +57,7 @@
 	        ifr.style.width = "500px";
 	    }
         else if(this.dataset.src === "profile"){
-            ifr.style.height = "714px";
+            ifr.style.height = "730px";
             ifr.style.width = "300px";
         }
 		ifr.style.visibility = "visible";
