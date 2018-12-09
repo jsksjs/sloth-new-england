@@ -535,7 +535,12 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				params.push(hash);
 			}
 			//add other parameters to query/params
-			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender, req.file.buffer);
+			let img;
+			if(req.file)
+				img = req.file.buffer;
+			else
+				img = null;
+			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender, img);
 			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ?, image = ? ";
 			//add WHERE clause to query/params
 			query += "WHERE email = ?";

@@ -22,10 +22,15 @@
 	let ifr = document.createElement("iframe");
     ifr.style.cssText =
 		"visibility: hidden;" +
-		"background: none;" +
-		"border: none;" +
-		"height: 710px;" +
-		"position: absolute;" +
+		"background: #3c3f41;" +
+		"color: #c2c2c2;" +
+		"border: 3px solid rgba(134, 78, 226, 0.8);" +
+		"display: flex;" +
+		"flex-direction: column;" +
+		"text-align: right;" +
+		"height: calc(100vh - 115px);" +
+		"max-height: 745px;" +
+		"position: relative;" +
 		"top: 105px;" +
 		"transform: translate(0%, -250%);" +
 		"transition: transform 1s, visibility 1.5s linear;" +
@@ -42,6 +47,7 @@
 		    backgrnd = document.getElementsByClassName("categoryBody")[0];
 		else
             backgrnd = document.getElementById("indexBody");
+		
 		container.addEventListener("click", frameRetract);
         document.getElementById("profile").addEventListener("click", frameExpand);
         document.getElementById("about").addEventListener("click", frameExpand);		
@@ -57,11 +63,11 @@
 	        ifr.style.width = "500px";
 	    }
         else if(this.dataset.src === "profile"){
-            ifr.style.height = "710px";
+            ifr.style.height = "calc(100vh - 115px)";
             ifr.style.width = "300px";
         }
 		ifr.style.visibility = "visible";
-		ifr.style.transform = "translate(0%, 0)";
+		ifr.style.transform = "translate(0," + document.body.scrollTop + "px)";
 		backgrnd.style.filter = "blur(5px) opacity(0.01%)";
 		container.style.pointerEvents = "auto";
 		container.style.cursor = "zoom-out";

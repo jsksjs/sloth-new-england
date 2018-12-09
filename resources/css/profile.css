@@ -2,7 +2,6 @@ html, body{
     background: transparent;
     overflow-x: hidden;
 	height: 100%;
-	width: 200%;
 	max-width: 100%;
 }
 
@@ -32,13 +31,8 @@ header>*{
 }
 
 .entry{
-    border: 3px solid rgba(134, 78, 226, 0.8);
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    background: #3c3f41;
-    color: #c2c2c2;
-    overflow: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
 #image{
@@ -77,6 +71,7 @@ label{
     font-size: 12pt;
     flex: 1;
     margin-right: 10px;
+	text-align: right;
 }
 
 .end{    
@@ -116,6 +111,7 @@ label{
     font-size: 12pt;
     height: 100%;
     flex: 1;
+	text-align: right;
 }
 
 #radioContainer{
