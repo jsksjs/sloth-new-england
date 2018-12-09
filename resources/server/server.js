@@ -482,7 +482,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				let FName = selResult[0].FName === null ? '':selResult[0].FName;
 				let MName = selResult[0].MName === null ? '':selResult[0].MName;
 				let LName = selResult[0].LName === null ? '':selResult[0].LName;
-				let decoder = new TextDecoder();
 				let img = selResult[0].Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,' + selResult[0].Image.toString("base64");
 
 				//dynamically change parts of page that need to be changed
@@ -577,7 +576,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		
 		//if page is favorited, delete record from favorite table
 		if(isFavorited){
-			console.log("Attempting to delete:"); //TODO: delete debugging
 			//remove record from favorite table
 			con.query("DELETE FROM favorite WHERE UserEmail=? AND URL=?", [userEmail, userURL], function(err, result, fields){
 				if(err){
@@ -585,12 +583,10 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 						error: err
 					});
 				}
-				console.log("Delete did not error.\n"); //TODO: delete debugging
 			});
 		}
 		//if page not favorited, add new record to favorite table
 		else{
-			console.log("Attempting to insert:");
 			//insert record into favorite table
 			con.query("INSERT INTO favorite SET ?", {userEmail: userEmail, URL: userURL}, function(err, result, fields){
 				if(err){
@@ -598,7 +594,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 						error: err
 					});
 				}
-				console.log("Insert did not error.\n"); //TODO: delete debugging
 			});	
 		}
 		
@@ -716,7 +711,6 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 					//Read each of the user's favorites in order to extract the needed fields from them
 					for(let i = 0; i < result.length; i++){
 						if(err){
-							console.log("error trying to read "+page);
 							return res.status(500).json({
 								error: err
 							});
