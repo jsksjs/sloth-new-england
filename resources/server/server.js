@@ -387,7 +387,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
             //extract info from existing cookie
             let user = req.cookies.user_info;
-            let favoritePages =[];
+            let favoritePages = [];
 
             //put each favorited page's URL into cookie
             let i;
@@ -553,6 +553,22 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 						error: err
 					});
 				}
+			});
+			//query for all of the user's favorite pages so that cookie can be updated
+			//TODO: this could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
+			con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
+				let favoritePages = [];
+
+				//put each favorited page's URL into cookie
+				for(let i = 0; i < selResult.length; i++){
+					favoritePages.push(selResult[i].URL);
+				}
+				//send updated cookie
+				res.cookie("user_info", {token: req.cookies.user_info.token,
+						username: userUsername,
+						email: userEmail,
+						favorites: favoritePages},
+				{httpOnly: true, domain: "localhost"});
 			});
 		});
         setTimeout(function(){res.redirect("/auth/profile")}, 100);
