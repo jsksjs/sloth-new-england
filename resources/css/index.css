@@ -221,7 +221,9 @@ li.drop, li.options {
 }
 
 #desc{
-    display: flex;
+    margin-top: 10px;
+	margin-bottom: 20px;
+	display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -230,6 +232,25 @@ li.drop, li.options {
     -webkit-user-select: none;
     -ms-user-select:none;
     user-select:none;
+}
+
+#newEngland {
+	margin: 0 auto;
+	width: 90%;
+}
+
+.NEtitle {
+	padding: 5px;
+	font-size: 18px;
+}
+.NEdesc {
+	padding: 5px;
+	font-size: 16px;
+}
+
+#NEmap {
+	height: 50%;
+	/*width: 50%;*/
 }
 
 .imgListItem{
@@ -248,11 +269,14 @@ li.drop, li.options {
     cursor: pointer;
 }
 
-.imgDescription{
-    font-size: 12pt;
+#indexHead{
+    font-size: 18pt;
     text-align: center;
     background: #dadada;
     padding: 5px;
+	margin: 0 auto;
+	margin-top: 5px;
+	width: 350px;
 }
 
 #NEDContainer{
@@ -261,6 +285,7 @@ li.drop, li.options {
     justify-content: center;
     flex-direction: column;
     display: flex;
+	text-align: center;
 }
 
 #pin{
