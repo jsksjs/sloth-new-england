@@ -536,6 +536,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 			}
 			//add other parameters to query/params
 			let img;
+			console.log(req.file);
 			if(req.file)
 				img = req.file.buffer;
 			else
@@ -571,7 +572,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 				{httpOnly: true, domain: "localhost"});
 			});
 		});
-        setTimeout(function(){res.redirect("/auth/profile")}, 100);
+        setTimeout(function(){return res.redirect("/auth/profile");}, 100);
 	});
 	
 	access.get("/logout", function(req, res){
@@ -593,7 +594,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		let userEmail = user.email;
 		let userFavorites = user.favorites;
 		let isFavorited = false;
-		for(i = 0; i < userFavorites.length; i++){
+		for(let i = 0; i < userFavorites.length; i++){
 			if(userFavorites[i] === userURL){
 				isFavorited = true;
 				break;
@@ -628,11 +629,10 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
 			//extract info from existing cookie
 			let user = req.cookies.user_info;
-			let favoritePages =[];
+			let favoritePages = [];
 			
 			//put each favorited page's URL into cookie
-			let i;
-			for(i = 0; i < selResult.length; i++){
+			for(let i = 0; i < selResult.length; i++){
 				favoritePages.push(selResult[i].URL);
 			}
 			//send updated cookie
