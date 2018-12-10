@@ -10,10 +10,11 @@ let moment = require("moment");
 let cm = require("./comment");
 let app = express();
 let multer = require("multer");
-let https = require("https");
 let privateKey  = fs.readFileSync('sslcert/privatekey.key', 'utf8');
 let certificate = fs.readFileSync('sslcert/certificate.crt', 'utf8');
 let servCred = {key: privateKey, cert: certificate, requestCert: false, rejectUnauthorized: false};
+let https = require("https").createServer(servCred, app);
+let http = require("http").Server(app);
 let storage = multer.memoryStorage();
 let upload = multer({storage: storage});
 
@@ -536,43 +537,45 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 			}
 			//add other parameters to query/params
 			let img;
-			console.log(req.file);
 			if(req.file)
 				img = req.file.buffer;
 			else
-				img = null;
-			params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender, img);
-			query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ?, image = ? ";
-			//add WHERE clause to query/params
-			query += "WHERE email = ?";
-			params.push(userEmail);
-			query += ";";
-
-			con.query(query, params, function (err, result, fields){
+				img = null;			
+			//query for all of the user's favorite pages so that cookie can be updated
+			//TODO: this could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
+			con.query("SELECT favorite.URL as URL, user.Image as Image FROM user left outer join favorite on favorite.UserEmail = user.Email where user.Email = ?;",
+			[userEmail], function (err, selResult, selFields){
 				if(err){
 					return res.status(500).json({
 						error: err
-					});
+					})
 				}
-			});
-			//query for all of the user's favorite pages so that cookie can be updated
-			//TODO: this could without using DB by checking if the current page is in the existing cookie.favorites, but is the sureness of knowing that DB received and processed query worth it? (will work on more important features instea of this)
-			con.query("SELECT URL FROM favorite WHERE UserEmail = ?", [userEmail], function (err, selResult, selFields){
 				let favoritePages = [];
-
 				//put each favorited page's URL into cookie
 				for(let i = 0; i < selResult.length; i++){
 					favoritePages.push(selResult[i].URL);
 				}
-				//send updated cookie
-				res.cookie("user_info", {token: req.cookies.user_info.token,
-						username: userUsername,
-						email: userEmail,
-						favorites: favoritePages},
-				{httpOnly: true, domain: "localhost"});
+				
+				if(img === null)
+					img = selResult[0].Image;
+				params.push(userUsername, userFirst, userMiddle, userLast, userAge, userGender, img, userEmail);
+				query += "username = ?, fName = ?, mName = ?, lName = ?, age = ?, gender = ?, image = ? WHERE email = ?;";
+				con.query(query, params, function (err, result, fields){
+					if(err){
+						return res.status(500).json({
+							error: err
+						});
+					}
+					//send updated cookie
+					res.cookie("user_info", {token: req.cookies.user_info.token,
+							username: userUsername,
+							email: userEmail,
+							favorites: favoritePages},
+					{httpOnly: true, domain: "localhost"});
+					return res.redirect("/auth/profile");
+				});
 			});
 		});
-        setTimeout(function(){return res.redirect("/auth/profile");}, 100);
 	});
 	
 	access.get("/logout", function(req, res){
@@ -835,14 +838,14 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 
 	
     // HTTPS Running Server Details.
-    let httpsServer = https.createServer(servCred, app).listen(8083, function(){
+    let httpsServer = https.listen(8083, function(){
         let host = httpsServer.address().address;
         let port = httpsServer.address().port;
         console.log("https listening at %s:%s Port", host, port);
     });
 	
 	// HTTP Running Server Details.
-    let httpServer = app.listen(8082, function(){
+    let httpServer = http.listen(8082, function(){
         let host = httpServer.address().address;
         let port = httpServer.address().port;
         console.log("http listening at %s:%s Port", host, port);
