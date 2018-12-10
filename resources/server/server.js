@@ -10,6 +10,10 @@ let moment = require("moment");
 let cm = require("./comment");
 let app = express();
 let multer = require("multer");
+let https = require("https");
+let privateKey  = fs.readFileSync('sslcert/privatekey.key', 'utf8');
+let certificate = fs.readFileSync('sslcert/certificate.crt', 'utf8');
+let servCred = {key: privateKey, cert: certificate, requestCert: false, rejectUnauthorized: false};
 let storage = multer.memoryStorage();
 let upload = multer({storage: storage});
 
@@ -814,10 +818,17 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 	});
 
 	
-    // Running Server Details.
-    let server = app.listen(8082, function(){
-        let host = server.address().address;
-        let port = server.address().port;
-        console.log("listening at %s:%s Port", host, port);
+    // HTTPS Running Server Details.
+    let httpsServer = https.createServer(servCred, app).listen(8083, function(){
+        let host = httpsServer.address().address;
+        let port = httpsServer.address().port;
+        console.log("https listening at %s:%s Port", host, port);
+    });
+	
+	// HTTP Running Server Details.
+    let httpServer = app.listen(8082, function(){
+        let host = httpServer.address().address;
+        let port = httpServer.address().port;
+        console.log("http listening at %s:%s Port", host, port);
     });
 });

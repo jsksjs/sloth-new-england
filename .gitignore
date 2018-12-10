@@ -69,3 +69,4 @@ typings/
 
 *.key
 *.cfg
+*sslcert/
