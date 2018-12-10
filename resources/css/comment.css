@@ -16,7 +16,7 @@ body{
 	width: 97%;
 	margin-top: 3%;	
 	margin-bottom: 3%;
-	box-shadow: 0 0 5px 3px rgba(0,0,0,0.3);
+	/*box-shadow: 0 0 5px 3px rgba(0,0,0,0.3);*/
 }
 
 .author{
@@ -30,6 +30,7 @@ body{
 .time{
     font-size: 10pt;
     margin: 0;
+	color: #8c8c8c;
 }
 
 .comment-container {
@@ -63,7 +64,7 @@ body{
 	max-width: 180px;
     margin-bottom: 15px;
 	border: none;
-	box-shadow: 0 0 2px 1px rgba(0,0,0,0.3);
+	box-shadow: 0 0 2px 1px rgba(0,0,0,0.2);
 }
 
 #comment-area {
@@ -74,7 +75,7 @@ body{
     padding: 5px;
     width: 600px;
     height: 100px;
-	box-shadow: 0 0 3px 2px rgba(0,0,0,0.2);
+	box-shadow: 0 0 3px 2px rgba(0,0,0,0.1);
 	border: none;
 }
 
@@ -103,7 +104,7 @@ body{
     width: 87%;
 	align-self: center;
 	margin: 20px 0;
-	box-shadow: 0 0 3px 2px rgba(0,0,0,0.3);
+	box-shadow: 0 0 3px 2px rgba(0,0,0,0.1);
 }
 
 .comment-text{
