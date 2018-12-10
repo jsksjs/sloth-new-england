@@ -39,7 +39,7 @@ module.exports = function(con) {
 							comments += (template1.replace("?=i", img)
 							+ template2.replace("?=@", i.UserName)
 							+ ((i.Email === i.ComEmail && i.Email === user.email) ? remove.replace("?=o", "?id="+encodeURIComponent(i.Sent + "&" + i.Email)): '')
-							+ template3.replace("?=!", i.Message.replace("\r\n", "<br>")).replace("?=t", i.Sent))
+							+ template3.replace("?=!", i.Message).replace("?=t", i.Sent))
 						}
 						return res.send(data.toString()
 							.replace('value=""', 'value="' + user.username + '" ')
