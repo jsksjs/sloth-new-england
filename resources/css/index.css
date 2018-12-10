@@ -22,7 +22,6 @@ body{
 	-ms-user-select:none;
 	user-select:none;
     background: url(../images/index/sloth-yes.jpg);
-    /*background-size: cover;*/
 	overflow: hidden;
 }
 
@@ -69,7 +68,7 @@ body{
     max-height: 50px;
 }
 
-.dropbtn, .navItem{
+.dropbtn, .navItem {
 	background: #333;
 }
 
@@ -88,7 +87,7 @@ body{
     background-color: #838383;
 }
 
-li.drop {
+li.drop, li.options {
     display: inline-block;
 }
 
@@ -96,34 +95,45 @@ li.drop {
     background-color: #838383;
 }
 
-.dropcontent {
+.dropcontent, .optiondrop {
     display: none;
     position: absolute;
     background-color: #8e8e8e;
-    width: 250px;
+    width: 91px;
 	font-size: 14pt;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     z-index: 1;
 }
 
-.dropcontent a {
+.dropcontent a, .dropcontent p, .optiondrop a, .optiondrop p {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
+	 background-color: #8e8e8e;
 	z-index: 1;
 }
 
-.dropcontent a:hover{
+.dropcontent a:hover, .dropcontent p:hover{
     background-color: #c1c1c1;
-		z-index: 3;
+	z-index: 3;
 }
 
-.drop:hover .dropcontent {
+.optiondrop a:hover, .optiondrop p:hover{
+	background: olive;
+}
+
+.drop:hover .dropcontent, .options:hover .optiondrop {
     display: flex;
     flex-direction: column;
 	z-index: 3;
+}
+
+.logoCont{
+	display: flex;
+    flex-direction: column-reverse;
+    flex: 0;
 }
 
 #logo{
@@ -147,7 +157,6 @@ li.drop {
 .options > a:hover, .options > p:hover{
 	background: olive;
 }
-
 
 #indexBody{
     display: flex;

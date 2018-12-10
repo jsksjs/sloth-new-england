@@ -15,7 +15,7 @@
 	</div>
 	<div class="navbar">
 		<ul class="nav">
-			<li id="logoBtn" class="options">
+			<li id="logoBtn" class="logoCont">
 				<a id="logo" href="index">🏠</a>
 			</li>
 			<li class="drop navItem">
@@ -36,14 +36,13 @@
 			<li class="drop navItem">
 				<a href="favorites" class="dropbtn">Favorites</a>
 			</li>
-            <li id="about" class="options navItem" data-src="about">
-                <p>About</p>
-            </li>
-            <li id="profile" class="options navItem" data-src="profile">
-                <p>Profile</p>
-            </li>
-			<li id="logout" class="options navItem">
-				<a href="logout" class="dropbtn">Logout</a>
+            <li class="options navItem">
+				<a class="optiondropbtn">Options</a>
+				<div class="optiondrop">
+					<p id="profile" data-src="profile">Profile</p>
+					<p id="about" data-src="about">About</p>
+					<a href="logout" class="dropbtn">Logout</a>
+				</div>
             </li>
 			<li id="pinBtn" class="options">
 				<label id="pinLabel" for="pin">📌</label>
