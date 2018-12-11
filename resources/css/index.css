@@ -7,7 +7,7 @@ body, html{
 	font-family: "Arial", "Georgia", "Times New Roman";
     background: #ebebeb;
     width: 100%;
-	height: 100%
+	height: 100%;
 }
 
 body{
@@ -164,7 +164,7 @@ li.drop, li.options {
     flex-direction: column;
     flex: 1;
     padding-top: 50px;
-    height: calc(100% - 105px);
+    min-height: calc(100% - 105px);
     transition: filter, 0.75s ease-out;
 }
 
@@ -228,7 +228,7 @@ li.drop, li.options {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex:1;
+    flex: 1;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select:none;
@@ -247,11 +247,7 @@ li.drop, li.options {
 .NEdesc {
 	padding: 5px;
 	font-size: 16px;
-}
-
-#NEmap {
-	height: 50%;
-	/*width: 50%;*/
+	margin-bottom: 20px;
 }
 
 .imgListItem{

@@ -30,11 +30,11 @@
 		"position: fixed;";
 
 	window.addEventListener("resize", function(){
-		if(currentScroll >= topHeight && !pin.checked){
-			nav.style.transform = "translate(0, 0)";
+		if(!pin.checked){
+			trigger.style.pointerEvents = "auto";
+			reset();
 		}
-		else if(currentScroll >= header.clientHeight && pin.checked){
-			navbar.classList.add("posTop");
+		else if(pin.checked){
 			reset();
 		}
 		nav.offsetHeight; // force cache flush
@@ -49,7 +49,6 @@
 			backgrnd = document.getElementsByClassName("categoryBody")[0];
 		else if(document.getElementById("indexBody"))
 			backgrnd = document.getElementById("indexBody");
-		console.log(backgrnd);
 		navbar = document.getElementsByClassName("navbar")[0];
 		nav = document.getElementsByClassName("nav")[0];
 		trigger.addEventListener("mouseover", hovered);
@@ -66,7 +65,7 @@
 	// on page scroll, record position, active trigger,
 	// and position navbar accordingly
 	function scrolled(){
-		currentScroll = document.documentElement.scrollTop;
+		currentScroll = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
 		// if scroll past certain point, show navbar
 		if(currentScroll >= header.clientHeight && pin.checked){
 			navbar.classList.add("posTop");
