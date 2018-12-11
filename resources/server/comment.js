@@ -36,8 +36,7 @@ module.exports = function(con) {
 						let comments = "";
 						for(let i of result){
 							let img = i.Image === null ? '/resources/images/index/templogo.png':'data:image/;base64,' + i.Image.toString("base64");
-							authorClass += (i.Email === i.ComEmail && i.Email === user.email) ?  ' comUser' : '';
-							let template2 = "<p class='" + authorClass + "'>?=@</p>";
+							let template2 = "<p class='" + authorClass + ((i.Email === i.ComEmail && i.Email === user.email) ?  ' comUser' : '') + "'>?=@</p>";
 							comments += (template1.replace("?=i", img)
 							+ template2.replace("?=@", i.UserName)
 							+ ((i.Email === i.ComEmail && i.Email === user.email) ? remove.replace("?=o", "?id="+encodeURIComponent(i.Sent + "&" + i.Email)): '')
