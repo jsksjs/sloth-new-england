@@ -69,9 +69,15 @@
 			log.style.visibility = "hidden";
 			log.style.background = "white";
 			log.style.borderTop = "1px #c2c2c2 solid";
-			if(parent.document.getElementsByClassName("comment-frame")[0])
-				parent.document.getElementsByClassName("comment-frame")[0]
-			.contentWindow.document.getElementsByClassName("comment-info")[0].value = this["user"].value;
+			if(parent.document.getElementsByClassName("comment-frame")[0]){
+				let com = parent.document.getElementsByClassName("comment-frame")[0];
+				com.contentWindow.document.getElementsByClassName("comment-info")[0].value = this["user"].value;
+				if(com.contentWindow.document.getElementsByClassName("comUser").length > 0){
+					for(let i of com.contentWindow.document.getElementsByClassName("comUser")){
+						i.innerHTML = this["user"].value;
+					}
+				}
+			}
 		}
 		return valid;
 	};
