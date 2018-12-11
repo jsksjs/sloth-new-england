@@ -177,22 +177,34 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 		let userAge =req.body.age === '' ? null:req.body.age;
 		let userGender = req.body.gender;
 		//hash plaintext password so it can be stored in DB safely;
-		b.hash(req.body.password.toString(), 10, function(err, hash){
+		con.query('SELECT email FROM user WHERE email = ?', [userEmail], function(err, result, fields){
 			if(err){
 				return res.status(500).json({
 					error: err
 				});
 			}
-			//insert user with given data into DB
-			con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
-				if(err){
-					return res.status(500).json({
-						error: err
+			else if(result.length === 0){
+				b.hash(req.body.password.toString(), 10, function(err, hash){
+					if(err){
+						return res.status(500).json({
+							error: err
+						});
+					}
+					//insert user with given data into DB
+					con.query('INSERT INTO user SET ?', {Email: userEmail, UserName: userUsername, Password: hash, FName: userFirst, MName: userMiddle, LName: userLast, Age: userAge, Gender: userGender}, function (err, result, fields){
+						if(err){
+							return res.status(500).json({
+								error: err
+							});
+							res.redirect("/login");
+						}
 					});
-				}
-			});
+				});
+			}
+			else{
+				res.redirect("/login");
+			}
 		});
-		res.redirect("/login");
 	});
 
 	// on attempt to access auth, move to index
