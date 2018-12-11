@@ -53,7 +53,7 @@
 		nav = document.getElementsByClassName("nav")[0];
 		trigger.addEventListener("mouseover", hovered);
 		nav.addEventListener("transitionend", toggleTrigger);
-
+		backgrnd.addEventListener("mouseover", function(){trigger.style.pointerEvents = "auto";});
 		pin = document.getElementById("pin");
 		pin.addEventListener("change", pinUnpin);
 
@@ -65,10 +65,13 @@
 	// on page scroll, record position, active trigger,
 	// and position navbar accordingly
 	function scrolled(){
-		currentScroll = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+		currentScroll = window.scrollY || window.pageYOffset 
+		|| document.body.scrollTop
+		+ (document.documentElement && document.documentElement.scrollTop || 0);
 		// if scroll past certain point, show navbar
 		if(currentScroll >= header.clientHeight && pin.checked){
 			navbar.classList.add("posTop");
+			trigger.style.pointerEvents = "none";
 			reset();
 		}
 		// if towards top of page, move navbar back to original position and show
@@ -77,6 +80,7 @@
 			navbar.classList.remove("posTop");
 		}
 		else if(currentScroll >= topHeight && !pin.checked){
+			nav.style.transform = "translate(0, 0)";
 			trigger.style.pointerEvents = "auto";
 		}
 	}
@@ -98,6 +102,10 @@
 			nav.style.transform = "translate(0, 0)";
 			trigger.addEventListener("mouseover", hovered);
 			backgrnd.removeEventListener("mouseover", off);
+			trigger.style.pointerEvents = "auto";
+		}
+		else{
+			trigger.style.pointerEvents = "none";
 		}
 	}
 
@@ -109,6 +117,15 @@
 		else{
 			pinLabel.innerHTML = "📌";
 			navbar.classList.remove("posTop");
+			if(currentScroll >= topHeight){
+				trigger.style.pointerEvents = "none";
+				nav.style.transition = "none";						
+				nav.style.transform = "translate(0, " + (currentScroll-header.clientHeight) +"px)";
+				nav.offsetHeight; // force cache flush
+				nav.style.transition = "transform 0.75s";
+				nav.style.transform = "translate(0, 0)";
+				trigger.style.pointerEvents = "auto";
+			}
 		}
 	}
 
