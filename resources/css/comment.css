@@ -3,6 +3,7 @@ html, body{
     overflow: hidden;
 	margin: 0;
 	padding: 0;
+	font-family: "Arial", "Georgia", "Times New Roman";
 }
 
 html{
@@ -35,7 +36,6 @@ body{
 
 .comment-container {
 	background-color: #f2f2f2;
-    font-family: "Arial", "Times New Roman";
 	width: 100%;
 	border: none;
     overflow: hidden;
@@ -57,7 +57,6 @@ body{
 
 .comment-info {
 	margin-top: 15px;
-    font-family: "Arial", "Times New Roman", serif;
     font-size: 15px;
     padding: 5px;
     display: block;
@@ -68,20 +67,19 @@ body{
 }
 
 #comment-area {
-    font-family: "Arial", "Times New Roman", serif;
     font-size: 15px;
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
     padding: 5px;
     width: 600px;
     height: 100px;
 	box-shadow: 0 0 3px 2px rgba(0,0,0,0.1);
+	font-family: "Arial", "Georgia", "Times New Roman";
 	border: none;
 }
 
 .comment-button {
 	max-width: 68px;
-    font-family: "Arial", "Times New Roman", serif;
     font-size: 16px;
     padding: 7px;
     background-color: #333;
@@ -98,7 +96,6 @@ body{
 
 .comment-box {
     background-color: #f6f6f6;
-    font-family: "Arial", "Times New Roman", serif;
     padding: 10px;
     height: 100%;
     width: 87%;
