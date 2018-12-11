@@ -3,6 +3,8 @@ html, body{
     overflow-x: hidden;
 	height: 100%;
 	max-width: 100%;
+	color: #f2f2f2;
+	font-family: "Arial", "Georgia", "Times New Roman";
 }
 
 *{
@@ -28,6 +30,7 @@ header>*{
     display:flex;
     flex-direction: column;
 	justify-content: center;
+	padding: 5px;
 }
 
 .entry{
@@ -56,6 +59,7 @@ header>*{
 
 #submit{
     padding: 3px;
+	font-size: 15px;
 }
 
 .actions{
