@@ -196,13 +196,15 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
 							return res.status(500).json({
 								error: err
 							});
-							res.redirect("/login");
+						}
+						else{
+							return res.redirect("/login");
 						}
 					});
 				});
 			}
 			else{
-				res.redirect("/login");
+				return res.redirect("/register");
 			}
 		});
 	});
