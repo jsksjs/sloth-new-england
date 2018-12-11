@@ -46,6 +46,8 @@ html,body { min-height:100%; }
     display: flex;
     flex-direction: column;
     align-items: center;
+	padding: 10px;
+	padding-bottom: 12px;
 }
 
 #contentHeaderCont{
@@ -55,7 +57,7 @@ html,body { min-height:100%; }
 }
 
 #favorite{
-	padding: 3px;
+	padding: 5px;
 	font-size: 10pt;
 	font-family: arial;
 	cursor: default;

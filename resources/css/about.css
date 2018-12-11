@@ -1,7 +1,8 @@
 html, body{
+	font-family: "Arial", "Georgia", "Times New Roman";
+	background: transparent;
     height: 100%;
     width: 100%;
-    background: transparent;
 }
 
 *{
@@ -23,7 +24,7 @@ html, body{
     border: 3px solid rgba(134, 78, 226, 0.8);
     background: #3c3f41;
     padding: 20px;
-    color: #c2c2c2;
+    color: #cccccc;
     overflow: hidden;
 }
 

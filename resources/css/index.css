@@ -4,6 +4,7 @@
 }
 
 body, html{
+	font-family: "Arial", "Georgia", "Times New Roman";
     background: #ebebeb;
     width: 100%;
 	height: 100%;
@@ -318,6 +319,7 @@ li.drop, li.options {
     -ms-user-select:none;
     user-select:none;
     border-top: 1px solid rgba(0,0,0,0.3);
+	padding: 5px;
 }
 
 .viewImage{
