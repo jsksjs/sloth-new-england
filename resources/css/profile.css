@@ -64,7 +64,7 @@ header>*{
 
 .actions{
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
 }
 
 input{
@@ -74,7 +74,8 @@ input{
 label{
     font-size: 12pt;
     flex: 1;
-    margin-right: 10px;
+    padding-right: 10px;
+	min-width: 1px;
 	text-align: right;
 }
 

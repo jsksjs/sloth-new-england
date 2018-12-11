@@ -47,7 +47,6 @@
 		    backgrnd = document.getElementsByClassName("categoryBody")[0];
 		else
             backgrnd = document.getElementById("indexBody");
-		
 		container.addEventListener("click", frameRetract);
         document.getElementById("profile").addEventListener("click", frameExpand);
         document.getElementById("about").addEventListener("click", frameExpand);
@@ -61,7 +60,7 @@
 	    if(ifr.src !== this.dataset.src)
 	        ifr.src = this.dataset.src;
 	    if(this.dataset.src === "about"){
-	        ifr.style.height = "178px";
+	        ifr.style.height = "216px";
 	        ifr.style.width = "500px";
 	    }
         else if(this.dataset.src === "profile"){

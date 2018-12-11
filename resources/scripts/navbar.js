@@ -29,14 +29,27 @@
 		"pointer-events: none;" +
 		"position: fixed;";
 
+	window.addEventListener("resize", function(){
+		if(currentScroll >= topHeight && !pin.checked){
+			nav.style.transform = "translate(0, 0)";
+		}
+		else if(currentScroll >= header.clientHeight && pin.checked){
+			navbar.classList.add("posTop");
+			reset();
+		}
+		nav.offsetHeight; // force cache flush
+	});
 	// inject all dynamic elements on load
 	window.addEventListener("load", inject);
 	function inject(){
 		window.addEventListener("scroll", scrolled);
 		document.body.appendChild(trigger);
 		header = document.getElementsByClassName("header")[0];
-		backgrnd = document.getElementsByClassName("categoryBody")[0];
-
+		if(document.getElementsByClassName("categoryBody")[0])
+			backgrnd = document.getElementsByClassName("categoryBody")[0];
+		else if(document.getElementById("indexBody"))
+			backgrnd = document.getElementById("indexBody");
+		console.log(backgrnd);
 		navbar = document.getElementsByClassName("navbar")[0];
 		nav = document.getElementsByClassName("nav")[0];
 		trigger.addEventListener("mouseover", hovered);
@@ -73,7 +86,7 @@
 	function hovered(){
 		// if hover over navbar, show 
 		if(currentScroll >= topHeight && !pin.checked){
-			nav.style.transform = "translate(0%, " + (currentScroll-header.clientHeight) +"px)";
+			nav.style.transform = "translate(0, " + (currentScroll-header.clientHeight) +"px)";
 			trigger.removeEventListener("mouseover", hovered);
 			backgrnd.addEventListener("mouseover", off);
 		}
@@ -83,7 +96,7 @@
 	function off(){
 		// hide navbar
 		if(currentScroll >= topHeight && !pin.checked) {
-			nav.style.transform = "translate(0%, 0%)";
+			nav.style.transform = "translate(0, 0)";
 			trigger.addEventListener("mouseover", hovered);
 			backgrnd.removeEventListener("mouseover", off);
 		}
@@ -103,14 +116,14 @@
 	// force reset the transition and flush cache to prevent past state confusion
 	function reset(){
 		nav.style.transition = "none";
-		nav.style.transform = "translate(0%, 0%)";
+		nav.style.transform = "translate(0, 0)";
 		nav.offsetHeight; // force cache flush
 		nav.style.transition = "transform 0.75s";
 	}
 
 	// toggle the invisible mouseover trigger
 	function toggleTrigger(){
-		if(nav.style.transform === "translate(0%, 0%)"){
+		if(nav.style.transform === "translate(0, 0)"){
 			trigger.style.pointerEvents = "auto";
 		}
 		else{
