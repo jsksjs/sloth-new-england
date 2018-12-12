@@ -1,3 +1,9 @@
+/**
+ * Sloth from the Goonies
+ * Doctor Andrew Jung
+ * Creates an image viewer on the index page.
+ */
+
 // anonymous wrapper because I was sick of thinking of new variable names
 (function(){
 

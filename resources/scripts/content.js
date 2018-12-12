@@ -1,6 +1,7 @@
 /**
  * Sloth from the Goonies
  * Doctor Andrew Jung
+*  Add a comment frame and the drop down frame on a content page.
  */
 
 // anonymous wrapper because I was sick of thinking of new variable names
@@ -27,7 +28,7 @@
 		"position: absolute;" +
 		"top: 105px;" +
 		"will-change: transform, visibility;" +
-		"transform: translate(0%, -125%);" +
+		"transform: translate(0, -125%);" +
 		"transition: transform 0.75s, visibility 1.5s linear;" +
         "box-shadow: 0 0 8px 0 rgba(0,0,0,0.7);";
 
@@ -66,7 +67,7 @@
 	    if(ifr.src !== this.dataset.src)
 	        ifr.src = this.dataset.src;
 		ifr.style.visibility = "visible";
-		ifr.style.transform = "translate(0%, 0)";
+		ifr.style.transform = "translate(0, 0)";
 		backgrnd.style.filter = "blur(5px) opacity(0.01%)";
 		container.style.pointerEvents = "auto";
 		container.style.cursor = "zoom-out";
@@ -75,7 +76,7 @@
 	// "retract" image (move it up)
 	function frameRetract(){
         ifr.style.visibility = "hidden";
-        ifr.style.transform = "translate(0%, -150%)";
+        ifr.style.transform = "translate(0, -150%)";
 		backgrnd.style.filter = "blur(0px) opacity(100%)";	
 		container.style.pointerEvents = "none";
 		container.style.cursor = "auto";

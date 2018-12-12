@@ -46,10 +46,12 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
     access.use(cm(con));
 
 
+	// handle non-user resources
     app.get("(/resources/*/*)", function(req, res){
         res.sendFile(path.join(path.dirname(path.dirname(__dirname)), req.params[0]));
     });
 
+	// non-user standard page handles
     app.get("(/|/login|/register)", function(req, res){
         let param = req.params[0];
         if(param === "/")
@@ -57,6 +59,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         res.sendFile(param + ".html", {root: path.dirname(path.dirname(__dirname))});
     });
 
+	// contact handles with message
     app.get("/contact", function(req, res){
         fs.readFile(path.join(path.dirname(path.dirname(__dirname)), "contact.html"), function(err, data){
             let html = data.toString().replace("?", "Hi!<br><br>This message will NOT be sent to the admins.");
@@ -64,6 +67,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
         });
     });
 
+	// post contact message
     app.post("/contact", function(req, res){
         con.query("INSERT INTO guest_message SET ?", {ContactID: null,
                 ContactEmail: req.body.email, Subject: req.body.subject, Message: req.body.message,
@@ -79,6 +83,7 @@ fs.readFile(path.join(__dirname, "credentials.cfg"), "utf-8", function(err, data
             });
     });
 
+	// handle login post
     app.post("/login", function(req, res){
         /*
         This block directs user to index and serves fresh cookie

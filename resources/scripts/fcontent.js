@@ -1,6 +1,7 @@
 /**
  * Sloth from the Goonies
  * Doctor Andrew Jung
+ * Favorites page should be treated differently from a regular content page.
  */
 
 // anonymous wrapper because I was sick of thinking of new variable names

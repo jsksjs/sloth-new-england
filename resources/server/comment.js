@@ -52,6 +52,7 @@ module.exports = function(con) {
         })
     });
 
+	// handles the comment add
     router.post("(/history|/abandoned_buildings|/education|/sports|/culture)(/commentFrame)", function (req, res) {
         let user = req.cookies.user_info;
         con.query("insert into comment SET ?", {Sent: moment().format('YYYY-MM-DD HH:mm:ss'),
