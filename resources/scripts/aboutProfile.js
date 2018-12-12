@@ -70,7 +70,7 @@
             ifr.style.width = "300px";
         }
 		else if(this.dataset.src === "contact"){
-            ifr.style.height = "380px";
+            ifr.style.height = "427px";
             ifr.style.width = "478px";
         }
 		ifr.style.visibility = "visible";
