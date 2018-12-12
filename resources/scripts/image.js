@@ -30,6 +30,7 @@
 		"height: 95vh;" +
 		"position: absolute;" +
 		"top: 2.5vh;" +
+		"will-change: transform, visibility;" +
 		"transform: translate(0%, -125%);" +
 		"transition: transform 0.75s, visibility 1.5s linear;";
 

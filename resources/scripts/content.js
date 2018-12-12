@@ -26,6 +26,7 @@
 		"height: calc(100vh - 115px);" +
 		"position: absolute;" +
 		"top: 105px;" +
+		"will-change: transform, visibility;" +
 		"transform: translate(0%, -125%);" +
 		"transition: transform 0.75s, visibility 1.5s linear;" +
         "box-shadow: 0 0 8px 0 rgba(0,0,0,0.7);";

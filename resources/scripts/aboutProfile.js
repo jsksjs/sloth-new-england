@@ -32,6 +32,7 @@
 		"max-height: 745px;" +
 		"position: relative;" +
 		"top: 105px;" +
+		"will-change: transform, visibility;" +
 		"transform: translate(0%, -250%);" +
 		"transition: transform 1s, visibility 1.5s linear;" +
         "box-shadow: 0 0 8px 0 rgba(0,0,0,0.7);";

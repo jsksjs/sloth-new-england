@@ -2,11 +2,13 @@
 	margin: 0;
 	padding: 0;
 	transition: height 0.5s;
+	will-change: height;
 }
 
 .categoryBody{
 	padding-top: 50px;
 	transition: filter, 0.75s ease-out;
+	will-change: filter;
 	display: flex;
 	flex-direction: column;
 }

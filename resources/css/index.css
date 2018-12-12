@@ -49,6 +49,7 @@ body{
     white-space: nowrap;
     transform: translate(0, 0);
     transition: transform 0.75s;
+	will-change: transform;
 	z-index: 1;
 	position: relative;
 }
@@ -143,6 +144,7 @@ li.drop, li.options {
     font-size: 18pt;
     padding: 8px 0;
     cursor: pointer;
+	text-decoration: none;
 }
 
 #logo:hover{
@@ -166,6 +168,7 @@ li.drop, li.options {
     padding-top: 50px;
     min-height: calc(100% - 105px);
     transition: filter, 0.75s ease-out;
+	will-change: filter;
 }
 
 #imgListContainer{
@@ -322,6 +325,7 @@ li.drop, li.options {
 .viewImage{
     object-fit: contain;
     width: 600px;
+	will-change: transform;
     transform: translate(0, 0);
     -webkit-transition: -webkit-transform 500ms linear;
     -moz-transition: -moz-transform 500ms linear;
